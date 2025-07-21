@@ -203,36 +203,32 @@
 
   <section id="rsvp">
     <h2>Confirmação de Presença (RSVP)</h2>
-    <form action="#" method="post">
+    <form action="https://formsubmit.co/marianatiago.casamento2026@gmail.com" method="POST">
       <div class="form-row">
-        <div class="form-group">
+        <div style="flex:1;">
           <label for="nome">Nome *</label>
-          <input type="text" name="nome" id="nome" required>
+          <input type="text" id="nome" name="nome" required>
         </div>
-        <div class="form-group">
+        <div style="flex:1;">
           <label for="sobrenome">Sobrenome *</label>
-          <input type="text" name="sobrenome" id="sobrenome" required>
+          <input type="text" id="sobrenome" name="sobrenome" required>
         </div>
       </div>
 
-      <div class="form-group">
-        <label>Você estará presente? *</label>
-        <div class="radio-group">
-          <label><input type="radio" name="presenca" value="Sim" required> Sim</label>
-          <label><input type="radio" name="presenca" value="Não"> Não</label>
-        </div>
-      </div>
+      <label>Você estará presente? *</label>
+      <label><input type="radio" name="presenca" value="Sim" required> Sim</label>
+      <label><input type="radio" name="presenca" value="Não"> Não</label>
 
-      <div class="form-group">
-        <label for="email">Email *</label>
-        <input type="email" name="email" id="email" required>
-      </div>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
 
-      <div class="form-group">
-        <label for="restricoes">Tem alguma restrição alimentar?</label>
-        <textarea name="restricoes" id="restricoes" placeholder="Escreva aqui (opcional)"></textarea>
-      </div>
-      
+      <label for="restricoes">Tem alguma restrição alimentar?</label>
+      <textarea id="restricoes" name="restricoes" placeholder="Escreve aqui..."></textarea>
+
+      <!-- Optional customizations -->
+      <input type="hidden" name="_subject" value="Nova confirmação de presença!">
+      <input type="hidden" name="_next" value="https://marianatiagocasamento.github.io/site_casamento/obrigado.html">
+
       <button type="submit">Enviar</button>
     </form>
   </section>
