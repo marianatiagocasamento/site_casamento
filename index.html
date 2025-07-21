@@ -113,14 +113,14 @@
       right: 0;
     }
 
-    /* Rest of your existing styles */
-    section {
+    /* Schedule Section */
+    #schedule {
       padding: 3rem 2rem;
       max-width: 1000px;
       margin: auto;
     }
 
-    h2 {
+    #schedule h2 {
       border-bottom: 1px solid #ccc;
       padding-bottom: 0.5rem;
       font-family: 'Orpheus Pro', serif;
@@ -130,9 +130,8 @@
       color: #444;
     }
 
-    .event-grid {
+    .ceremony-reception {
       display: flex;
-      flex-wrap: wrap;
       justify-content: space-between;
       gap: 2rem;
       margin-top: 2rem;
@@ -140,7 +139,7 @@
 
     .event-card {
       background-color: #fff;
-      flex: 1 1 45%;
+      flex: 1;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       text-align: center;
       padding: 1.5rem;
@@ -152,26 +151,32 @@
       transform: translateY(-5px);
     }
 
-    .event-card img {
-      width: 100%;
-      height: auto;
-      border-radius: 4px;
-    }
-
     .event-card h3 {
-      margin: 1rem 0 0.5rem;
       font-family: 'Orpheus Pro', serif;
+      font-size: 1.5rem;
       color: #333;
+      margin-bottom: 1rem;
     }
 
-    .event-card p {
-      margin: 0.25rem 0;
+    .event-card .time {
+      font-size: 1.2rem;
+      color: #d4af37;
+      margin-bottom: 0.5rem;
+    }
+
+    .event-card .location {
+      font-style: italic;
       color: #666;
+      margin-bottom: 1rem;
+    }
+
+    .event-card .address {
+      color: #666;
+      margin-bottom: 1.5rem;
     }
 
     .event-card a {
       display: inline-block;
-      margin-top: 1rem;
       padding: 0.5rem 1.5rem;
       background-color: #d4af37;
       color: #fff;
@@ -182,6 +187,55 @@
 
     .event-card a:hover {
       background-color: #b8972e;
+    }
+
+    /* Travel Section */
+    #travel {
+      padding: 3rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    #travel h2 {
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 0.5rem;
+      font-family: 'Orpheus Pro', serif;
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: #444;
+    }
+
+    #travel ul {
+      list-style-type: none;
+      padding: 0;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    #travel li {
+      background: white;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    /* RSVP Section */
+    #rsvp {
+      padding: 3rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    #rsvp h2 {
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 0.5rem;
+      font-family: 'Orpheus Pro', serif;
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: #444;
     }
 
     form {
@@ -292,9 +346,10 @@
         font-size: 1.1rem;
       }
       
-      .event-grid {
+      .ceremony-reception {
         flex-direction: column;
       }
+      
       .form-row {
         flex-direction: column;
       }
@@ -314,7 +369,22 @@
 
   <section id="schedule">
     <h2>Programa do Dia</h2>
-    <!-- Content will be loaded from schedule.html -->
+    <div class="ceremony-reception">
+      <div class="event-card">
+        <h3>Cerimónia</h3>
+        <div class="time">15:00</div>
+        <div class="location">Igreja de São Miguel</div>
+        <div class="address">Rua da Igreja, Sintra</div>
+        <a href="#" target="_blank">Ver no mapa</a>
+      </div>
+      <div class="event-card">
+        <h3>Copo de Água</h3>
+        <div class="time">17:00</div>
+        <div class="location">Quinta da Regaleira</div>
+        <div class="address">Rua Barbosa do Bocage, Sintra</div>
+        <a href="#" target="_blank">Ver no mapa</a>
+      </div>
+    </div>
   </section>
 
   <section id="travel">
@@ -329,23 +399,48 @@
 
   <section id="rsvp">
     <h2>Confirmação de Presença</h2>
-    <!-- Content will be loaded from rsvp.html -->
+    <form>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Nome Completo</label>
+          <input type="text" id="name" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Telemóvel</label>
+          <input type="tel" id="phone">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Confirmo a minha presença</label>
+        <div class="radio-group">
+          <label>
+            <input type="radio" name="attendance" value="yes" required> Sim, estarei presente
+          </label>
+          <label>
+            <input type="radio" name="attendance" value="no"> Infelizmente não poderei comparecer
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="guests">Número de pessoas (incluindo você)</label>
+        <input type="number" id="guests" min="1" value="1" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Mensagem para os noivos (opcional)</label>
+        <textarea id="message"></textarea>
+      </div>
+      <button type="submit">Enviar Confirmação</button>
+    </form>
   </section>
 
   <footer>
     <p>Com amor, [Os Noivos]</p>
   </footer>
-
-  <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      fetch('schedule.html')
-        .then(res => res.text())
-        .then(html => document.querySelector('#schedule').innerHTML = html);
-
-      fetch('rsvp.html')
-        .then(res => res.text())
-        .then(html => document.querySelector('#rsvp').innerHTML = html);
-    });
-  </script>
 </body>
 </html>
