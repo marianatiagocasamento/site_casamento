@@ -28,16 +28,15 @@
       padding: 0;
       background-color: #f8f8f8;
       color: #333;
-      line-height: 1.6;
     }
 
-    /* Enhanced Header */
+    /* Enhanced Header (only change we're keeping) */
     header {
       background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
-      padding: 5rem 2rem;
+      padding: 4rem 2rem;
       text-align: center;
       position: relative;
-      min-height: 40vh;
+      min-height: 30vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -77,61 +76,30 @@
       background: #d4af37;
     }
 
-    header p.subtitle {
+    header p {
       font-size: 1.3rem;
       max-width: 600px;
       margin: 1.5rem auto 0;
       color: #555;
       font-style: italic;
-      line-height: 1.6;
     }
 
-    header .date {
-      font-size: 1.25rem;
-      margin-top: 2rem;
-      color: #666;
-      letter-spacing: 1px;
-      position: relative;
-      display: inline-block;
-      padding: 0.5rem 1.5rem;
-    }
-
-    header .date::before,
-    header .date::after {
-      content: "✻";
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #d4af37;
-    }
-
-    header .date::before {
-      left: 0;
-    }
-
-    header .date::after {
-      right: 0;
-    }
-
-    /* Schedule Section */
-    #schedule {
-      padding: 3rem 2rem;
+    /* Rest of your ORIGINAL styles (unchanged) */
+    section {
+      padding: 2rem;
       max-width: 1000px;
       margin: auto;
     }
 
-    #schedule h2 {
+    h2 {
       border-bottom: 1px solid #ccc;
       padding-bottom: 0.5rem;
       font-family: 'Orpheus Pro', serif;
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 2rem;
-      color: #444;
     }
 
-    .ceremony-reception {
+    .event-grid {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       gap: 2rem;
       margin-top: 2rem;
@@ -139,103 +107,34 @@
 
     .event-card {
       background-color: #fff;
-      flex: 1;
+      flex: 1 1 45%;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       text-align: center;
-      padding: 1.5rem;
-      border-radius: 8px;
-      transition: transform 0.3s ease;
+      padding: 1rem;
     }
 
-    .event-card:hover {
-      transform: translateY(-5px);
+    .event-card img {
+      width: 100%;
+      height: auto;
     }
 
     .event-card h3 {
+      margin: 1rem 0 0.5rem;
       font-family: 'Orpheus Pro', serif;
-      font-size: 1.5rem;
-      color: #333;
-      margin-bottom: 1rem;
     }
 
-    .event-card .time {
-      font-size: 1.2rem;
-      color: #d4af37;
-      margin-bottom: 0.5rem;
-    }
-
-    .event-card .location {
-      font-style: italic;
-      color: #666;
-      margin-bottom: 1rem;
-    }
-
-    .event-card .address {
-      color: #666;
-      margin-bottom: 1.5rem;
+    .event-card p {
+      margin: 0.25rem 0;
     }
 
     .event-card a {
       display: inline-block;
-      padding: 0.5rem 1.5rem;
-      background-color: #d4af37;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #000;
       color: #fff;
       text-decoration: none;
-      border-radius: 30px;
-      transition: background-color 0.3s ease;
-    }
-
-    .event-card a:hover {
-      background-color: #b8972e;
-    }
-
-    /* Travel Section */
-    #travel {
-      padding: 3rem 2rem;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    #travel h2 {
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 0.5rem;
-      font-family: 'Orpheus Pro', serif;
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 2rem;
-      color: #444;
-    }
-
-    #travel ul {
-      list-style-type: none;
-      padding: 0;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    #travel li {
-      background: white;
-      padding: 1rem;
-      margin-bottom: 1rem;
       border-radius: 6px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
-
-    /* RSVP Section */
-    #rsvp {
-      padding: 3rem 2rem;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    #rsvp h2 {
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 0.5rem;
-      font-family: 'Orpheus Pro', serif;
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 2rem;
-      color: #444;
     }
 
     form {
@@ -261,7 +160,6 @@
       display: block;
       font-weight: 500;
       margin-bottom: 0.3rem;
-      color: #555;
     }
 
     .form-row .form-group {
@@ -276,12 +174,11 @@
       border: 1px solid #ddd;
       border-radius: 6px;
       background-color: #f8f8f8;
-      font-family: 'AGaramond Pro', serif;
     }
 
     form textarea {
       resize: vertical;
-      min-height: 120px;
+      min-height: 80px;
     }
 
     .radio-group {
@@ -295,67 +192,42 @@
       align-items: center;
       gap: 0.5rem;
       font-size: 1rem;
-      color: #555;
     }
 
     form button {
       display: block;
       width: 100%;
-      margin-top: 1.5rem;
+      margin-top: 1rem;
       padding: 1rem;
       font-size: 1rem;
       font-weight: bold;
-      background-color: #d4af37;
+      background-color: #000;
       color: #fff;
       border: none;
       border-radius: 30px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
-      font-family: 'Orpheus Pro', serif;
-      letter-spacing: 1px;
     }
 
     form button:hover {
-      background-color: #b8972e;
+      background-color: #333;
     }
 
     footer {
       text-align: center;
-      padding: 2rem;
-      background-color: #f0f0f0;
-      margin-top: 3rem;
-      color: #666;
-      font-size: 0.9rem;
-    }
-
-    footer p {
-      margin: 0;
+      padding: 1rem;
+      background-color: #eee;
+      margin-top: 2rem;
     }
 
     @media (max-width: 600px) {
-      header {
-        padding: 3rem 1.5rem;
-        min-height: 30vh;
-      }
-      
-      header h1 {
-        font-size: 2.5rem;
-      }
-      
-      header p.subtitle {
-        font-size: 1.1rem;
-      }
-      
-      .ceremony-reception {
+      .event-grid {
         flex-direction: column;
       }
-      
       .form-row {
         flex-direction: column;
       }
       .radio-group {
         flex-direction: column;
-        gap: 0.5rem;
       }
     }
   </style>
@@ -363,29 +235,10 @@
 <body>
   <header>
     <h1>Estamos a Casar!</h1>
-    <p class="subtitle">Junta-te a nós para celebrar este dia tão especial</p>
-    <div class="date">15 de Agosto, 2024</div>
+    <p>Junta-te a nós para celebrar este dia tão especial</p>
   </header>
 
-  <section id="schedule">
-    <h2>Programa do Dia</h2>
-    <div class="ceremony-reception">
-      <div class="event-card">
-        <h3>Cerimónia</h3>
-        <div class="time">15:00</div>
-        <div class="location">Igreja de São Miguel</div>
-        <div class="address">Rua da Igreja, Sintra</div>
-        <a href="#" target="_blank">Ver no mapa</a>
-      </div>
-      <div class="event-card">
-        <h3>Copo de Água</h3>
-        <div class="time">17:00</div>
-        <div class="location">Quinta da Regaleira</div>
-        <div class="address">Rua Barbosa do Bocage, Sintra</div>
-        <a href="#" target="_blank">Ver no mapa</a>
-      </div>
-    </div>
-  </section>
+  <section id="schedule"></section>
 
   <section id="travel">
     <h2>Informações de Alojamento</h2>
@@ -397,50 +250,22 @@
     </ul>
   </section>
 
-  <section id="rsvp">
-    <h2>Confirmação de Presença</h2>
-    <form>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="name">Nome Completo</label>
-          <input type="text" id="name" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" required>
-        </div>
-        <div class="form-group">
-          <label for="phone">Telemóvel</label>
-          <input type="tel" id="phone">
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Confirmo a minha presença</label>
-        <div class="radio-group">
-          <label>
-            <input type="radio" name="attendance" value="yes" required> Sim, estarei presente
-          </label>
-          <label>
-            <input type="radio" name="attendance" value="no"> Infelizmente não poderei comparecer
-          </label>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="guests">Número de pessoas (incluindo você)</label>
-        <input type="number" id="guests" min="1" value="1" required>
-      </div>
-      <div class="form-group">
-        <label for="message">Mensagem para os noivos (opcional)</label>
-        <textarea id="message"></textarea>
-      </div>
-      <button type="submit">Enviar Confirmação</button>
-    </form>
-  </section>
+  <section id="rsvp"></section>
 
   <footer>
     <p>Com amor, [Os Noivos]</p>
   </footer>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      fetch('schedule.html')
+        .then(res => res.text())
+        .then(html => document.querySelector('#schedule').innerHTML = html);
+
+      fetch('rsvp.html')
+        .then(res => res.text())
+        .then(html => document.querySelector('#rsvp').innerHTML = html);
+    });
+  </script>
 </body>
 </html>
