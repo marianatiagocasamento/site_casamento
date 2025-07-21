@@ -28,21 +28,94 @@
       padding: 0;
       background-color: #f8f8f8;
       color: #333;
+      line-height: 1.6;
     }
 
+    /* Enhanced Header */
     header {
-      background-color: #fff;
-      padding: 2rem;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+      padding: 5rem 2rem;
       text-align: center;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: relative;
+      min-height: 40vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #d4af37, #f5f7fa);
     }
 
     header h1 {
       font-family: 'Orpheus Pro', serif;
+      font-size: 3.5rem;
+      margin: 0;
+      letter-spacing: 1px;
+      color: #333;
+      position: relative;
+      padding-bottom: 1rem;
     }
 
+    header h1::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 2px;
+      background: #d4af37;
+    }
+
+    header p.subtitle {
+      font-size: 1.3rem;
+      max-width: 600px;
+      margin: 1.5rem auto 0;
+      color: #555;
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    header .date {
+      font-size: 1.25rem;
+      margin-top: 2rem;
+      color: #666;
+      letter-spacing: 1px;
+      position: relative;
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+    }
+
+    header .date::before,
+    header .date::after {
+      content: "✻";
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #d4af37;
+    }
+
+    header .date::before {
+      left: 0;
+    }
+
+    header .date::after {
+      right: 0;
+    }
+
+    /* Rest of your existing styles */
     section {
-      padding: 2rem;
+      padding: 3rem 2rem;
       max-width: 1000px;
       margin: auto;
     }
@@ -51,6 +124,10 @@
       border-bottom: 1px solid #ccc;
       padding-bottom: 0.5rem;
       font-family: 'Orpheus Pro', serif;
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: #444;
     }
 
     .event-grid {
@@ -66,31 +143,45 @@
       flex: 1 1 45%;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       text-align: center;
-      padding: 1rem;
+      padding: 1.5rem;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .event-card:hover {
+      transform: translateY(-5px);
     }
 
     .event-card img {
       width: 100%;
       height: auto;
+      border-radius: 4px;
     }
 
     .event-card h3 {
       margin: 1rem 0 0.5rem;
       font-family: 'Orpheus Pro', serif;
+      color: #333;
     }
 
     .event-card p {
       margin: 0.25rem 0;
+      color: #666;
     }
 
     .event-card a {
       display: inline-block;
       margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      background-color: #000;
+      padding: 0.5rem 1.5rem;
+      background-color: #d4af37;
       color: #fff;
       text-decoration: none;
-      border-radius: 6px;
+      border-radius: 30px;
+      transition: background-color 0.3s ease;
+    }
+
+    .event-card a:hover {
+      background-color: #b8972e;
     }
 
     form {
@@ -116,6 +207,7 @@
       display: block;
       font-weight: 500;
       margin-bottom: 0.3rem;
+      color: #555;
     }
 
     .form-row .form-group {
@@ -130,11 +222,12 @@
       border: 1px solid #ddd;
       border-radius: 6px;
       background-color: #f8f8f8;
+      font-family: 'AGaramond Pro', serif;
     }
 
     form textarea {
       resize: vertical;
-      min-height: 80px;
+      min-height: 120px;
     }
 
     .radio-group {
@@ -148,34 +241,57 @@
       align-items: center;
       gap: 0.5rem;
       font-size: 1rem;
+      color: #555;
     }
 
     form button {
       display: block;
       width: 100%;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
       padding: 1rem;
       font-size: 1rem;
       font-weight: bold;
-      background-color: #000;
+      background-color: #d4af37;
       color: #fff;
       border: none;
       border-radius: 30px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-family: 'Orpheus Pro', serif;
+      letter-spacing: 1px;
     }
 
     form button:hover {
-      background-color: #333;
+      background-color: #b8972e;
     }
 
     footer {
       text-align: center;
-      padding: 1rem;
-      background-color: #eee;
-      margin-top: 2rem;
+      padding: 2rem;
+      background-color: #f0f0f0;
+      margin-top: 3rem;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    footer p {
+      margin: 0;
     }
 
     @media (max-width: 600px) {
+      header {
+        padding: 3rem 1.5rem;
+        min-height: 30vh;
+      }
+      
+      header h1 {
+        font-size: 2.5rem;
+      }
+      
+      header p.subtitle {
+        font-size: 1.1rem;
+      }
+      
       .event-grid {
         flex-direction: column;
       }
@@ -184,6 +300,7 @@
       }
       .radio-group {
         flex-direction: column;
+        gap: 0.5rem;
       }
     }
   </style>
@@ -191,10 +308,14 @@
 <body>
   <header>
     <h1>Estamos a Casar!</h1>
-    <p>Junta-te a nós para celebrar este dia tão especial</p>
+    <p class="subtitle">Junta-te a nós para celebrar este dia tão especial</p>
+    <div class="date">15 de Agosto, 2024</div>
   </header>
 
-  <section id="schedule"></section>
+  <section id="schedule">
+    <h2>Programa do Dia</h2>
+    <!-- Content will be loaded from schedule.html -->
+  </section>
 
   <section id="travel">
     <h2>Informações de Alojamento</h2>
@@ -206,7 +327,10 @@
     </ul>
   </section>
 
-  <section id="rsvp"></section>
+  <section id="rsvp">
+    <h2>Confirmação de Presença</h2>
+    <!-- Content will be loaded from rsvp.html -->
+  </section>
 
   <footer>
     <p>Com amor, [Os Noivos]</p>
@@ -225,4 +349,3 @@
   </script>
 </body>
 </html>
-
