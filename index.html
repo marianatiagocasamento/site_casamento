@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nosso Casamento</title>
-
   <style>
+    /* Load local fonts */
     @font-face {
       font-family: 'Orpheus Pro';
       src: url('fonts/OrpheusPro.woff2') format('woff2'),
@@ -31,14 +31,21 @@
     body {
       font-family: 'AGaramond Pro', serif;
       background-color: #f8f8f8;
-      color: #000;
+      color: #333;
     }
 
+    /* HERO SECTION */
     .hero {
-      position: relative;
+      height: 100vh;
+      background: url('images/flowers.png') no-repeat center bottom;
+      background-size: cover;
       text-align: center;
-      background-color: #e9f0ec;
-      padding: 6rem 1rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding: 2rem;
     }
 
     .hero .rsvp-button {
@@ -63,14 +70,14 @@
 
     .hero h1 {
       font-family: 'Orpheus Pro', serif;
-      font-size: 3rem;
+      font-size: 3.5rem;
       font-weight: normal;
       margin-bottom: 1rem;
     }
 
     .hero .date {
       font-size: 1.2rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 0.5rem;
     }
 
     .hero p {
@@ -78,22 +85,162 @@
       margin-top: 0.5rem;
     }
 
-    .hero .flowers {
+    /* HEADER AND SECTIONS BELOW */
+    header {
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+      padding: 4rem 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    header h2 {
+      font-family: 'Orpheus Pro', serif;
+      font-size: 2.5rem;
+    }
+
+    section {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 0.5rem;
+      font-family: 'Orpheus Pro', serif;
+    }
+
+    .event-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
       margin-top: 2rem;
     }
 
-    .hero .flowers img {
+    .event-card {
+      background-color: #fff;
+      flex: 1 1 45%;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .event-card img {
       width: 100%;
-      max-height: 400px;
-      object-fit: cover;
+      height: auto;
+    }
+
+    .event-card h3 {
+      margin: 1rem 0 0.5rem;
+      font-family: 'Orpheus Pro', serif;
+    }
+
+    .event-card p {
+      margin: 0.25rem 0;
+    }
+
+    .event-card a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #000;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .form-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background-color: #f8f8f8;
+    }
+
+    form textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 2rem;
+      padding: 0.5rem 0;
+    }
+
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+    }
+
+    form button {
+      display: block;
+      width: 100%;
+      margin-top: 1rem;
+      padding: 1rem;
+      font-size: 1rem;
+      font-weight: bold;
+      background-color: #000;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: #333;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #eee;
+      margin-top: 2rem;
     }
 
     @media (max-width: 600px) {
-      .hero h1 {
-        font-size: 2rem;
+      .event-grid {
+        flex-direction: column;
       }
-      .hero .date {
-        font-size: 1rem;
+      .form-row {
+        flex-direction: column;
+      }
+      .radio-group {
+        flex-direction: column;
       }
     }
   </style>
@@ -102,16 +249,41 @@
 
   <section class="hero">
     <a href="#rsvp" class="rsvp-button">RSVP</a>
-    <div class="nav-link">Onde e quando</div>
+    <div class="nav-link"><a href="#schedule" style="text-decoration: none; color: #000;">Onde e quando</a></div>
     <div class="date">– 17.06.2023 –</div>
     <h1>Sofia e Ahmir</h1>
     <p>Vamos nos casar!</p>
-
-    <div class="flowers">
-      <img src="https://cdn.jsdelivr.net/gh/marianatiagocasamento/site_casamento/background.png" alt="Flores decorativas">
-      <!-- Replace the src with your own floral image path -->
-    </div>
   </section>
 
+  <section id="schedule"></section>
+
+  <section id="travel">
+    <h2>Informações de Alojamento</h2>
+    <p>Recomendamos os seguintes hotéis nas proximidades:</p>
+    <ul>
+      <li>Hotel Sintra Garden</li>
+      <li>Pousada de Juventude de Sintra</li>
+      <li>Casa da Vila Guesthouse</li>
+    </ul>
+  </section>
+
+  <section id="rsvp"></section>
+
+  <footer>
+    <p>Com amor, [Os Noivos]</p>
+  </footer>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      fetch('schedule.html')
+        .then(res => res.text())
+        .then(html => document.querySelector('#schedule').innerHTML = html);
+
+      fetch('rsvp.html')
+        .then(res => res.text())
+        .then(html => document.querySelector('#rsvp').innerHTML = html);
+    });
+  </script>
 </body>
 </html>
+
