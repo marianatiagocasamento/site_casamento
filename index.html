@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nosso Casamento</title>
   <style>
     body {
@@ -171,7 +171,6 @@
     <p>Junta-te a nós para celebrar este dia tão especial</p>
   </header>
 
-  <!-- Placeholder sections to be populated via JS -->
   <section id="schedule"></section>
   <section id="travel">
     <h2>Informações de Alojamento</h2>
@@ -182,6 +181,7 @@
       <li>Casa da Vila Guesthouse</li>
     </ul>
   </section>
+
   <section id="rsvp"></section>
 
   <footer>
@@ -189,19 +189,17 @@
   </footer>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      fetch("schedule.html")
-        .then((res) => res.text())
-        .then((data) => {
-          document.getElementById("schedule").innerHTML = data;
-        });
+    // Load external sections
+    window.addEventListener('DOMContentLoaded', () => {
+      fetch('schedule.html')
+        .then(res => res.text())
+        .then(html => document.querySelector('#schedule').innerHTML = html);
 
-      fetch("rsvp.html")
-        .then((res) => res.text())
-        .then((data) => {
-          document.getElementById("rsvp").innerHTML = data;
-        });
+      fetch('rsvp.html')
+        .then(res => res.text())
+        .then(html => document.querySelector('#rsvp').innerHTML = html);
     });
   </script>
 </body>
 </html>
+
