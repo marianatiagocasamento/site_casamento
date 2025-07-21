@@ -70,6 +70,81 @@
       border-radius: 6px;
     }
 
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .form-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background-color: #f8f8f8;
+    }
+
+    form textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 2rem;
+      padding: 0.5rem 0;
+    }
+
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+    }
+
+    form button {
+      display: block;
+      width: 100%;
+      margin-top: 1rem;
+      padding: 1rem;
+      font-size: 1rem;
+      font-weight: bold;
+      background-color: #000;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: #333;
+    }
+
     footer {
       text-align: center;
       padding: 1rem;
@@ -81,6 +156,12 @@
       .event-grid {
         flex-direction: column;
       }
+      .form-row {
+        flex-direction: column;
+      }
+      .radio-group {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
@@ -90,10 +171,8 @@
     <p>Junta-te a nós para celebrar este dia tão especial</p>
   </header>
 
-  <!-- Modular section: schedule -->
+  <!-- Placeholder sections to be populated via JS -->
   <section id="schedule"></section>
-
-  <!-- Travel section stays here (can be modular later if you want) -->
   <section id="travel">
     <h2>Informações de Alojamento</h2>
     <p>Recomendamos os seguintes hotéis nas proximidades:</p>
@@ -103,24 +182,26 @@
       <li>Casa da Vila Guesthouse</li>
     </ul>
   </section>
-
-  <!-- Modular section: RSVP -->
   <section id="rsvp"></section>
 
   <footer>
     <p>Com amor, [Os Noivos]</p>
   </footer>
 
-  <!-- JS to load modular content -->
   <script>
-    async function loadSection(id, file) {
-      const response = await fetch(file);
-      const html = await response.text();
-      document.getElementById(id).innerHTML = html;
-    }
+    document.addEventListener("DOMContentLoaded", function () {
+      fetch("schedule.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("schedule").innerHTML = data;
+        });
 
-    loadSection("schedule", "schedule.html");
-    loadSection("rsvp", "rsvp.html");
+      fetch("rsvp.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("rsvp").innerHTML = data;
+        });
+    });
   </script>
 </body>
 </html>
