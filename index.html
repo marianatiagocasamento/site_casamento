@@ -85,7 +85,17 @@
       margin-bottom: 1rem;
     }
 
-    .form-row input {
+    .form-group {
+      margin: 1rem 0;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .form-row .form-group {
       flex: 1;
     }
 
@@ -93,7 +103,6 @@
       width: 100%;
       box-sizing: border-box;
       padding: 0.75rem;
-      margin: 0.5rem 0;
       font-size: 1rem;
       border: 1px solid #ddd;
       border-radius: 6px;
@@ -103,15 +112,6 @@
     form textarea {
       resize: vertical;
       min-height: 80px;
-    }
-
-    form label {
-      display: block;
-      margin: 0.5rem 0;
-    }
-
-    .form-group {
-      margin: 1rem 0;
     }
 
     .radio-group {
@@ -205,20 +205,33 @@
     <h2>Confirmação de Presença (RSVP)</h2>
     <form action="#" method="post">
       <div class="form-row">
-        <input type="text" name="nome" placeholder="Nome *" required>
-        <input type="text" name="sobrenome" placeholder="Sobrenome *" required>
+        <div class="form-group">
+          <label for="nome">Nome *</label>
+          <input type="text" name="nome" id="nome" placeholder="Nome" required>
+        </div>
+        <div class="form-group">
+          <label for="sobrenome">Sobrenome *</label>
+          <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome" required>
+        </div>
       </div>
 
       <div class="form-group">
-        <p>Você estará presente? *</p>
+        <label>Você estará presente? *</label>
         <div class="radio-group">
           <label><input type="radio" name="presenca" value="Sim" required> Sim</label>
           <label><input type="radio" name="presenca" value="Não"> Não</label>
         </div>
       </div>
 
-      <input type="email" name="email" placeholder="Email" required>
-      <textarea name="restricoes" placeholder="Tem alguma restrição alimentar?"></textarea>
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" name="email" id="email" placeholder="Email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="restricoes">Tem alguma restrição alimentar?</label>
+        <textarea name="restricoes" id="restricoes" placeholder="Escreva aqui (opcional)"></textarea>
+      </div>
       
       <button type="submit">Enviar</button>
     </form>
