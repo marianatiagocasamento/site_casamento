@@ -6,7 +6,7 @@
   <title>Nosso Casamento</title>
   <style>
     body {
-      font-family: sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 0;
       background-color: #f8f8f8;
@@ -67,30 +67,61 @@
       background-color: #000;
       color: #fff;
       text-decoration: none;
+      border-radius: 6px;
     }
 
     form {
       max-width: 600px;
       margin: 0 auto;
-      padding: 1rem;
-      box-sizing: border-box;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
 
-    form input, form textarea, form button {
+    .form-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-row input {
+      flex: 1;
+    }
+
+    form input, form textarea {
       width: 100%;
       box-sizing: border-box;
-      margin: 0.5rem 0;
       padding: 0.75rem;
+      margin: 0.5rem 0;
       font-size: 1rem;
-      border: 1px solid #aaa;
-      border-radius: 4px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background-color: #f8f8f8;
+    }
+
+    form textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    form label {
+      display: block;
+      margin: 0.5rem 0;
     }
 
     form button {
+      display: block;
+      width: 100%;
+      margin-top: 1rem;
+      padding: 1rem;
+      font-size: 1rem;
+      font-weight: bold;
       background-color: #000;
       color: #fff;
-      cursor: pointer;
       border: none;
+      border-radius: 30px;
+      cursor: pointer;
     }
 
     form button:hover {
@@ -106,6 +137,9 @@
 
     @media (max-width: 600px) {
       .event-grid {
+        flex-direction: column;
+      }
+      .form-row {
         flex-direction: column;
       }
     }
@@ -150,10 +184,19 @@
   <section id="rsvp">
     <h2>Confirmação de Presença (RSVP)</h2>
     <form action="#" method="post">
-      <input type="text" name="nome" placeholder="Nome completo" required>
+      <div class="form-row">
+        <input type="text" name="nome" placeholder="Nome *" required>
+        <input type="text" name="sobrenome" placeholder="Sobrenome *" required>
+      </div>
+
+      <p>Você estará presente? *</p>
+      <label><input type="radio" name="presenca" value="Sim" required> Sim</label>
+      <label><input type="radio" name="presenca" value="Não"> Não</label>
+
       <input type="email" name="email" placeholder="Email" required>
-      <textarea name="mensagem" placeholder="Mensagem (opcional)"></textarea>
-      <button type="submit">Confirmar Presença</button>
+      <textarea name="restricoes" placeholder="Tem alguma restrição alimentar?"></textarea>
+      
+      <button type="submit">Enviar</button>
     </form>
   </section>
 
