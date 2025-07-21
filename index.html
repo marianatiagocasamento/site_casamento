@@ -22,13 +22,17 @@
       font-style: normal;
     }
 
+    /* Reset and layout */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
       font-family: 'AGaramond Pro', serif;
       background-color: #f8f8f8;
       color: #333;
@@ -40,18 +44,18 @@
       width: 100vw;
       background: url('https://cdn.jsdelivr.net/gh/marianatiagocasamento/site_casamento/background.png') no-repeat center center fixed;
       background-size: cover;
+      background-attachment: fixed;
       background-repeat: no-repeat;
-    
+
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      position: relative;
       text-align: center;
       padding: 2rem;
+      position: relative;
       z-index: 1;
     }
-
 
     .hero .rsvp-button {
       position: absolute;
@@ -90,19 +94,7 @@
       margin-top: 0.5rem;
     }
 
-    /* HEADER AND SECTIONS BELOW */
-    header {
-      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
-      padding: 4rem 2rem;
-      text-align: center;
-      position: relative;
-    }
-
-    header h2 {
-      font-family: 'Orpheus Pro', serif;
-      font-size: 2.5rem;
-    }
-
+    /* SECTION LAYOUT */
     section {
       padding: 2rem;
       max-width: 1000px;
@@ -291,4 +283,5 @@
   </script>
 </body>
 </html>
+
 
