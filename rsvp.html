@@ -1,0 +1,40 @@
+<!-- rsvp-form.html -->
+<section id="rsvp">
+  <h2>Confirmação de Presença (RSVP)</h2>
+  <form action="https://formsubmit.co/marianatiago.casamento2026@gmail.com" method="POST">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="nome">Nome *</label>
+        <input type="text" id="nome" name="nome" required>
+      </div>
+      <div class="form-group">
+        <label for="sobrenome">Sobrenome *</label>
+        <input type="text" id="sobrenome" name="sobrenome" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Você estará presente? *</label>
+      <div class="radio-group">
+        <label><input type="radio" name="presenca" value="Sim" required> Sim</label>
+        <label><input type="radio" name="presenca" value="Não"> Não</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+
+    <div class="form-group">
+      <label for="restricoes">Tem alguma restrição alimentar?</label>
+      <textarea id="restricoes" name="restricoes" placeholder="Escreve aqui..."></textarea>
+    </div>
+
+    <!-- Optional customizations -->
+    <input type="hidden" name="_subject" value="Nova confirmação de presença!">
+    <input type="hidden" name="_next" value="https://marianatiagocasamento.github.io/site_casamento/obrigado.html">
+
+    <button type="submit">Enviar</button>
+  </form>
+</section>
