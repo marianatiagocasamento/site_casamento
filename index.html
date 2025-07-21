@@ -70,81 +70,6 @@
       border-radius: 6px;
     }
 
-    form {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 2rem;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-
-    .form-row {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .form-group {
-      margin-bottom: 1rem;
-    }
-
-    .form-group label {
-      display: block;
-      font-weight: 500;
-      margin-bottom: 0.3rem;
-    }
-
-    .form-row .form-group {
-      flex: 1;
-    }
-
-    form input, form textarea {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 0.75rem;
-      font-size: 1rem;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      background-color: #f8f8f8;
-    }
-
-    form textarea {
-      resize: vertical;
-      min-height: 80px;
-    }
-
-    .radio-group {
-      display: flex;
-      gap: 2rem;
-      padding: 0.5rem 0;
-    }
-
-    .radio-group label {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 1rem;
-    }
-
-    form button {
-      display: block;
-      width: 100%;
-      margin-top: 1rem;
-      padding: 1rem;
-      font-size: 1rem;
-      font-weight: bold;
-      background-color: #000;
-      color: #fff;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-    }
-
-    form button:hover {
-      background-color: #333;
-    }
-
     footer {
       text-align: center;
       padding: 1rem;
@@ -154,12 +79,6 @@
 
     @media (max-width: 600px) {
       .event-grid {
-        flex-direction: column;
-      }
-      .form-row {
-        flex-direction: column;
-      }
-      .radio-group {
         flex-direction: column;
       }
     }
@@ -201,47 +120,21 @@
     </ul>
   </section>
 
-  <section id="rsvp">
-    <h2>Confirmação de Presença (RSVP)</h2>
-    <form action="https://formsubmit.co/marianatiago.casamento2026@gmail.com" method="POST">
-      <div class="form-row">
-        <div class="form-group">
-          <label for="nome">Nome *</label>
-          <input type="text" id="nome" name="nome" required>
-        </div>
-        <div class="form-group">
-          <label for="sobrenome">Sobrenome *</label>
-          <input type="text" id="sobrenome" name="sobrenome" required>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>Você estará presente? *</label>
-        <div class="radio-group">
-          <label><input type="radio" name="presenca" value="Sim" required> Sim</label>
-          <label><input type="radio" name="presenca" value="Não"> Não</label>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
-      </div>
-
-      <div class="form-group">
-        <label for="restricoes">Tem alguma restrição alimentar?</label>
-        <textarea id="restricoes" name="restricoes" placeholder="Escreve aqui..."></textarea>
-      </div>
-
-      <input type="hidden" name="_subject" value="Nova confirmação de presença!">
-      <input type="hidden" name="_next" value="https://marianatiagocasamento.github.io/site_casamento/obrigado.html">
-
-      <button type="submit">Enviar</button>
-    </form>
-  </section>
+  <div id="rsvp-container"></div>
 
   <footer>
     <p>Com amor, [Os Noivos]</p>
   </footer>
+
+  <script>
+    fetch("rsvp.html")
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById("rsvp-container").innerHTML = html;
+      })
+      .catch(error => {
+        console.error("Erro ao carregar o RSVP:", error);
+      });
+  </script>
 </body>
 </html>
