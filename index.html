@@ -2,10 +2,9 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nosso Casamento</title>
   <style>
-    /* Load local fonts */
     @font-face {
       font-family: 'Orpheus Pro';
       src: url('fonts/OrpheusPro.woff2') format('woff2'),
@@ -22,7 +21,6 @@
       font-style: normal;
     }
 
-    /* Reset and layout */
     * {
       margin: 0;
       padding: 0;
@@ -40,10 +38,8 @@
       color: #333;
     }
 
-    /* HERO SECTION */
     .hero {
-      height: 100vh;
-      width: 100%;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -58,7 +54,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(255, 255, 255, 0.6); /* optional overlay */
+      background: rgba(255, 255, 255, 0.6);
       z-index: 0;
     }
 
@@ -104,14 +100,12 @@
       margin-top: 0.5rem;
     }
 
-    /* SECTION LAYOUT */
     section:not(.hero) {
       padding: 2rem;
       max-width: 1000px;
-      margin: auto;
+      margin: 2rem auto;
       background: rgba(255, 255, 255, 0.85);
       border-radius: 12px;
-      margin-top: 2rem;
     }
 
     h2 {
@@ -171,11 +165,13 @@
 
     .form-row {
       display: flex;
+      flex-wrap: wrap;
       gap: 1rem;
       margin-bottom: 1rem;
     }
 
     .form-group {
+      flex: 1 1 100%;
       margin-bottom: 1rem;
     }
 
@@ -183,10 +179,6 @@
       display: block;
       font-weight: 500;
       margin-bottom: 0.3rem;
-    }
-
-    .form-row .form-group {
-      flex: 1;
     }
 
     form input, form textarea {
@@ -206,6 +198,7 @@
 
     .radio-group {
       display: flex;
+      flex-wrap: wrap;
       gap: 2rem;
       padding: 0.5rem 0;
     }
@@ -240,18 +233,6 @@
       padding: 1rem;
       background-color: rgba(255, 255, 255, 0.85);
       margin-top: 2rem;
-    }
-
-    @media (max-width: 600px) {
-      .event-grid {
-        flex-direction: column;
-      }
-      .form-row {
-        flex-direction: column;
-      }
-      .radio-group {
-        flex-direction: column;
-      }
     }
   </style>
 </head>
