@@ -45,60 +45,7 @@
       }
     }
 
-    .timeline-container {
-      position: relative;
-      max-width: 1000px;
-      margin: 3rem auto;
-      padding: 2rem 0;
-    }
-    
-    .timeline-container::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      width: 4px;
-      background: #ccc;
-      transform: translateX(-50%);
-    }
-    
-    .timeline-item {
-      position: relative;
-      width: 50%;
-      padding: 1rem 2rem;
-      box-sizing: border-box;
-    }
-    
-    .timeline-item.left {
-      left: 0;
-      text-align: right;
-    }
-    
-    .timeline-item.right {
-      left: 50%;
-    }
-    
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      top: 20px;
-      width: 20px;
-      height: 20px;
-      background: #fff;
-      border: 3px solid #000;
-      border-radius: 50%;
-      z-index: 1;
-    }
-    
-    .timeline-item.left::before {
-      right: -10px;
-    }
-    
-    .timeline-item.right::before {
-      left: -10px;
-    }
-    
+
     .content-box {
       background: #fff;
       padding: 1.5rem;
