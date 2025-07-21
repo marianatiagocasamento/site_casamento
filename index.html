@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nosso Casamento</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+      color: #333;
+    }
+    header {
+      background-color: #fff;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    section {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    h2 {
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 0.5rem;
+    }
+    .event-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .event-card {
+      background-color: #fff;
+      flex: 1 1 45%;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      padding: 1rem;
+    }
+    .event-card img {
+      width: 100%;
+      height: auto;
+    }
+    .event-card h3 {
+      margin: 1rem 0 0.5rem;
+    }
+    .event-card p {
+      margin: 0.25rem 0;
+    }
+    .event-card a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #000;
+      color: #fff;
+      text-decoration: none;
+    }
+    form input, form textarea, form button {
+      display: block;
+      width: 100%;
+      margin: 0.5rem 0;
+      padding: 0.75rem;
+      font-size: 1rem;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #eee;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Estamos a Casar!</h1>
+    <p>Junta-te a nós para celebrar este dia tão especial</p>
+  </header>
+
+  <section id="schedule">
+    <h2>Cerimónia e Festa</h2>
+    <div class="event-grid">
+      <div class="event-card">
+        <img src="https://via.placeholder.com/400x250?text=Cerimonia" alt="Igreja">
+        <h3>Cerimónia</h3>
+        <p><strong>15:00h</strong></p>
+        <p>Igreja Nossa Senhora do Rosário</p>
+        <a href="#" target="_blank">Mapa</a>
+      </div>
+      <div class="event-card">
+        <img src="https://www.casamentos.pt/images/articles/photos/m/5c4/quinta-o-agua_1_171137.jpeg" alt="Quinta o Água">
+        <h3>Copo de água</h3>
+        <p><strong>17:00h</strong></p>
+        <p>Quinta o Águia</p>
+        <a href="#" target="_blank">Mapa</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="travel">
+    <h2>Informações de Alojamento</h2>
+    <p>Recomendamos os seguintes hotéis nas proximidades:</p>
+    <ul>
+      <li>Hotel Sintra Garden</li>
+      <li>Pousada de Juventude de Sintra</li>
+      <li>Casa da Vila Guesthouse</li>
+    </ul>
+  </section>
+
+  <section id="rsvp">
+    <h2>Confirmação de Presença (RSVP)</h2>
+    <form action="#" method="post">
+      <input type="text" name="nome" placeholder="Nome completo" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <textarea name="mensagem" placeholder="Mensagem (opcional)"></textarea>
+      <button type="submit">Confirmar Presença</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>Com amor, [Os Noivos]</p>
+  </footer>
+</body>
+</html>
