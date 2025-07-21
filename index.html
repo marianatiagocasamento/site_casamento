@@ -84,23 +84,6 @@
       gap: 1rem;
       margin-bottom: 1rem;
     }
-    .form-group {
-      margin: 1rem 0;
-    }
-    
-    .radio-group {
-      display: flex;
-      gap: 2rem;
-      padding: 0.5rem 0;
-    }
-    
-    .radio-group label {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 1rem;
-    }
-
 
     .form-row input {
       flex: 1;
@@ -125,6 +108,23 @@
     form label {
       display: block;
       margin: 0.5rem 0;
+    }
+
+    .form-group {
+      margin: 1rem 0;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 2rem;
+      padding: 0.5rem 0;
+    }
+
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
     }
 
     form button {
@@ -157,6 +157,9 @@
         flex-direction: column;
       }
       .form-row {
+        flex-direction: column;
+      }
+      .radio-group {
         flex-direction: column;
       }
     }
@@ -197,6 +200,7 @@
       <li>Casa da Vila Guesthouse</li>
     </ul>
   </section>
+
   <section id="rsvp">
     <h2>Confirmação de Presença (RSVP)</h2>
     <form action="#" method="post">
@@ -204,7 +208,7 @@
         <input type="text" name="nome" placeholder="Nome *" required>
         <input type="text" name="sobrenome" placeholder="Sobrenome *" required>
       </div>
-  
+
       <div class="form-group">
         <p>Você estará presente? *</p>
         <div class="radio-group">
@@ -212,7 +216,7 @@
           <label><input type="radio" name="presenca" value="Não"> Não</label>
         </div>
       </div>
-  
+
       <input type="email" name="email" placeholder="Email" required>
       <textarea name="restricoes" placeholder="Tem alguma restrição alimentar?"></textarea>
       
