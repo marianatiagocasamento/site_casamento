@@ -86,7 +86,7 @@
     }
 
     .form-group {
-      margin: 1rem 0;
+      margin-bottom: 1rem;
     }
 
     .form-group label {
@@ -179,14 +179,14 @@
         <h3>Cerimónia</h3>
         <p><strong>15:00h</strong></p>
         <p>Igreja Nossa Senhora do Rosário</p>
-        <a href="https://www.google.com/maps/place/Igreja+de+Nossa+Senhora+do+Ros%C3%A1rio/@37.7452319,-25.5773111,893m/data=!3m2!1e3!4b1!4m6!3m5!1s0xb5cd5f927c9b2cf:0xcd0a56acd38550cd!8m2!3d37.7452277!4d-25.5747362!16s%2Fg%2F1231m3qm?entry=ttu&g_ep=EgoyMDI1MDcxNi4wIKXMDSoASAFQAw%3D%3D" target="_blank">Mapa</a>
+        <a href="https://www.google.com/maps/place/Igreja+de+Nossa+Senhora+do+Ros%C3%A1rio/@37.7452319,-25.5773111,893m/data=!3m2!1e3!4b1!4m6!3m5!1s0xb5cd5f927c9b2cf:0xcd0a56acd38550cd!8m2!3d37.7452277!4d-25.5747362!16s%2Fg%2F1231m3qm?entry=ttu" target="_blank">Mapa</a>
       </div>
       <div class="event-card">
         <img src="https://cdn.jsdelivr.net/gh/marianatiagocasamento/site_casamento/quinta.png" alt="Quinta o Águia">
         <h3>Copo de água</h3>
         <p><strong>17:00h</strong></p>
         <p>Quinta o Águia</p>
-        <a href="https://www.google.com/maps/place/Quinta+%C3%81guia/@37.8957452,-25.7670908,892m/data=!3m2!1e3!4b1!4m6!3m5!1s0xb4331bc80e5575b:0xa8c86865b4d7b388!8m2!3d37.895741!4d-25.7645159!16s%2Fg%2F11t5x0y3d1?entry=ttu&g_ep=EgoyMDI1MDcxNi4wIKXMDSoASAFQAw%3D%3D" target="_blank">Mapa</a>
+        <a href="https://www.google.com/maps/place/Quinta+%C3%81guia/@37.8957452,-25.7670908,892m/data=!3m2!1e3!4b1!4m6!3m5!1s0xb4331bc80e5575b:0xa8c86865b4d7b388!8m2!3d37.895741!4d-25.7645159!16s%2Fg%2F11t5x0y3d1?entry=ttu" target="_blank">Mapa</a>
       </div>
     </div>
   </section>
@@ -203,49 +203,42 @@
 
   <section id="rsvp">
     <h2>Confirmação de Presença (RSVP)</h2>
-    <form action="https://formsubmit.co/your@email.com" method="POST">
-      
+    <form action="https://formsubmit.co/marianatiago.casamento2026@gmail.com" method="POST">
       <div class="form-row">
-        <div style="flex:1;">
+        <div class="form-group">
           <label for="nome">Nome *</label>
           <input type="text" id="nome" name="nome" required>
         </div>
-        <div style="flex:1;">
+        <div class="form-group">
           <label for="sobrenome">Sobrenome *</label>
           <input type="text" id="sobrenome" name="sobrenome" required>
         </div>
       </div>
-  
-      <div style="margin-top: 1rem;">
+
+      <div class="form-group">
         <label>Você estará presente? *</label>
-        <div style="margin-top: 0.5rem;">
-          <label style="margin-right: 1rem;">
-            <input type="radio" name="presenca" value="Sim" required> Sim
-          </label>
-          <label>
-            <input type="radio" name="presenca" value="Não"> Não
-          </label>
+        <div class="radio-group">
+          <label><input type="radio" name="presenca" value="Sim" required> Sim</label>
+          <label><input type="radio" name="presenca" value="Não"> Não</label>
         </div>
       </div>
-  
-      <div style="margin-top: 1rem;">
+
+      <div class="form-group">
         <label for="email">Email</label>
         <input type="email" id="email" name="email" required>
       </div>
-  
-      <div style="margin-top: 1rem;">
+
+      <div class="form-group">
         <label for="restricoes">Tem alguma restrição alimentar?</label>
         <textarea id="restricoes" name="restricoes" placeholder="Escreve aqui..."></textarea>
       </div>
-  
-      <!-- Optional customizations -->
+
       <input type="hidden" name="_subject" value="Nova confirmação de presença!">
       <input type="hidden" name="_next" value="https://marianatiagocasamento.github.io/site_casamento/obrigado.html">
-  
+
       <button type="submit">Enviar</button>
     </form>
   </section>
-
 
   <footer>
     <p>Com amor, [Os Noivos]</p>
