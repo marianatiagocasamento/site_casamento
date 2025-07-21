@@ -321,6 +321,10 @@
       fetch('schedule.html')
         .then(res => res.text())
         .then(html => document.querySelector('#schedule').innerHTML = html);
+      
+      fetch('gift.html')
+        .then(res => res.text())
+        .then(html => document.querySelector('#gift').innerHTML = html);
 
       fetch('rsvp.html')
         .then(res => res.text())
