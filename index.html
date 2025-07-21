@@ -2,9 +2,10 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=1200, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nosso Casamento</title>
   <style>
+    /* Load local fonts */
     @font-face {
       font-family: 'Orpheus Pro';
       src: url('fonts/OrpheusPro.woff2') format('woff2'),
@@ -21,6 +22,7 @@
       font-style: normal;
     }
 
+    /* Reset and layout */
     * {
       margin: 0;
       padding: 0;
@@ -32,22 +34,35 @@
       height: 100%;
       overflow-x: hidden;
       font-family: 'AGaramond Pro', serif;
-      background-color: #f8f8f8;
-      color: #333;
-    }
-
-    .hero {
-      height: 100vh;
-      width: 100vw;
       background: url('https://cdn.jsdelivr.net/gh/marianatiagocasamento/site_casamento/background.png') no-repeat center center fixed;
       background-size: cover;
       background-attachment: fixed;
+      color: #333;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      height: 100vh;
+      width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       padding: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.6); /* optional overlay */
+      z-index: 0;
+    }
+
+    .hero * {
       position: relative;
       z-index: 1;
     }
@@ -89,10 +104,14 @@
       margin-top: 0.5rem;
     }
 
-    section {
+    /* SECTION LAYOUT */
+    section:not(.hero) {
       padding: 2rem;
       max-width: 1000px;
       margin: auto;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 12px;
+      margin-top: 2rem;
     }
 
     h2 {
@@ -219,8 +238,20 @@
     footer {
       text-align: center;
       padding: 1rem;
-      background-color: #eee;
+      background-color: rgba(255, 255, 255, 0.85);
       margin-top: 2rem;
+    }
+
+    @media (max-width: 600px) {
+      .event-grid {
+        flex-direction: column;
+      }
+      .form-row {
+        flex-direction: column;
+      }
+      .radio-group {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
@@ -265,4 +296,3 @@
   </script>
 </body>
 </html>
-
