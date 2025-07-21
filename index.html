@@ -204,6 +204,7 @@
   <section id="rsvp">
     <h2>Confirmação de Presença (RSVP)</h2>
     <form action="https://formsubmit.co/your@email.com" method="POST">
+      
       <div class="form-row">
         <div style="flex:1;">
           <label for="nome">Nome *</label>
@@ -214,24 +215,37 @@
           <input type="text" id="sobrenome" name="sobrenome" required>
         </div>
       </div>
-
-      <label>Você estará presente? *</label>
-      <label><input type="radio" name="presenca" value="Sim" required> Sim</label>
-      <label><input type="radio" name="presenca" value="Não"> Não</label>
-
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
-
-      <label for="restricoes">Tem alguma restrição alimentar?</label>
-      <textarea id="restricoes" name="restricoes" placeholder="Escreve aqui..."></textarea>
-
+  
+      <div style="margin-top: 1rem;">
+        <label>Você estará presente? *</label>
+        <div style="margin-top: 0.5rem;">
+          <label style="margin-right: 1rem;">
+            <input type="radio" name="presenca" value="Sim" required> Sim
+          </label>
+          <label>
+            <input type="radio" name="presenca" value="Não"> Não
+          </label>
+        </div>
+      </div>
+  
+      <div style="margin-top: 1rem;">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+  
+      <div style="margin-top: 1rem;">
+        <label for="restricoes">Tem alguma restrição alimentar?</label>
+        <textarea id="restricoes" name="restricoes" placeholder="Escreve aqui..."></textarea>
+      </div>
+  
       <!-- Optional customizations -->
       <input type="hidden" name="_subject" value="Nova confirmação de presença!">
       <input type="hidden" name="_next" value="https://marianatiagocasamento.github.io/site_casamento/obrigado.html">
-
+  
       <button type="submit">Enviar</button>
     </form>
   </section>
+
 
   <footer>
     <p>Com amor, [Os Noivos]</p>
