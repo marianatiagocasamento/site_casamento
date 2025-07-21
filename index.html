@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nosso Casamento</title>
   <style>
     body {
@@ -70,6 +70,81 @@
       border-radius: 6px;
     }
 
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .form-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background-color: #f8f8f8;
+    }
+
+    form textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 2rem;
+      padding: 0.5rem 0;
+    }
+
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+    }
+
+    form button {
+      display: block;
+      width: 100%;
+      margin-top: 1rem;
+      padding: 1rem;
+      font-size: 1rem;
+      font-weight: bold;
+      background-color: #000;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: #333;
+    }
+
     footer {
       text-align: center;
       padding: 1rem;
@@ -81,6 +156,14 @@
       .event-grid {
         flex-direction: column;
       }
+
+      .form-row {
+        flex-direction: column;
+      }
+
+      .radio-group {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
@@ -90,44 +173,37 @@
     <p>Junta-te a nós para celebrar este dia tão especial</p>
   </header>
 
+  <!-- Schedule Section Loaded Dynamically -->
   <section id="schedule-container"></section>
-  
-  <script>
-    fetch('schedule.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('schedule-container').innerHTML = data;
-      })
-      .catch(error => {
-        console.error('Erro ao carregar o conteúdo da cerimónia:', error);
-        document.getElementById('schedule-container').innerHTML = "<p>Não foi possível carregar a informação da cerimónia.</p>";
-      });
-  </script>
-  
-  <section id="travel">
-    <h2>Informações de Alojamento</h2>
-    <p>Recomendamos os seguintes hotéis nas proximidades:</p>
-    <ul>
-      <li>Hotel Sintra Garden</li>
-      <li>Pousada de Juventude de Sintra</li>
-      <li>Casa da Vila Guesthouse</li>
-    </ul>
-  </section>
 
-  <div id="rsvp-container"></div>
+  <!-- RSVP Section Loaded Dynamically -->
+  <section id="rsvp-container"></section>
 
   <footer>
     <p>Com amor, [Os Noivos]</p>
   </footer>
 
   <script>
-    fetch("rsvp.html")
+    // Load Cerimónia e Festa
+    fetch('schedule.html')
       .then(response => response.text())
       .then(html => {
-        document.getElementById("rsvp-container").innerHTML = html;
+        document.getElementById('schedule-container').innerHTML = html;
       })
       .catch(error => {
-        console.error("Erro ao carregar o RSVP:", error);
+        document.getElementById('schedule-container').innerHTML = "<p>Erro ao carregar a cerimónia.</p>";
+        console.error(error);
+      });
+
+    // Load RSVP Section
+    fetch('rsvp.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('rsvp-container').innerHTML = html;
+      })
+      .catch(error => {
+        document.getElementById('rsvp-container').innerHTML = "<p>Erro ao carregar o formulário de presença.</p>";
+        console.error(error);
       });
   </script>
 </body>
