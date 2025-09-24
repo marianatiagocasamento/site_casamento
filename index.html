@@ -5,16 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nosso Casamento</title>
 
-  <!-- Add Google Font -->
+  <!-- Names font -->
   <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
+  <!-- Fallback for Baskerville BT -->
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet">
 
   <style>
+    /* If you have Baskerville BT files, keep this @font-face and place the files in /fonts */
+    @font-face {
+      font-family: 'Baskerville BT';
+      src: url('fonts/BaskervilleBT.woff2') format('woff2'),
+           url('fonts/BaskervilleBT.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* (Optional) keep these if you still plan to use them elsewhere */
     @font-face {
       font-family: 'Orpheus Pro';
       src: url('fonts/OrpheusPro.woff2') format('woff2'),
            url('fonts/OrpheusPro.woff') format('woff');
       font-weight: normal;
       font-style: normal;
+      font-display: swap;
     }
 
     @font-face {
@@ -23,24 +37,23 @@
            url('fonts/AGaramondPro-Regular.woff') format('woff');
       font-weight: normal;
       font-style: normal;
+      font-display: swap;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     html, body {
       width: 100%;
       height: 100%;
       overflow-x: hidden;
-      font-family: 'AGaramond Pro', serif;
+      /* Make Baskerville BT the default (falls back to Libre Baskerville, then generic serif) */
+      font-family: 'Baskerville BT', 'Libre Baskerville', serif;
       background: url('https://cdn.jsdelivr.net/gh/marianatiagocasamento/site_casamento/background.png') no-repeat center center fixed;
       background-size: cover;
       background-attachment: fixed;
       color: #333;
     }
+
     @media (max-width: 768px) {
       html, body {
         background: url('https://cdn.jsdelivr.net/gh/marianatiagocasamento/site_casamento/background_cellphone(1).png') no-repeat center center fixed;
@@ -88,10 +101,7 @@
       z-index: 0;
     }
 
-    .hero * {
-      position: relative;
-      z-index: 1;
-    }
+    .hero * { position: relative; z-index: 1; }
 
     .hero .rsvp-button {
       position: absolute;
@@ -113,7 +123,7 @@
       font-size: 1rem;
     }
 
-    /* Updated names styling */
+    /* Names in Pinyon Script, stacked, not bold */
     .names {
       font-family: 'Pinyon Script', cursive;
       font-size: 4rem;
@@ -122,22 +132,21 @@
       flex-direction: column;
       align-items: center;
       margin: 1rem 0;
-      font-weight: 400; /* 👈 force normal, prevents bold */
+      font-weight: 400; /* ensure not bold */
     }
 
-
-    .names .name {
-      display: block;
-    }
+    .names .name { display: block; }
 
     .names .amp {
       font-size: 3rem;
       margin: 0.5rem 0;
+      line-height: 1;
     }
 
     .hero .date {
       font-size: 1.2rem;
       margin-bottom: 0.5rem;
+      font-weight: 400;
     }
 
     .hero p {
@@ -153,10 +162,11 @@
       border-radius: 12px;
     }
 
+    /* Let headings inherit Baskerville */
     h2 {
       border-bottom: 1px solid #ccc;
       padding-bottom: 0.5rem;
-      font-family: 'Orpheus Pro', serif;
+      font-weight: 400;
     }
 
     form {
@@ -168,6 +178,11 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
 
+    .form-row { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
+    .form-group { flex: 1 1 100%; margin-bottom: 1rem; }
+
+    .form-group label { display: block; font-weight: 500; margin-bottom: 0.3rem; }
+
     form input, form textarea {
       width: 100%;
       box-sizing: border-box;
@@ -178,33 +193,26 @@
       background-color: #f8f8f8;
     }
 
-    form textarea {
-      resize: vertical;
-      min-height: 80px;
+    form textarea { resize: vertical; min-height: 80px; }
+
+    .radio-group {
+      display: flex; flex-wrap: wrap; gap: 2rem; padding: 0.5rem 0;
+    }
+
+    .radio-group label {
+      display: flex; align-items: center; gap: 0.5rem; font-size: 1rem;
     }
 
     form button {
-      display: block;
-      width: 100%;
-      margin-top: 1rem;
-      padding: 1rem;
-      font-size: 1rem;
-      font-weight: bold;
-      background-color: #000;
-      color: #fff;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
+      display: block; width: 100%; margin-top: 1rem; padding: 1rem;
+      font-size: 1rem; font-weight: bold; background-color: #000; color: #fff;
+      border: none; border-radius: 30px; cursor: pointer;
     }
 
-    form button:hover {
-      background-color: #333;
-    }
+    form button:hover { background-color: #333; }
 
     footer {
-      text-align: center;
-      padding: 1rem;
-      background-color: rgba(255, 255, 255, 0.85);
+      text-align: center; padding: 1rem; background-color: rgba(255, 255, 255, 0.85);
       margin-top: 2rem;
     }
   </style>
@@ -216,7 +224,6 @@
     <div class="nav-link"><a href="#schedule" style="text-decoration: none; color: #000;">Detalhes</a></div>
     <div class="date">– 09.05.2026 –</div>
 
-    <!-- Updated names block -->
     <h1 class="names">
       <span class="name">Mariana</span>
       <span class="amp">&amp;</span>
@@ -239,7 +246,7 @@
       fetch('schedule.html')
         .then(res => res.text())
         .then(html => document.querySelector('#schedule').innerHTML = html);
-      
+
       fetch('gift.html')
         .then(res => res.text())
         .then(html => document.querySelector('#gift').innerHTML = html);
@@ -251,3 +258,4 @@
   </script>
 </body>
 </html>
+
