@@ -26,8 +26,9 @@
   </div>
 
   <button type="submit">Enviar Confirmação</button>
-  <p id="formMessage" style="margin-top: 1rem; display:none;"></p>
 </form>
+
+<p id="formMessage" style="display:none;"></p>
 
 <script>
 document.getElementById("rsvpForm").addEventListener("submit", function(e) {
@@ -36,18 +37,30 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e) {
   const form = e.target;
   const data = new FormData(form);
   const action = "https://docs.google.com/forms/d/e/1FAIpQLSfOUgeDYzo24JNl85z2-DM7tL9CtZCzR8WMYkqMF7t7GnMZYw/formResponse";
+  const button = form.querySelector("button[type=submit]");
+  const message = document.getElementById("formMessage");
+
+  // Feedback while sending
+  button.disabled = true;
+  button.innerText = "Enviando...";
 
   fetch(action, {
     method: "POST",
     body: data,
     mode: "no-cors"
   }).then(() => {
-    document.getElementById("formMessage").innerText = "🎉 Obrigado! A sua confirmação foi enviada.";
-    document.getElementById("formMessage").style.display = "block";
-    form.reset();
+    // Hide form, show success message
+    form.style.display = "none";
+    message.innerText = "💌 Obrigado! A sua confirmação foi enviada com sucesso.";
+    message.className = "success";
+    message.style.display = "block";
   }).catch(() => {
-    document.getElementById("formMessage").innerText = "⚠️ Ocorreu um erro, tente novamente.";
-    document.getElementById("formMessage").style.display = "block";
+    // Restore button on error
+    button.disabled = false;
+    button.innerText = "Enviar Confirmação";
+    message.innerText = "⚠️ Ocorreu um erro, tente novamente.";
+    message.className = "error";
+    message.style.display = "block";
   });
 });
 </script>
@@ -98,14 +111,14 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e) {
 /* Radios */
 .rsvp-form .radio-group {
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   margin-top: 0.5rem;
 }
 
 .rsvp-form .radio-group label {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   cursor: pointer;
 }
 
@@ -113,11 +126,12 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e) {
   accent-color: #65805e; /* wedding green */
 }
 
-/* Responsive fix */
+/* Mobile fix */
 @media (max-width: 600px) {
   .rsvp-form .radio-group {
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 0.6rem; /* tighter spacing */
+    align-items: flex-start;
   }
 }
 
@@ -141,10 +155,27 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e) {
   background-color: #4d6147;
 }
 
+/* Success/Error Messages */
 #formMessage {
+  max-width: 600px;
+  margin: 1.5rem auto;
+  padding: 1rem;
+  border-radius: 8px;
   text-align: center;
-  font-size: 1rem;
-  color: #333;
+  font-size: 1.1rem;
+  display: none;
+}
+
+#formMessage.success {
+  background: #e6f4ea;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+}
+
+#formMessage.error {
+  background: #fdecea;
+  color: #c62828;
+  border: 1px solid #f5c6cb;
 }
 </style>
 
