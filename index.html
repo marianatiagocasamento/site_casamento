@@ -188,40 +188,47 @@
       resize: vertical;
     }
 
-    /* Radios */
-    .radio {
-      display: inline-flex;
+    /* === Radios (revised) === */
+    .radio-group {
+      display: flex;            /* lay Sim / Não horizontally */
       align-items: center;
-      gap: 0.8rem;          /* closer label to the dot */
+      gap: 2rem;                /* space between Sim and Não */
+      margin-top: .4rem;
+      flex-wrap: wrap;
     }
-    
+
+    .radio {
+      display: inline-flex;     /* keep dot and its label together */
+      align-items: center;
+      gap: 0.8rem;              /* distance between dot and its label */
+    }
+
     .radio input[type="radio"] {
-      margin: 0;            /* kill default margins */
-      width: 15px;          /* consistent dot size (optional) */
+      margin: 0;                /* remove default margins */
+      width: 15px;              /* consistent native dot size */
       height: 15px;
       accent-color: #65805e;
     }
-    
+
     .radio label {
-      margin: 0;            /* no extra spacing */
-      line-height: 1;       /* avoid baseline misalign */
-      padding: 0;           /* ensure no padding pushes it away */
+      margin: 0;
+      line-height: 1;
+      padding: 0;
     }
-    
+
     /* 📱 Mobile */
     @media (max-width: 720px) {
       .radio-group {
-        justify-content: flex-start;  /* left align the whole group */
-        gap: 2rem;                    /* spacing between Sim / Não */
+        justify-content: flex-start;  /* keep group left-aligned on mobile */
+        gap: 1.25rem;                 /* a bit tighter between Sim/Não */
         width: 100%;
       }
-    
+
       .radio {
-        flex: 0 0 auto;               /* stop stretching to full width */
+        flex: 0 0 auto;               /* no stretching */
         justify-content: flex-start;  /* keep dot+text tight on the left */
       }
     }
-
 
     .cute-form button[type="submit"] {
       width: 100%;
@@ -272,7 +279,7 @@
         min-width: 100%;
         margin-bottom: .9rem;
       }
-   }   
+    }
   </style>
 </head>
 <body>
@@ -371,5 +378,6 @@ function initRSVP_GForm(container) {
 
 </body>
 </html>
+
 
 
