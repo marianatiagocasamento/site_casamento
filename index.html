@@ -200,7 +200,7 @@
     .radio {                     /* NEW: wrap each option */
       display: inline-flex;
       align-items: center;
-      gap: .45rem;
+      gap: .35rem;
     }
     
     .radio input[type="radio"] {
@@ -212,15 +212,21 @@
     /* 📱 Mobile */
     @media (max-width: 720px) {
       .radio-group {
-        justify-content: space-between;
-        gap: .9rem;
-        width: 100%;
+        justify-content: center;   /* center both as a group */
+        gap: 1.5rem;               /* spacing between Sim / Não */
+        width: auto;
       }
-      .radio {                   /* center each option on mobile */
-        flex: 1;
-        justify-content: center;
+    
+      .radio {
+        flex: unset;               /* don’t force equal width */
+        justify-content: flex-start;
+      }
+    
+      .radio label {
+        margin: 0;                 /* remove extra spacing */
       }
     }
+
 
     .cute-form button[type="submit"] {
       width: 100%;
