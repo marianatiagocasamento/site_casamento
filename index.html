@@ -221,68 +221,72 @@
   </footer>
 
   <script>
-    window.addEventListener('DOMContentLoaded', async () => {
-      const v = Date.now(); // cache-buster during edits
+window.addEventListener('DOMContentLoaded', async () => {
+  const v = Date.now();
 
-      async function inject(selector, url, after) {
-        const res = await fetch(url + (url.includes('?') ? '&' : '?') + 'v=' + v);
-        const html = await res.text();
-        const el = document.querySelector(selector);
-        el.innerHTML = html;
-        if (after) after(el);
-      }
+  async function inject(selector, url, after) {
+    const res = await fetch(url + (url.includes('?') ? '&' : '?') + 'v=' + v);
+    const html = await res.text();
+    const el = document.querySelector(selector);
+    el.innerHTML = html;
+    if (after) after(el);
+  }
 
-      await inject('#schedule', 'schedule.html');
-      await inject('#gift', 'gift.html');
+  await inject('#schedule', 'schedule.html');
+  await inject('#gift', 'gift.html');
 
-      // Inject RSVP and wire up behavior for FormSubmit
-      await inject('#rsvp', 'rsvp.html', initRSVP_FormSubmit);
-    });
+  // Inject Google Forms RSVP and then initialize the behavior
+  await inject('#rsvp', 'rsvp.html', initRSVP_GForm);
+});
 
-    function initRSVP_FormSubmit(container) {
-      const section = container; // the #rsvp section content
-      const form    = section.querySelector('#rsvpForm');
-      const btn     = section.querySelector('button[type="submit"]');
-      const iframe  = section.querySelector('#rsvp_hidden'); // from rsvp.html
+function initRSVP_GForm(container) {
+  const section = container;                         // <section id="rsvp">...</section>
+  const form    = section.querySelector('#rsvpForm');
+  const btn     = section.querySelector('button[type="submit"]');
+  const iframe  = section.querySelector('#gform_hidden');
 
-      if (!form || !iframe) return;
+  if (!form || !iframe) return;
 
-      let submitted = false;
-      let fallbackTimer = null;
+  let submitted = false;
+  let fallbackTimer = null;
 
-      function showThanks() {
-        section.innerHTML = `
-          <div class="thankyou-card" role="status" aria-live="polite">
-            <span class="emoji">💌</span>
-            <h2>Obrigado pela sua confirmação!</h2>
-            <p>A sua resposta foi recebida com sucesso.</p>
-            <div class="thankyou-actions">
-              <a class="btn btn-primary" href="#rsvp" onclick="location.reload()">Enviar outra resposta</a>
-              <a class="btn btn-ghost" href="#schedule">Ver detalhes do dia</a>
-            </div>
-          </div>
-        `;
-        section.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
+  function replaceWithThanks() {
+    section.innerHTML = `
+      <div class="thankyou-card" role="status" aria-live="polite">
+        <span class="emoji">💌</span>
+        <h2>Obrigado pela sua confirmação!</h2>
+        <p>A sua resposta foi recebida com sucesso.</p>
+        <div class="thankyou-actions">
+          <a class="btn btn-primary" href="#rsvp" onclick="location.reload()">Enviar outra resposta</a>
+          <a class="btn btn-ghost" href="#schedule">Ver detalhes do dia</a>
+        </div>
+      </div>
+    `;
+    section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 
-      form.addEventListener('submit', () => {
-        submitted = true;
-        btn.disabled = true;
-        btn.textContent = 'Enviando...';
-        section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  form.addEventListener('submit', () => {
+    submitted = true;
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+    section.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-        // Fallback in case the iframe 'load' doesn’t fire
-        clearTimeout(fallbackTimer);
-        fallbackTimer = setTimeout(() => { if (submitted) showThanks(); }, 1200);
-      });
+    // Fallback in case the iframe 'load' gets blocked by browser
+    clearTimeout(fallbackTimer);
+    fallbackTimer = setTimeout(() => {
+      if (submitted) replaceWithThanks();
+    }, 1200);
+  });
 
-      iframe.addEventListener('load', () => {
-        if (!submitted) return; // ignore initial empty load
-        clearTimeout(fallbackTimer);
-        showThanks();
-      });
-    }
-  </script>
+  // Primary path: when Google finishes, its confirmation page loads in the iframe
+  iframe.addEventListener('load', () => {
+    if (!submitted) return; // ignore initial empty load after injection
+    clearTimeout(fallbackTimer);
+    replaceWithThanks();
+  });
+}
+</script>
+
 </body>
 </html>
 
