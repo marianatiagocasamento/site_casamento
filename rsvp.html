@@ -1,19 +1,34 @@
 <h2>Confirmação de Presença (RSVP)</h2>
 
-<div class="form-embed">
-  <iframe 
-    src="https://docs.google.com/forms/d/e/1FAIpQLSfOUgeDYzo24JNl85z2-DM7tL9CtZCzR8WMYkqMF7t7GnMZYw/viewform?embedded=true" 
-    width="100%" 
-    height="980" 
-    frameborder="0" 
-    marginheight="0" 
-    marginwidth="0" 
-    title="RSVP">
-  </iframe>
-  <div class="form-mask" aria-hidden="true"></div>
-</div>
+<form action="https://docs.google.com/forms/d/e/1FAIpQLSfOUgeDYzo24JNl85z2-DM7tL9CtZCzR8WMYkqMF7t7GnMZYw/formResponse"
+      method="POST" target="_self">
 
+  <div class="form-group">
+    <label for="nome">Nome *</label>
+    <input type="text" id="nome" name="entry.1844618974" required>
+  </div>
 
+  <div class="form-group">
+    <label for="sobrenome">Sobrenome *</label>
+    <input type="text" id="sobrenome" name="entry.1812276602" required>
+  </div>
 
+  <div class="form-group">
+    <label>Você estará presente? *</label>
+    <label><input type="radio" name="entry.1896938407" value="Sim" required> Sim</label>
+    <label><input type="radio" name="entry.1896938407" value="Não"> Não</label>
+  </div>
 
+  <div class="form-group">
+    <label for="restricoes">Tem alguma restrição alimentar?</label>
+    <textarea id="restricoes" name="entry.493100585" placeholder="Escreve aqui..."></textarea>
+  </div>
+
+  <!-- Optional: redirect after submit -->
+  <input type="hidden" name="fvv" value="1">
+  <input type="hidden" name="draftResponse" value="[]">
+  <input type="hidden" name="pageHistory" value="0">
+
+  <button type="submit">Enviar</button>
+</form>
 
