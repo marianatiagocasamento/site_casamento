@@ -76,8 +76,8 @@
     }
 
     .hero .rsvp-button {
-      display: inline-block;
-      margin-top: 1rem;       /* spacing below the date */
+      display: block;                /* force new line */
+      margin: 1rem auto 0;           /* center horizontally */
       background: #65805e;
       color: #fff;
       text-decoration: none;
@@ -107,14 +107,14 @@
     }
 
     /* Date below names with lines */
+/* date is a full-width row with the lines */
     .hero .date {
-      font-family: 'Baskerville BT','Libre Baskerville',serif; /* Baskerville URW look */
-      font-size: clamp(1.1rem, 2.2vw, 1.4rem);
-      letter-spacing: .04em;
-      margin: .6rem 0 0.6rem;
-      display: inline-flex;
+      display: flex;                 /* was: inline-flex */
       align-items: center;
+      justify-content: center;
       gap: 1rem;
+      margin: .6rem auto 0.6rem;
+      width: 100%;
     }
     .hero .date::before,
     .hero .date::after {
