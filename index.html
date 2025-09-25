@@ -22,7 +22,6 @@
       font-display: swap;
     }
 
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     html, body {
@@ -70,8 +69,8 @@
       width: min(92vw, 780px);
       margin: 0 auto;
       text-align: center;
-      transform: translateY(-4vh);         /* push content slightly upward */
-      padding-top: 2rem; 
+      transform: translateY(-10vh);   /* ⬆️ push content higher (was -4vh) */
+      padding-top: 0;                 /* ⬆️ remove extra top padding (was 2rem) */
     }
     @media (max-width: 768px) {
       .hero-inner { transform: none; }     /* keep balanced on mobile */
@@ -79,7 +78,7 @@
     
     .hero .rsvp-button {
       display: inline-block;         /* shrink to fit text */
-      margin-top: 1.5rem;            /* space below the date */
+      margin-top: 3rem;              /* ⬆️ bigger gap below the date (was 1.5rem) */
       background: #65805e;           /* green background */
       color: #fff;                   /* white text */
       text-decoration: none;         /* remove underline */
@@ -100,7 +99,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: .25rem 0 .5rem;  /* less vertical margin so it sits higher */
+      margin: 0 0 1.5rem;            /* ⬆️ no top margin, more space below names */
       font-weight: 500;
     }
     .names .name { display: block; }
@@ -115,8 +114,8 @@
       font-family: 'Baskerville BT','Libre Baskerville',serif !important;
       font-weight: 400;
       font-style: normal;
-      font-size: clamp(1.4rem, 2.2vw, 1.9rem); /* larger date */
-      margin-top: 1rem;
+      font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+      margin-top: 2.5rem;            /* ⬆️ bigger gap above date (was 1rem) */
     }
     
     .hero p {
@@ -383,5 +382,6 @@ function initRSVP_GForm(container) {
 
 </body>
 </html>
+
 
 
