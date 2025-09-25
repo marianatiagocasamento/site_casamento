@@ -1,18 +1,14 @@
 <h2>Confirmação de Presença (RSVP)</h2>
 
-<form class="rsvp-form" id="rsvpForm"
-      action="https://docs.google.com/forms/d/e/1FAIpQLSfOUgeDYzo24JNl85z2-DM7tL9CtZCzR8WMYkqMF7t7GnMZYw/formResponse"
-      method="POST" target="hidden_iframe">
-
+<form class="rsvp-form" id="rsvpForm">
   <div class="form-row">
     <div class="form-group">
       <label for="nome">Nome *</label>
-      <input type="text" id="nome" name="entry.1844618974" required>
+      <input type="text" id="nome" name="entry.1844618974" required />
     </div>
-
     <div class="form-group">
       <label for="sobrenome">Sobrenome *</label>
-      <input type="text" id="sobrenome" name="entry.1812276602" required>
+      <input type="text" id="sobrenome" name="entry.1812276602" required />
     </div>
   </div>
 
@@ -29,62 +25,129 @@
     <textarea id="restricoes" name="entry.493100585" placeholder="Escreve aqui..."></textarea>
   </div>
 
-  <!-- Hidden fields required by Google -->
-  <input type="hidden" name="fvv" value="1">
-  <input type="hidden" name="draftResponse" value="[]">
-  <input type="hidden" name="pageHistory" value="0">
-
   <button type="submit">Enviar Confirmação</button>
+  <p id="formMessage" style="margin-top: 1rem; display:none;"></p>
 </form>
 
-<!-- Hidden iframe to capture Google Form submission -->
-<iframe name="hidden_iframe" style="display:none;"></iframe>
+<script>
+document.getElementById("rsvpForm").addEventListener("submit", function(e) {
+  e.preventDefault();
 
-<!-- Thank-you message (hidden until submission) -->
-<div id="thankYou" style="display:none; text-align:center; padding:2rem; font-size:1.2rem; font-family:'Baskerville BT','Libre Baskerville',serif;">
-  💌 Obrigado! A sua resposta foi registada com sucesso.
-</div>
+  const form = e.target;
+  const data = new FormData(form);
+  const action = "https://docs.google.com/forms/d/e/1FAIpQLSfOUgeDYzo24JNl85z2-DM7tL9CtZCzR8WMYkqMF7t7GnMZYw/formResponse";
+
+  fetch(action, {
+    method: "POST",
+    body: data,
+    mode: "no-cors"
+  }).then(() => {
+    document.getElementById("formMessage").innerText = "🎉 Obrigado! A sua confirmação foi enviada.";
+    document.getElementById("formMessage").style.display = "block";
+    form.reset();
+  }).catch(() => {
+    document.getElementById("formMessage").innerText = "⚠️ Ocorreu um erro, tente novamente.";
+    document.getElementById("formMessage").style.display = "block";
+  });
+});
+</script>
 
 <style>
-  .rsvp-form {
-    max-width: 640px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-    font-family: 'Baskerville BT', 'Libre Baskerville', serif;
+.rsvp-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  font-family: 'Baskerville BT', 'Libre Baskerville', serif;
+}
+
+.rsvp-form .form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.rsvp-form .form-group {
+  flex: 1 1 100%;
+}
+
+.rsvp-form label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+.rsvp-form input,
+.rsvp-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #f8f8f8;
+}
+
+.rsvp-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Radios */
+.rsvp-form .radio-group {
+  display: flex;
+  gap: 2rem;
+  margin-top: 0.5rem;
+}
+
+.rsvp-form .radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.rsvp-form input[type="radio"] {
+  accent-color: #65805e; /* wedding green */
+}
+
+/* Responsive fix */
+@media (max-width: 600px) {
+  .rsvp-form .radio-group {
+    flex-direction: column;
+    gap: 0.8rem;
   }
-  .rsvp-form .form-row { display: flex; flex-wrap: wrap; gap: 1rem; }
-  .rsvp-form .form-group { flex: 1 1 100%; margin-bottom: 1.2rem; }
-  .rsvp-form label { display:block; margin-bottom:0.4rem; font-weight:500; color:#333; }
-  .rsvp-form input, .rsvp-form textarea {
-    width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px;
-    font-size: 1rem; background:#fafafa; font-family:inherit;
-  }
-  .rsvp-form input:focus, .rsvp-form textarea:focus {
-    outline:none; border-color:#65805e; background:#fff;
-  }
-  .rsvp-form textarea { min-height:90px; resize:vertical; }
-  .rsvp-form .radio-group { display:flex; gap:2rem; margin-top:0.5rem; }
-  .rsvp-form .radio-group label { font-weight:400; display:flex; align-items:center; gap:0.4rem; }
-  .rsvp-form button {
-    width:100%; padding:1rem; font-size:1.1rem; font-weight:bold;
-    background:#65805e; color:#fff; border:none; border-radius:30px;
-    cursor:pointer; transition:background 0.3s;
-  }
-  .rsvp-form button:hover { background:#4f6449; }
+}
+
+/* Button */
+.rsvp-form button {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #65805e;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.rsvp-form button:hover {
+  background-color: #4d6147;
+}
+
+#formMessage {
+  text-align: center;
+  font-size: 1rem;
+  color: #333;
+}
 </style>
 
-<script>
-  // Replace form with thank-you message after submission
-  document.getElementById('rsvpForm').addEventListener('submit', function(e) {
-    setTimeout(() => {
-      document.getElementById('rsvpForm').style.display = 'none';
-      document.getElementById('thankYou').style.display = 'block';
-    }, 500); // wait a moment to ensure Google receives it
-  });
-</script>
 
 
 
