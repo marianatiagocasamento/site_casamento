@@ -189,41 +189,35 @@
     }
 
     /* Radios */
-    .radio-group {
-      display: flex;
-      gap: 1.25rem;
-      flex-wrap: wrap;
-      align-items: center;
-      margin-top: .4rem;
-    }
-    
-    .radio {                     /* NEW: wrap each option */
+    .radio {
       display: inline-flex;
       align-items: center;
-      gap: .35rem;
+      gap: .25rem;          /* closer label to the dot */
     }
     
     .radio input[type="radio"] {
-      margin: 0;
-      vertical-align: middle;
-      accent-color: #65805e;
+      margin: 0;            /* kill default margins */
+      width: 18px;          /* consistent dot size (optional) */
+      height: 18px;
+    }
+    
+    .radio label {
+      margin: 0;            /* no extra spacing */
+      line-height: 1;       /* avoid baseline misalign */
+      padding: 0;           /* ensure no padding pushes it away */
     }
     
     /* 📱 Mobile */
     @media (max-width: 720px) {
       .radio-group {
-        justify-content: center;   /* center both as a group */
-        gap: 1.5rem;               /* spacing between Sim / Não */
-        width: auto;
+        justify-content: flex-start;  /* left align the whole group */
+        gap: 1rem;                    /* spacing between Sim / Não */
+        width: 100%;
       }
     
       .radio {
-        flex: unset;               /* don’t force equal width */
-        justify-content: flex-start;
-      }
-    
-      .radio label {
-        margin: 0;                 /* remove extra spacing */
+        flex: 0 0 auto;               /* stop stretching to full width */
+        justify-content: flex-start;  /* keep dot+text tight on the left */
       }
     }
 
