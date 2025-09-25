@@ -192,13 +192,13 @@
     .radio {
       display: inline-flex;
       align-items: center;
-      gap: 1rem;          /* closer label to the dot */
+      gap: 0.5rem;          /* closer label to the dot */
     }
     
     .radio input[type="radio"] {
       margin: 0;            /* kill default margins */
-      width: 18px;          /* consistent dot size (optional) */
-      height: 18px;
+      width: 15px;          /* consistent dot size (optional) */
+      height: 15px;
       accent-color: #65805e;
     }
     
@@ -212,7 +212,7 @@
     @media (max-width: 720px) {
       .radio-group {
         justify-content: flex-start;  /* left align the whole group */
-        gap: 1.5rem;                    /* spacing between Sim / Não */
+        gap: 1rem;                    /* spacing between Sim / Não */
         width: 100%;
       }
     
