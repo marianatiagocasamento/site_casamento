@@ -109,16 +109,13 @@
     }
 
     /* Date below names with lines */
-/* date is a full-width row with the lines */
     .hero .date {
-      display: flex;                 /* was: inline-flex */
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      font-weight: 400;
-      margin: 1.5rem auto 0.8rem;
-      width: 100%;
+      font-family: 'Baskerville BT','Libre Baskerville',serif;
+      font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+      margin-top: 1rem;
+      font-style: italic;
     }
+    
     .hero .date::before,
     .hero .date::after {
       content: "";
