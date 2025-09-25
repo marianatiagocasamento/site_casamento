@@ -75,14 +75,20 @@
     @media (max-width: 768px) {
       .hero-inner { transform: none; }     /* keep balanced on mobile */
     }
-
+    
     .hero .rsvp-button {
-      display: inline-block;   /* make it size to content */
-      margin-top: 1.2rem;      /* add spacing below the date */
-      padding: 0.6rem 1.4rem;  /* balanced size */
-      border-radius: 30px;     /* keep pill look */
+      display: inline-block;         /* shrink to fit text */
+      margin-top: 1.5rem;            /* space below the date */
+      background: #65805e;           /* green background */
+      color: #fff;                   /* white text */
+      text-decoration: none;         /* remove underline */
+      padding: 0.6rem 1.4rem;        /* balanced padding */
+      font-size: 1rem;
+      border-radius: 30px;           /* pill shape */
+      font-family: 'Baskerville BT', 'Libre Baskerville', serif;
+      font-weight: 400;
+      transition: background 0.2s;
     }
-
 
     /* Names in Pinyon Script, stacked, responsive size */
     .names {
