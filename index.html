@@ -191,23 +191,21 @@
     /* Radios */
     .radio-group {
       display: flex;
-      gap: 1.25rem;
-      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: .4rem;
+    }
+    
+    .radio {
+      display: inline-flex;        /* junta bolinha + texto */
       align-items: center;
+      gap: .45rem;
     }
-
-    /* Works whether your HTML is <label><input> Sim</label> OR input+label */
-    .radio-group label {
-      display: inline-flex;   /* keeps text beside the dot */
-      margin-left: .3rem;
-    }
-
-    .radio-group input[type="radio"] {
-      display: inline-block;   
+    
+    .radio input[type="radio"] {
       margin: 0;
-      vertical-align: middle;
       accent-color: #65805e;
     }
+
 
     .cute-form button[type="submit"] {
       width: 100%;
