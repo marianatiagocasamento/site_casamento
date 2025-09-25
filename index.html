@@ -142,8 +142,10 @@
     }
 
     /* ===== RSVP (FormSubmit) styles ===== */
+    /* RSVP card */
     .cute-form {
       max-width: 600px;
+      width: 90%;                 /* give it more horizontal room on small screens */
       margin: 1.5rem auto 0;
       padding: 2rem;
       background: #fff;
@@ -152,22 +154,99 @@
       text-align: left;
       font-family: 'Baskerville BT','Libre Baskerville',serif;
     }
-    .cute-form .form-row { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .cute-form .form-group { flex: 1 1 45%; min-width: 240px; margin-bottom: 1rem; }
-    .cute-form label { display:block; font-weight:500; margin-bottom:.4rem; }
-    .cute-form input, .cute-form textarea {
-      width: 100%; padding: .8rem; border: 1px solid #ddd; border-radius: 8px;
-      font-size: 1rem; background: #fafafa;
+    
+    .cute-form .form-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
     }
-    .cute-form textarea { min-height: 90px; resize: vertical; }
-    .radio-group { display:flex; gap:1.25rem; flex-wrap:wrap; margin-top:.4rem; }
-    .radio-group label { display:flex; align-items:center; gap:.45rem; cursor:pointer; }
-    .cute-form input[type="radio"] { accent-color:#65805e; }
-    .cute-form button[type="submit"]{
-      width:100%; padding:1rem; font-weight:700; background:#65805e; color:#fff;
-      border:0; border-radius:30px; cursor:pointer; transition:background .2s;
+    
+    .cute-form .form-group {
+      flex: 1 1 45%;
+      min-width: 240px;
+      margin-bottom: 1rem;
     }
-    .cute-form button[type="submit"]:hover{ background:#4e664a; }
+    
+    .cute-form label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: .4rem;
+    }
+    
+    .cute-form input,
+    .cute-form textarea {
+      width: 100%;
+      padding: .9rem;             /* a touch more comfortable */
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: #fafafa;
+    }
+    
+    .cute-form textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+    
+    .radio-group {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      margin-top: .4rem;
+    }
+    
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      cursor: pointer;
+    }
+    
+    .cute-form input[type="radio"] { accent-color: #65805e; }
+    
+    .cute-form button[type="submit"] {
+      width: 100%;
+      padding: 1rem;
+      font-weight: 700;
+      background: #65805e;
+      color: #fff;
+      border: 0;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    
+    .cute-form button[type="submit"]:hover { background: #4e664a; }
+    
+    /* 📱 Mobile tweaks */
+    @media (max-width: 600px) {
+      .cute-form {
+        width: 95%;               /* nearly full width */
+        padding: 1.2rem;          /* less side padding so it feels less cramped */
+      }
+    
+      .cute-form .form-row {
+        flex-direction: column;   /* stack fields */
+        gap: .6rem;
+      }
+    
+      .cute-form .form-group {
+        min-width: 100%;
+        margin-bottom: .9rem;
+      }
+    
+      .radio-group {
+        justify-content: space-between; /* spread Sim / Não evenly */
+        gap: .9rem;
+        width: 100%;
+      }
+    
+      .radio-group label {
+        flex: 1;
+        justify-content: center;  /* center each option under the question */
+      }
+    }
+
 
     /* Thank-you card (replaces whole RSVP on success) */
     .thankyou-card{
