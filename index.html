@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet">
 
   <style>
-    /* Load Baskerville BT (include woff2/woff if you generate them) */
+    /* Load Baskerville BT */
     @font-face {
       font-family: 'Baskerville BT';
       src: url('fonts/BaskervilleBT.woff2') format('woff2'),
@@ -69,29 +69,29 @@
       width: min(92vw, 780px);
       margin: 0 auto;
       text-align: center;
-      transform: translateY(-10vh);   /* ⬆️ push content higher (was -4vh) */
-      padding-top: 0;                 /* ⬆️ remove extra top padding (was 2rem) */
+      transform: translateY(-10vh);   /* push content higher */
+      padding-top: 0;                 
     }
     @media (max-width: 768px) {
-      .hero-inner { transform: none; }     /* keep balanced on mobile */
+      .hero-inner { transform: none; }
     }
     
     .hero .rsvp-button {
-      display: inline-block;         /* shrink to fit text */
-      margin-top: 3rem;              /* ⬆️ bigger gap below the date (was 1.5rem) */
-      background: #65805e;           /* green background */
-      color: #fff;                   /* white text */
-      text-decoration: none;         /* remove underline */
-      padding: 0.6rem 1.4rem;        /* balanced padding */
+      display: inline-block;
+      margin-top: 3rem;
+      background: #65805e;
+      color: #fff;
+      text-decoration: none;
+      padding: 0.6rem 1.4rem;
       font-size: 1rem;
-      border-radius: 30px;           /* pill shape */
+      border-radius: 30px;
       font-family: 'Baskerville BT', 'Libre Baskerville', serif;
       font-weight: 400;
       transition: background 0.2s;
     }
     .hero .rsvp-button:hover { background:#4e664a; }
 
-    /* Names in Pinyon Script, stacked, responsive size */
+    /* Names in Pinyon Script */
     .names {
       font-family: 'Pinyon Script', cursive;
       font-size: clamp(3rem, 6vw, 6rem);
@@ -99,7 +99,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: 0 0 1.5rem;            /* ⬆️ no top margin, more space below names */
+      margin: 0 0 1.5rem;
       font-weight: 500;
     }
     .names .name { display: block; }
@@ -109,26 +109,20 @@
       line-height: 1;
     }
 
-    /* Date below names in Baskerville (forced) */
+    /* Date below names */
     .hero .date {
       font-family: 'Baskerville BT','Libre Baskerville',serif !important;
       font-weight: 400;
       font-style: normal;
       font-size: clamp(1.4rem, 2.2vw, 1.9rem);
-      margin-top: 2.5rem;            /* ⬆️ bigger gap above date (was 1rem) */
+      margin-top: 2.5rem;
     }
 
     @media (max-width: 768px) {
       .names {
-        font-size: 3.5rem;   /* force larger size on phones */
+        font-size: 3.5rem;   
         line-height: 1.2;
       }
-    }
-
-    
-    .hero p {
-      font-size: 1.2rem;
-      margin-top: 0.6rem;
     }
 
     section:not(.hero) {
@@ -139,7 +133,6 @@
       border-radius: 12px;
     }
 
-    /* Ensure all headings use Baskerville */
     h1, h2, h3, h4, h5, h6 {
       font-family: 'Baskerville BT', 'Libre Baskerville', serif;
       font-weight: 400;
@@ -157,8 +150,7 @@
       margin-top: 2rem;
     }
 
-    /* ===== RSVP (FormSubmit) styles ===== */
-    /* RSVP card */
+    /* RSVP form */
     .cute-form {
       max-width: 600px;
       width: 90%;
@@ -204,42 +196,23 @@
       resize: vertical;
     }
 
-    /* === Radios (revised) === */
     .radio-group {
-      display: flex;            /* lay Sim / Não horizontally */
+      display: flex;
       align-items: center;
-      gap: 2rem;                /* space between Sim and Não */
+      gap: 2rem;
       margin-top: .4rem;
       flex-wrap: wrap;
     }
     .radio {
-      display: inline-flex;     /* keep dot and its label together */
+      display: inline-flex;
       align-items: center;
-      gap: 0.6rem;              /* distance between dot and its label */
+      gap: 0.6rem;
     }
     .radio input[type="radio"] {
       margin: 0;
       width: 15px;
       height: 15px;
       accent-color: #65805e;
-    }
-    .radio label {
-      margin: 0;
-      line-height: 1;
-      padding: 0;
-    }
-
-    /* 📱 Mobile */
-    @media (max-width: 720px) {
-      .radio-group {
-        justify-content: flex-start;
-        gap: 1.25rem;
-        width: 100%;
-      }
-      .radio {
-        flex: 0 0 auto;
-        justify-content: flex-start;
-      }
     }
 
     .cute-form button[type="submit"] {
@@ -255,7 +228,7 @@
     }
     .cute-form button[type="submit"]:hover { background: #4e664a; }
 
-    /* Thank-you card (replaces whole RSVP on success) */
+    /* Thank-you card */
     .thankyou-card{
       max-width: 720px; margin: 2rem auto; padding: 2rem; background:#fff;
       border-radius:16px; box-shadow:0 4px 16px rgba(0,0,0,.08);
@@ -266,7 +239,7 @@
     .thankyou-actions{
       margin-top:1rem; display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap;
     }
-    .btn{ display:inline-block; padding:.75rem 1.1rem; border-radius:30px; text-decoration:none; font-weight:400; border:1px solid transparent; }
+    .btn{ display:inline-block; padding:.6rem 1rem; border-radius:30px; text-decoration:none; font-weight:400; font-size:0.95rem; border:1px solid transparent; }
     .btn-primary{ background:#65805e; color:#fff; }
     .btn-primary:hover{ background:#4e664a; }
     .btn-ghost{ background:#fff; color:#333; border-color:#ddd; }
@@ -274,7 +247,6 @@
 
     @keyframes fadeIn{ from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none} }
 
-    /* 📱 Mobile tweaks */
     @media (max-width: 720px) {
       .cute-form {
         width: 95%;
@@ -295,19 +267,13 @@
 
   <section class="hero">
     <div class="hero-inner">
-      <!-- Names first -->
       <h1 class="names">
         <span class="name">Mariana</span>
         <span class="amp">&amp;</span>
         <span class="name">Tiago</span>
       </h1>
-
-      <!-- Date below names -->
       <div class="date">9 de maio de 2026</div>
-
-      <!-- Small green button -->
       <a href="#rsvp" class="rsvp-button">Confirmar Presença!</a>
-
     </div>
   </section>
 
@@ -333,13 +299,11 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   await inject('#schedule', 'schedule.html');
   await inject('#gift', 'gift.html');
-
-  // Inject Google Forms RSVP and then initialize the behavior
   await inject('#rsvp', 'rsvp.html', initRSVP_GForm);
 });
 
 function initRSVP_GForm(container) {
-  const section = container;                         // <section id="rsvp">...</section>
+  const section = container;
   const form    = section.querySelector('#rsvpForm');
   const btn     = section.querySelector('button[type="submit"]');
   const iframe  = section.querySelector('#gform_hidden');
@@ -356,7 +320,7 @@ function initRSVP_GForm(container) {
         <h2>Obrigado pela sua confirmação!</h2>
         <p>A sua resposta foi recebida com sucesso.</p>
         <div class="thankyou-actions">
-          <a class="btn btn-primary" href="#rsvp" onclick="location.reload()">Enviar outra resposta</a>
+          <a class="btn btn-primary" href="#rsvp" onclick="reloadRSVP(event)">Enviar outra resposta</a>
           <a class="btn btn-ghost" href="#schedule">Ver detalhes do dia</a>
         </div>
       </div>
@@ -372,24 +336,37 @@ function initRSVP_GForm(container) {
     }
     section.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-    // Fallback in case the iframe 'load' gets blocked by browser
     clearTimeout(fallbackTimer);
     fallbackTimer = setTimeout(() => {
       if (submitted) replaceWithThanks();
     }, 1200);
   });
 
-  // Primary path: when Google finishes, its confirmation page loads in the iframe
   iframe.addEventListener('load', () => {
-    if (!submitted) return; // ignore initial empty load after injection
+    if (!submitted) return;
     clearTimeout(fallbackTimer);
     replaceWithThanks();
   });
+}
+
+function reloadRSVP(e) {
+  e.preventDefault();
+  const section = document.querySelector('#rsvp');
+  if (!section) return;
+
+  fetch('rsvp.html?v=' + Date.now())
+    .then(res => res.text())
+    .then(html => {
+      section.innerHTML = html;
+      initRSVP_GForm(section);
+      section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
 }
 </script>
 
 </body>
 </html>
+
 
 
 
