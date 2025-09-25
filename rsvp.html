@@ -1,8 +1,8 @@
 <h2>Confirmação de Presença (RSVP)</h2>
 
-<form class="rsvp-form"
+<form class="rsvp-form" id="rsvpForm"
       action="https://docs.google.com/forms/d/e/1FAIpQLSfOUgeDYzo24JNl85z2-DM7tL9CtZCzR8WMYkqMF7t7GnMZYw/formResponse"
-      method="POST" target="_self">
+      method="POST" target="hidden_iframe">
 
   <div class="form-row">
     <div class="form-group">
@@ -37,6 +37,14 @@
   <button type="submit">Enviar Confirmação</button>
 </form>
 
+<!-- Hidden iframe to capture Google Form submission -->
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+
+<!-- Thank-you message (hidden until submission) -->
+<div id="thankYou" style="display:none; text-align:center; padding:2rem; font-size:1.2rem; font-family:'Baskerville BT','Libre Baskerville',serif;">
+  💌 Obrigado! A sua resposta foi registada com sucesso.
+</div>
+
 <style>
   .rsvp-form {
     max-width: 640px;
@@ -47,80 +55,36 @@
     box-shadow: 0 4px 16px rgba(0,0,0,0.08);
     font-family: 'Baskerville BT', 'Libre Baskerville', serif;
   }
-
-  .rsvp-form .form-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+  .rsvp-form .form-row { display: flex; flex-wrap: wrap; gap: 1rem; }
+  .rsvp-form .form-group { flex: 1 1 100%; margin-bottom: 1.2rem; }
+  .rsvp-form label { display:block; margin-bottom:0.4rem; font-weight:500; color:#333; }
+  .rsvp-form input, .rsvp-form textarea {
+    width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px;
+    font-size: 1rem; background:#fafafa; font-family:inherit;
   }
-
-  .rsvp-form .form-group {
-    flex: 1 1 100%;
-    margin-bottom: 1.2rem;
+  .rsvp-form input:focus, .rsvp-form textarea:focus {
+    outline:none; border-color:#65805e; background:#fff;
   }
-
-  .rsvp-form label {
-    display: block;
-    margin-bottom: 0.4rem;
-    font-weight: 500;
-    color: #333;
-  }
-
-  .rsvp-form input[type="text"],
-  .rsvp-form input[type="email"],
-  .rsvp-form textarea {
-    width: 100%;
-    padding: 0.8rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 1rem;
-    background: #fafafa;
-    transition: border 0.2s;
-    font-family: inherit;
-  }
-
-  .rsvp-form input:focus,
-  .rsvp-form textarea:focus {
-    outline: none;
-    border-color: #65805e;
-    background: #fff;
-  }
-
-  .rsvp-form textarea {
-    min-height: 90px;
-    resize: vertical;
-  }
-
-  .rsvp-form .radio-group {
-    display: flex;
-    gap: 2rem;
-    margin-top: 0.5rem;
-  }
-
-  .rsvp-form .radio-group label {
-    font-weight: 400;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
+  .rsvp-form textarea { min-height:90px; resize:vertical; }
+  .rsvp-form .radio-group { display:flex; gap:2rem; margin-top:0.5rem; }
+  .rsvp-form .radio-group label { font-weight:400; display:flex; align-items:center; gap:0.4rem; }
   .rsvp-form button {
-    width: 100%;
-    padding: 1rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-    background: #65805e;
-    color: #fff;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: background 0.3s;
-    font-family: inherit;
+    width:100%; padding:1rem; font-size:1.1rem; font-weight:bold;
+    background:#65805e; color:#fff; border:none; border-radius:30px;
+    cursor:pointer; transition:background 0.3s;
   }
-
-  .rsvp-form button:hover {
-    background: #4f6449;
-  }
+  .rsvp-form button:hover { background:#4f6449; }
 </style>
+
+<script>
+  // Replace form with thank-you message after submission
+  document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+    setTimeout(() => {
+      document.getElementById('rsvpForm').style.display = 'none';
+      document.getElementById('thankYou').style.display = 'block';
+    }, 500); // wait a moment to ensure Google receives it
+  });
+</script>
+
 
 
