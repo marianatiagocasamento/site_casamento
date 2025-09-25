@@ -1,163 +1,50 @@
 <section id="rsvp">
   <h2>Confirmação de Presença (RSVP)</h2>
 
-  <!-- hidden iframe to catch Google's response -->
-  <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+  <!-- hidden iframe to avoid page navigation after submit -->
+  <iframe name="rsvp_hidden" id="rsvp_hidden" style="display:none;"></iframe>
 
   <form id="rsvpForm"
         class="cute-form"
-        action="https://docs.google.com/forms/d/e/1FAIpQLSfOUgeDYzo24JNl85z2-DM7tL9CtZCzR8WMYkqMF7t7GnMZYw/formResponse"
+        action="https://formsubmit.co/marianatiago.casamento2026@gmail.com"
         method="POST"
-        target="hidden_iframe">
+        target="rsvp_hidden">
 
     <div class="form-row">
       <div class="form-group">
         <label for="nome">Nome *</label>
-        <input type="text" id="nome" name="entry.1844618974" required />
+        <input type="text" id="nome" name="Nome" required />
       </div>
       <div class="form-group">
         <label for="sobrenome">Sobrenome *</label>
-        <input type="text" id="sobrenome" name="entry.1812276602" required />
+        <input type="text" id="sobrenome" name="Sobrenome" required />
       </div>
     </div>
 
     <div class="form-group">
       <label>Você estará presente? *</label>
       <div class="radio-group">
-        <label><input type="radio" name="entry.1896938407" value="Sim" required> Sim</label>
-        <label><input type="radio" name="entry.1896938407" value="Não"> Não</label>
+        <label><input type="radio" name="Presença" value="Sim" required> Sim</label>
+        <label><input type="radio" name="Presença" value="Não"> Não</label>
       </div>
     </div>
 
     <div class="form-group">
-      <label for="restricoes">Tem alguma restrição alimentar?</label>
-      <textarea id="restricoes" name="entry.493100585" placeholder="Escreva aqui..."></textarea>
+      <label for="email">Email *</label>
+      <input type="email" id="email" name="Email" required />
     </div>
 
-    <!-- recommended hidden fields -->
-    <input type="hidden" name="fvv" value="1">
-    <input type="hidden" name="draftResponse" value="[]">
-    <input type="hidden" name="pageHistory" value="0">
+    <div class="form-group">
+      <label for="restricoes">Tem alguma restrição alimentar?</label>
+      <textarea id="restricoes" name="Restrições" placeholder="Escreva aqui..."></textarea>
+    </div>
+
+    <!-- FormSubmit options -->
+    <input type="hidden" name="_subject" value="Nova confirmação de presença!" />
+    <input type="hidden" name="_captcha" value="false" />
+    <!-- honeypot -->
+    <input type="text" name="_honey" style="display:none" />
 
     <button type="submit">Enviar Confirmação</button>
   </form>
 </section>
-
-<style>
-  #rsvp { padding: 0 1rem; }
-
-  .cute-form {
-    max-width: 600px;
-    margin: 1.5rem auto 0;
-    padding: 2rem;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    text-align: left;
-    font-family: 'Baskerville BT','Libre Baskerville',serif;
-  }
-
-  .form-row { display: flex; flex-wrap: wrap; gap: 1rem; }
-  .form-group { flex: 1; min-width: 45%; margin-bottom: 1rem; }
-  .form-group label { display:block; font-weight:500; margin-bottom:.4rem; }
-
-  .cute-form input, .cute-form textarea {
-    width: 100%; padding: .8rem; border: 1px solid #ddd; border-radius: 8px;
-    font-size: 1rem; background: #fafafa;
-  }
-  .cute-form textarea { min-height: 90px; resize: vertical; }
-
-  .radio-group { display:flex; gap:1.25rem; flex-wrap:wrap; margin-top:.4rem; }
-  .radio-group label { display:flex; align-items:center; gap:.45rem; cursor:pointer; }
-  .cute-form input[type="radio"] { accent-color: #65805e; }
-
-  .cute-form button[type="submit"]{
-    width:100%; padding:1rem; font-weight:700; background:#65805e; color:#fff;
-    border:0; border-radius:30px; cursor:pointer; transition:background .2s;
-  }
-  .cute-form button[type="submit"]:hover{ background:#4e664a; }
-
-  /* Thank-you card that replaces the whole section */
-  .thankyou-card{
-    max-width: 720px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background:#fff;
-    border-radius:16px;
-    box-shadow:0 4px 16px rgba(0,0,0,.08);
-    text-align:center;
-    font-family:'Baskerville BT','Libre Baskerville',serif;
-    animation:fadeIn .4s ease-out;
-  }
-  .thankyou-card .emoji{ font-size:2rem; display:block; margin-bottom:.5rem; }
-  .thankyou-card p{ margin:.4rem 0; }
-  .thankyou-actions{
-    margin-top:1rem; display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap;
-  }
-  .btn{
-    display:inline-block; padding:.75rem 1.1rem; border-radius:30px; text-decoration:none;
-    font-weight:600; border:1px solid transparent;
-  }
-  .btn-primary{ background:#65805e; color:#fff; }
-  .btn-primary:hover{ background:#4e664a; }
-  .btn-ghost{ background:#fff; color:#333; border-color:#ddd; }
-  .btn-ghost:hover{ border-color:#bbb; }
-
-  @keyframes fadeIn{ from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none} }
-
-  @media (max-width: 600px){
-    .form-row { flex-direction: column; }
-    .form-group { min-width:100%; }
-    .radio-group { justify-content: center; gap: 1rem; }
-  }
-</style>
-
-<script>
-  // Swap the entire #rsvp section for a thank-you card after submit
-  (function(){
-    let submitted = false;
-    let fallbackTimer = null;
-
-    const section = document.getElementById('rsvp');
-    const form    = document.getElementById('rsvpForm');
-    const btn     = form.querySelector('button[type="submit"]');
-    const iframe  = document.getElementById('hidden_iframe');
-
-    function replaceWithThanks(){
-      // Build the thank-you block
-      const html = `
-        <div class="thankyou-card" role="status" aria-live="polite">
-          <span class="emoji">💌</span>
-          <h2>Obrigado pela sua confirmação!</h2>
-          <p>A sua resposta foi recebida com sucesso.</p>
-          <div class="thankyou-actions">
-            <a href="#rsvp" class="btn btn-primary" onclick="location.reload()">Enviar outra resposta</a>
-            <a href="#schedule" class="btn btn-ghost">Ver detalhes do dia</a>
-          </div>
-        </div>
-      `;
-      section.innerHTML = html;
-      section.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-
-    form.addEventListener('submit', function(){
-      submitted = true;
-      btn.disabled = true;
-      btn.textContent = 'Enviando...';
-      section.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-      // Fallback: if iframe is blocked, still show thank-you
-      if (fallbackTimer) clearTimeout(fallbackTimer);
-      fallbackTimer = setTimeout(function(){
-        if (submitted) replaceWithThanks();
-      }, 1200);
-    });
-
-    // Primary path: Google confirmation loads into the iframe
-    iframe.addEventListener('load', function(){
-      if (!submitted) return; // ignore initial empty load
-      clearTimeout(fallbackTimer);
-      replaceWithThanks();
-    });
-  })();
-</script>
