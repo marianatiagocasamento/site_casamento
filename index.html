@@ -2,367 +2,225 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Nosso Casamento</title>
 
-  <!-- Names font -->
+  <!-- Display fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
-  <!-- Fallback family in case Baskerville BT doesn't load -->
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet">
 
   <style>
-    /* Load Baskerville BT (keep ttf now; add woff/woff2 later if you convert) */
-    @font-face {
-      font-family: 'Baskerville BT';
-      src: url('fonts/BaskervilleBT.ttf') format('truetype');
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
+    :root{
+      --brand:#65805e;
+      --brand-600:#4e664a;
+      --ink:#333;
+      --paper:#ffffff;
+      --panel:rgba(255,255,255,.9);
+      --ring: rgba(101,128,94,.15);
+      --radius:14px;
+      --shadow:0 6px 22px rgba(0,0,0,.08);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *{box-sizing:border-box}
+    html,body{height:100%}
 
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow-x: hidden;
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; color:var(--ink);
       font-family: 'Baskerville BT', 'Libre Baskerville', serif;
-      background: url('https://cdn.jsdelivr.net/gh/marianatiagocasamento/site_casamento/background.png') no-repeat center center fixed;
-      background-size: cover;
-      background-attachment: fixed;
-      color: #333;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      background: #f6f6f4;
+      /* Fallback color while image loads */
+      background-image:url('https://cdn.jsdelivr.net/gh/marianatiagocasamento/site_casamento/background.png');
+      background-size:cover; background-position:center; background-repeat:no-repeat; background-attachment:fixed;
     }
 
-    @media (max-width: 768px) {
-      html, body {
-        background: url('https://cdn.jsdelivr.net/gh/marianatiagocasamento/site_casamento/background_cellphone(1).png') no-repeat center center fixed;
-        background-size: cover;
-        background-attachment: fixed;
-      }
+    /* iOS/Android: avoid jank from fixed backgrounds */
+    @media (max-width: 768px){
+      body{ background-image:url('https://cdn.jsdelivr.net/gh/marianatiagocasamento/site_casamento/background_cellphone(1).png'); background-attachment:scroll; }
     }
 
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 2rem;
-      position: relative;
-      z-index: 1;
-    }
+    /* Page container rhythm */
+    .container{width:min(92vw, 960px); margin-inline:auto}
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(255, 255, 255, 0.4);
-      z-index: 0;
+    /* HERO */
+    .hero{
+      min-height: 100svh;
+      display:grid; place-items:center; text-align:center; position:relative; padding: clamp(24px, 6vw, 48px) 16px;
+      isolation:isolate;
     }
+    .hero::before{content:""; position:absolute; inset:0; background:rgba(255,255,255,.5); z-index:-1; backdrop-filter:saturate(1.1) blur(2px)}
+    .hero-inner{ width:min(92vw, 780px); margin-inline:auto }
 
-    .hero * { position: relative; z-index: 1; }
+    .rsvp-button{
+      position:fixed; right:16px; bottom:16px; z-index:10;
+      background:var(--brand); color:#fff; text-decoration:none; padding:.7rem 1.1rem; border-radius:999px; box-shadow:var(--shadow);
+      font-weight:600; letter-spacing:.2px;
+    }
+    @media (min-width: 900px){ .rsvp-button{ top:24px; right:32px; bottom:auto; position:sticky; float:right } }
 
-    /* Center column for date + names + subtitle */
-    .hero-inner {
-      width: min(92vw, 780px);
-      margin: 0 auto;
-      text-align: center;
+    .date{ font-size:1.1rem; opacity:.9; margin-bottom:.35rem }
+    .names{
+      font-family:'Pinyon Script', cursive;
+      font-size:clamp(3rem, 8vw, 6rem); line-height:1.12; display:flex; flex-direction:column; align-items:center; margin:.5rem 0 0; font-weight:400
     }
+    .names .amp{ font-size: clamp(1.6rem, 4.2vw, 2.6rem); margin:.2rem 0 }
+    .hero p{ font-size: clamp(1.05rem, 2.5vw, 1.25rem); margin-top:.4rem }
 
-    .hero .rsvp-button {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      background: #65805e;
-      color: #fff;
-      text-decoration: none;
-      padding: 0.5rem 1.2rem;
-      font-size: 1rem;
-      border-radius: 3px;
-      font-family: 'Baskerville BT', 'Libre Baskerville', serif;
-      font-weight: 400;
-    }
+    /* SECTIONS */
+    section.section{ background:var(--panel); border-radius:12px; box-shadow:var(--shadow); padding: clamp(18px, 3.8vw, 28px); margin: 20px auto }
+    section.section h2{ font-weight:400; border-bottom:1px solid #ddd; padding-bottom:.5rem; margin-top:.2rem }
 
-    /* Names in Pinyon Script, stacked, responsive size */
-    .names {
-      font-family: 'Pinyon Script', cursive;
-      font-size: clamp(3rem, 6vw, 6rem);
-      line-height: 1.2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 1rem 0;
-      font-weight: 400;
-    }
+    footer{ text-align:center; padding:1rem; background:var(--panel); margin-top:24px }
 
-    .names .name { display: block; }
-    .names .amp {
-      font-size: clamp(2rem, 4vw, 3rem);
-      margin: 0.5rem 0;
-      line-height: 1;
+    /* FORM – clean, touch-friendly, accessible */
+    .cute-form{ width:min(94vw, 680px); margin: 1.25rem auto 0; padding: clamp(16px, 4vw, 28px); background:#fff; border-radius:var(--radius); box-shadow:var(--shadow) }
+    .cute-form *{ font-family:inherit }
+    .cute-form .form-row{ display:grid; grid-template-columns: 1fr; gap: .9rem }
+    .cute-form .form-group{ display:flex; flex-direction:column; gap:.45rem }
+    .cute-form label{ font-weight:600 }
+    .cute-form input, .cute-form textarea, .cute-form select{
+      width:100%; padding: .9rem .95rem; border:1px solid #ddd; border-radius:10px; background:#fafafa; line-height:1.25; font-size:1rem
     }
+    .cute-form input:focus, .cute-form textarea:focus, .cute-form select:focus{ outline:none; border-color:var(--brand); box-shadow:0 0 0 3px var(--ring); background:#fff }
+    .cute-form textarea{ min-height: 96px; resize: vertical }
 
-    .hero .date {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-      font-weight: 400;
-    }
+    /* Two columns on wider screens */
+    @media (min-width: 720px){ .cute-form .form-row{ grid-template-columns: 1fr 1fr } }
 
-    .hero p {
-      font-size: 1.2rem;
-      margin-top: 0.5rem;
+    /* Radios – no :has (for wider browser support) */
+    .radio-group{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:.6rem; margin-top:.35rem; max-width:420px }
+    .radio{ position:relative }
+    .radio input{ position:absolute; opacity:0; inset:0 }
+    .radio label{
+      display:flex; align-items:center; justify-content:center; gap:.5rem; padding:.65rem .9rem; border:1px solid #e6e6e6; border-radius:999px; background:#fff; cursor:pointer; transition:border-color .15s ease, box-shadow .15s ease
     }
+    .radio input:focus + label{ box-shadow:0 0 0 3px var(--ring) }
+    .radio input:checked + label{ border-color: var(--brand); box-shadow:0 0 0 3px rgba(101,128,94,.12) }
 
-    section:not(.hero) {
-      padding: 2rem;
-      max-width: 1000px;
-      margin: 2rem auto;
-      background: rgba(255, 255, 255, 0.85);
-      border-radius: 12px;
-    }
-
-    /* Ensure all headings use Baskerville */
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Baskerville BT', 'Libre Baskerville', serif;
-      font-weight: 400;
-    }
-
-    h2 {
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 0.5rem;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background-color: rgba(255, 255, 255, 0.85);
-      margin-top: 2rem;
-    }
-
-    /* ===== RSVP styles (better mobile, all Baskerville) ===== */
-    .cute-form {
-      max-width: 640px;
-      width: min(94vw, 640px);
-      margin: 1.5rem auto 0;
-      padding: clamp(16px, 4vw, 28px);
-      background: #fff;
-      border-radius: 14px;
-      box-shadow: 0 6px 22px rgba(0,0,0,0.08);
-      text-align: left;
-      font-family: 'Baskerville BT','Libre Baskerville',serif; /* force Baskerville on the form */
-    }
-    /* Make form controls inherit the same font */
-    .cute-form input,
-    .cute-form textarea,
-    .cute-form button,
-    .cute-form label {
-      font-family: inherit;
-      font-size: 1rem;
-    }
-
-    .cute-form .form-row {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .cute-form .form-group {
-      flex: 1 1 47%;
-      min-width: 260px;
-      margin-bottom: 1rem;
-    }
-    .cute-form label {
-      display: block;
-      font-weight: 500;
-      margin-bottom: .45rem;
-    }
-
-    .cute-form input,
-    .cute-form textarea {
-      width: 100%;
-      padding: .9rem .95rem;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      background: #fafafa;
-      line-height: 1.25;
-    }
-    .cute-form input:focus,
-    .cute-form textarea:focus {
-      outline: none;
-      border-color: #65805e;
-      box-shadow: 0 0 0 3px rgba(101,128,94,0.15);
-      background: #fff;
-    }
-    .cute-form textarea {
-      min-height: 96px;
-      resize: vertical;
-    }
-
-    /* Radios laid out cleanly on mobile */
-    .radio-group {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: .75rem;
-      margin-top: .4rem;
-      align-items: center;
-      max-width: 320px;
-    }
-    .radio-group label {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: .5rem;
-      padding: .55rem .75rem;
-      border: 1px solid #e6e6e6;
-      border-radius: 999px;
-      background: #fff;
-      transition: border-color .15s ease;
-    }
-    .radio-group input[type="radio"] { accent-color: #65805e; }
-    .radio-group label:has(input[type="radio"]:checked) {
-      border-color: #65805e;
-      box-shadow: 0 0 0 3px rgba(101,128,94,0.12);
-    }
+    .cute-form .hint{ font-size:.9rem; color:#666 }
 
     .cute-form button[type="submit"]{
-      width: 100%;
-      padding: 1rem;
-      font-weight: 700;
-      background: #65805e;
-      color: #fff;
-      border: 0;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: background .2s;
-      margin-top: .25rem;
+      width:100%; padding:1rem; font-weight:800; background:var(--brand); color:#fff; border:0; border-radius:30px; cursor:pointer; transition: background .2s
     }
-    .cute-form button[type="submit"]:hover{ background: #4e664a; }
+    .cute-form button[type="submit"]:hover{ background:var(--brand-600) }
+    .cute-form button[disabled]{ opacity:.7; cursor:not-allowed }
 
-    /* Thank-you card (replaces RSVP on success) */
-    .thankyou-card{
-      max-width: 720px;
-      width: min(94vw, 720px);
-      margin: 2rem auto;
-      padding: clamp(18px, 4vw, 30px);
-      background:#fff;
-      border-radius:16px;
-      box-shadow:0 6px 22px rgba(0,0,0,.08);
-      text-align:center;
-      font-family:'Baskerville BT','Libre Baskerville',serif;
-      animation:fadeIn .35s ease-out;
-    }
-    .thankyou-card .emoji{ font-size:2rem; display:block; margin-bottom:.5rem; }
-    .thankyou-actions{
-      margin-top:1rem; display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap;
-    }
-    .btn{ display:inline-block; padding:.75rem 1.1rem; border-radius:30px; text-decoration:none; font-weight:600; border:1px solid transparent; }
-    .btn-primary{ background:#65805e; color:#fff; }
-    .btn-primary:hover{ background:#4e664a; }
-    .btn-ghost{ background:#fff; color:#333; border-color:#ddd; }
-    .btn-ghost:hover{ border-color:#bbb; }
+    /* Thank-you card */
+    .thankyou-card{ width:min(94vw, 720px); margin: 1.5rem auto; padding: clamp(18px,4vw,30px); background:#fff; border-radius:16px; box-shadow:var(--shadow); text-align:center; animation:fadeIn .35s ease-out }
+    .thankyou-card .emoji{ font-size:2rem; display:block; margin-bottom:.5rem }
+    .thankyou-actions{ margin-top:1rem; display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap }
+    .btn{ display:inline-block; padding:.75rem 1.1rem; border-radius:30px; text-decoration:none; font-weight:700; border:1px solid transparent }
+    .btn-primary{ background:var(--brand); color:#fff }
+    .btn-primary:hover{ background:var(--brand-600) }
+    .btn-ghost{ background:#fff; color:var(--ink); border-color:#ddd }
+    .btn-ghost:hover{ border-color:#bbb }
 
-    @keyframes fadeIn{ from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none} }
+    @keyframes fadeIn{ from{opacity:0; transform: translateY(8px)} to{opacity:1; transform:none} }
 
-    /* Extra mobile polish */
-    @media (max-width: 720px){
-      .cute-form .form-row { flex-direction: column; gap: .7rem; }
-      .cute-form .form-group { min-width: 100%; }
+    /* Motion preference */
+    @media (prefers-reduced-motion: reduce){
+      *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important }
     }
   </style>
 </head>
 <body>
 
-  <section class="hero">
-    <a href="#rsvp" class="rsvp-button">Confirmar Presença!</a>
+  <a href="#rsvp" class="rsvp-button" aria-label="Ir para confirmar presença">Confirmar Presença</a>
+
+  <header class="hero">
     <div class="hero-inner">
       <div class="date">– 9 de maio de 2026 –</div>
-
-      <h1 class="names">
-        <span class="name">Mariana</span>
-        <span class="amp">&amp;</span>
-        <span class="name">Tiago</span>
-      </h1>
-
+      <h1 class="names"><span class="name">Mariana</span><span class="amp">&amp;</span><span class="name">Tiago</span></h1>
       <p>Vamos casar!</p>
     </div>
-  </section>
+  </header>
 
-  <section id="schedule"></section>
-  <section id="gift"></section>
-  <section id="rsvp"></section>
+  <main class="container">
+    <section id="schedule" class="section" aria-label="Programa do dia"></section>
+    <section id="gift" class="section" aria-label="Lista de presentes"></section>
+    <section id="rsvp" class="section" aria-label="Confirmar presença"></section>
+  </main>
 
   <footer>
-    <p>Com amor, Mariana & Tiago</p>
+    <p>Com amor, Mariana &amp; Tiago</p>
   </footer>
 
   <script>
-  // Make inject/re-render functions global so the thank-you button can call them
-  let __cacheBust = Date.now();
+    // Cache-bust helper
+    let __cacheBust = Date.now();
 
-  async function inject(selector, url, after) {
-    const res = await fetch(url + (url.includes('?') ? '&' : '?') + 'v=' + __cacheBust);
-    const html = await res.text();
-    const el = document.querySelector(selector);
-    el.innerHTML = html;
-    if (after) after(el);
-  }
-
-  async function reRenderRSVP() {
-    await inject('#rsvp', 'rsvp.html', initRSVP_GForm);
-    document.querySelector('#rsvp').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  window.addEventListener('DOMContentLoaded', async () => {
-    await inject('#schedule', 'schedule.html');
-    await inject('#gift', 'gift.html');
-    await reRenderRSVP(); // initial load of RSVP + behavior
-  });
-
-  function initRSVP_GForm(container) {
-    const section = container;                         // <section id="rsvp">...</section>
-    const form    = section.querySelector('#rsvpForm');
-    const btn     = section.querySelector('button[type="submit"]');
-    const iframe  = section.querySelector('#gform_hidden');
-
-    if (!form || !iframe) return;
-
-    let submitted = false;
-    let fallbackTimer = null;
-
-    function replaceWithThanks() {
-      section.innerHTML = `
-        <div class="thankyou-card" role="status" aria-live="polite">
-          <span class="emoji">💌</span>
-          <h2>Obrigado pela sua confirmação!</h2>
-          <p>A sua resposta foi recebida com sucesso.</p>
-          <div class="thankyou-actions">
-            <a class="btn btn-primary" href="#rsvp" onclick="reRenderRSVP()">Enviar outra resposta</a>
-            <a class="btn btn-ghost" href="#schedule">Ver detalhes do dia</a>
-          </div>
-        </div>
-      `;
-      section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    async function inject(selector, url, after){
+      try{
+        const res = await fetch(url + (url.includes('?') ? '&' : '?') + 'v=' + __cacheBust, { cache: 'no-store' });
+        if(!res.ok) throw new Error('Falha ao carregar '+ url);
+        const html = await res.text();
+        const el = document.querySelector(selector);
+        if(!el) return;
+        el.innerHTML = html;
+        after && after(el);
+      }catch(err){
+        const el = document.querySelector(selector);
+        if(el){
+          el.innerHTML = '<p style="margin:0">Não foi possível carregar este conteúdo agora. Tente novamente mais tarde.</p>';
+          console.error(err);
+        }
+      }
     }
 
-    form.addEventListener('submit', () => {
-      submitted = true;
-      btn.disabled = true;
-      btn.textContent = 'Enviando...';
-      section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    async function reRenderRSVP(){
+      await inject('#rsvp', 'rsvp.html', initRSVP_GForm);
+      document.querySelector('#rsvp').scrollIntoView({ behavior:'smooth', block:'start' });
+    }
 
-      // Fallback if iframe load is blocked
-      clearTimeout(fallbackTimer);
-      fallbackTimer = setTimeout(() => { if (submitted) replaceWithThanks(); }, 1200);
+    window.addEventListener('DOMContentLoaded', async () => {
+      await inject('#schedule', 'schedule.html');
+      await inject('#gift', 'gift.html');
+      await reRenderRSVP();
     });
 
-    // Primary path: when Google finishes, its confirmation page loads in the iframe
-    iframe.addEventListener('load', () => {
-      if (!submitted) return; // ignore initial empty load
-      clearTimeout(fallbackTimer);
-      replaceWithThanks();
-    });
-  }
+    function initRSVP_GForm(container){
+      const section = container;
+      const form    = section.querySelector('#rsvpForm');
+      const btn     = section.querySelector('button[type="submit"]');
+      const iframe  = section.querySelector('#gform_hidden');
+      if(!form || !iframe) return;
+
+      // Replace legacy :has CSS by pairing input+label markup in rsvp.html
+      // Ensure radios use <div class="radio"><input ... id="x"><label for="x">...</label></div>
+
+      let submitted = false;
+      let timer = null;
+
+      function replaceWithThanks(){
+        section.innerHTML = `
+          <div class="thankyou-card" role="status" aria-live="polite">
+            <span class="emoji">💌</span>
+            <h2>Obrigado pela sua confirmação!</h2>
+            <p>A sua resposta foi recebida com sucesso.</p>
+            <div class="thankyou-actions">
+              <a class="btn btn-primary" href="#rsvp" onclick="reRenderRSVP()">Enviar outra resposta</a>
+              <a class="btn btn-ghost" href="#schedule">Ver detalhes do dia</a>
+            </div>
+          </div>`;
+        section.scrollIntoView({ behavior:'smooth', block:'center' });
+      }
+
+      form.addEventListener('submit', () => {
+        submitted = true;
+        if(btn){ btn.disabled = true; btn.textContent = 'Enviando…'; }
+        section.scrollIntoView({ behavior:'smooth', block:'center' });
+        clearTimeout(timer);
+        timer = setTimeout(() => { if(submitted) replaceWithThanks(); }, 1400);
+      });
+
+      iframe.addEventListener('load', () => {
+        if(!submitted) return; // ignore initial load
+        clearTimeout(timer);
+        replaceWithThanks();
+      });
+    }
   </script>
-
 </body>
 </html>
 
