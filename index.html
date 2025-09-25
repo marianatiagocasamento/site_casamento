@@ -141,30 +141,57 @@
       margin-top: 2rem;
     }
 
-    /* 👇 NEW: styles for Google Form embed (applies inside rsvp.html) */
-    .form-embed {
-      position: relative;
-      max-width: 760px;
-      margin: 0 auto;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    /* ===== RSVP (FormSubmit) styles ===== */
+    .cute-form {
+      max-width: 600px;
+      margin: 1.5rem auto 0;
+      padding: 2rem;
       background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      text-align: left;
+      font-family: 'Baskerville BT','Libre Baskerville',serif;
     }
-
-    .form-embed iframe {
-      width: 100%;
-      height: 1000px;
-      border: 0;
+    .cute-form .form-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .cute-form .form-group { flex: 1 1 45%; min-width: 240px; margin-bottom: 1rem; }
+    .cute-form label { display:block; font-weight:500; margin-bottom:.4rem; }
+    .cute-form input, .cute-form textarea {
+      width: 100%; padding: .8rem; border: 1px solid #ddd; border-radius: 8px;
+      font-size: 1rem; background: #fafafa;
     }
+    .cute-form textarea { min-height: 90px; resize: vertical; }
+    .radio-group { display:flex; gap:1.25rem; flex-wrap:wrap; margin-top:.4rem; }
+    .radio-group label { display:flex; align-items:center; gap:.45rem; cursor:pointer; }
+    .cute-form input[type="radio"] { accent-color:#65805e; }
+    .cute-form button[type="submit"]{
+      width:100%; padding:1rem; font-weight:700; background:#65805e; color:#fff;
+      border:0; border-radius:30px; cursor:pointer; transition:background .2s;
+    }
+    .cute-form button[type="submit"]:hover{ background:#4e664a; }
 
-    .form-embed .form-mask {
-      position: absolute;
-      left: 0; right: 0; bottom: 0;
-      height: 120px;
-      pointer-events: none;
-      background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 90%);
-      z-index: 2; 
+    /* Thank-you card (replaces whole RSVP on success) */
+    .thankyou-card{
+      max-width: 720px; margin: 2rem auto; padding: 2rem; background:#fff;
+      border-radius:16px; box-shadow:0 4px 16px rgba(0,0,0,.08);
+      text-align:center; font-family:'Baskerville BT','Libre Baskerville',serif;
+      animation:fadeIn .4s ease-out;
+    }
+    .thankyou-card .emoji{ font-size:2rem; display:block; margin-bottom:.5rem; }
+    .thankyou-actions{
+      margin-top:1rem; display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap;
+    }
+    .btn{ display:inline-block; padding:.75rem 1.1rem; border-radius:30px; text-decoration:none; font-weight:600; border:1px solid transparent; }
+    .btn-primary{ background:#65805e; color:#fff; }
+    .btn-primary:hover{ background:#4e664a; }
+    .btn-ghost{ background:#fff; color:#333; border-color:#ddd; }
+    .btn-ghost:hover{ border-color:#bbb; }
+
+    @keyframes fadeIn{ from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none} }
+
+    /* Mobile tweaks */
+    @media (max-width: 600px){
+      .cute-form .form-row { flex-direction: column; }
+      .radio-group { justify-content:center; gap:1rem; }
     }
   </style>
 </head>
@@ -194,20 +221,68 @@
   </footer>
 
   <script>
-    window.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('DOMContentLoaded', async () => {
       const v = Date.now(); // cache-buster during edits
-      fetch('schedule.html?v=' + v)
-        .then(res => res.text())
-        .then(html => document.querySelector('#schedule').innerHTML = html);
 
-      fetch('gift.html?v=' + v)
-        .then(res => res.text())
-        .then(html => document.querySelector('#gift').innerHTML = html);
+      async function inject(selector, url, after) {
+        const res = await fetch(url + (url.includes('?') ? '&' : '?') + 'v=' + v);
+        const html = await res.text();
+        const el = document.querySelector(selector);
+        el.innerHTML = html;
+        if (after) after(el);
+      }
 
-      fetch('rsvp.html?v=' + v)
-        .then(res => res.text())
-        .then(html => document.querySelector('#rsvp').innerHTML = html);
+      await inject('#schedule', 'schedule.html');
+      await inject('#gift', 'gift.html');
+
+      // Inject RSVP and wire up behavior for FormSubmit
+      await inject('#rsvp', 'rsvp.html', initRSVP_FormSubmit);
     });
+
+    function initRSVP_FormSubmit(container) {
+      const section = container; // the #rsvp section content
+      const form    = section.querySelector('#rsvpForm');
+      const btn     = section.querySelector('button[type="submit"]');
+      const iframe  = section.querySelector('#rsvp_hidden'); // from rsvp.html
+
+      if (!form || !iframe) return;
+
+      let submitted = false;
+      let fallbackTimer = null;
+
+      function showThanks() {
+        section.innerHTML = `
+          <div class="thankyou-card" role="status" aria-live="polite">
+            <span class="emoji">💌</span>
+            <h2>Obrigado pela sua confirmação!</h2>
+            <p>A sua resposta foi recebida com sucesso.</p>
+            <div class="thankyou-actions">
+              <a class="btn btn-primary" href="#rsvp" onclick="location.reload()">Enviar outra resposta</a>
+              <a class="btn btn-ghost" href="#schedule">Ver detalhes do dia</a>
+            </div>
+          </div>
+        `;
+        section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      form.addEventListener('submit', () => {
+        submitted = true;
+        btn.disabled = true;
+        btn.textContent = 'Enviando...';
+        section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        // Fallback in case the iframe 'load' doesn’t fire
+        clearTimeout(fallbackTimer);
+        fallbackTimer = setTimeout(() => { if (submitted) showThanks(); }, 1200);
+      });
+
+      iframe.addEventListener('load', () => {
+        if (!submitted) return; // ignore initial empty load
+        clearTimeout(fallbackTimer);
+        showThanks();
+      });
+    }
   </script>
 </body>
 </html>
+
