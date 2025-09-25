@@ -117,6 +117,14 @@
       font-size: clamp(1.4rem, 2.2vw, 1.9rem);
       margin-top: 2.5rem;            /* ⬆️ bigger gap above date (was 1rem) */
     }
+
+    @media (max-width: 768px) {
+      .names {
+        font-size: 3.5rem;   /* force larger size on phones */
+        line-height: 1.2;
+      }
+    }
+
     
     .hero p {
       font-size: 1.2rem;
