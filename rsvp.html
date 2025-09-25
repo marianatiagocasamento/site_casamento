@@ -1,34 +1,157 @@
-<h2>Confirmação de Presença (RSVP)</h2>
+<section id="rsvp">
+  <h2>Confirmação de Presença (RSVP)</h2>
 
-<form class="rsvp-form" id="rsvpForm">
-  <div class="form-row">
+  <form id="rsvpForm" class="cute-form">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="nome">Nome *</label>
+        <input type="text" id="nome" name="entry.1844618974" required />
+      </div>
+      <div class="form-group">
+        <label for="sobrenome">Sobrenome *</label>
+        <input type="text" id="sobrenome" name="entry.1812276602" required />
+      </div>
+    </div>
+
     <div class="form-group">
-      <label for="nome">Nome *</label>
-      <input type="text" id="nome" name="entry.1844618974" required />
+      <label>Você estará presente? *</label>
+      <div class="radio-group">
+        <label><input type="radio" name="entry.1896938407" value="Sim" required> Sim</label>
+        <label><input type="radio" name="entry.1896938407" value="Não"> Não</label>
+      </div>
     </div>
+
     <div class="form-group">
-      <label for="sobrenome">Sobrenome *</label>
-      <input type="text" id="sobrenome" name="entry.1812276602" required />
+      <label for="restricoes">Tem alguma restrição alimentar?</label>
+      <textarea id="restricoes" name="entry.493100585" placeholder="Escreva aqui..."></textarea>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label>Você estará presente? *</label>
-    <div class="radio-group">
-      <label><input type="radio" name="entry.1896938407" value="Sim" required> Sim</label>
-      <label><input type="radio" name="entry.1896938407" value="Não"> Não</label>
-    </div>
-  </div>
+    <button type="submit">Enviar Confirmação</button>
+  </form>
 
-  <div class="form-group">
-    <label for="restricoes">Tem alguma restrição alimentar?</label>
-    <textarea id="restricoes" name="entry.493100585" placeholder="Escreve aqui..."></textarea>
-  </div>
+  <div id="formMessage" class="form-message"></div>
+</section>
 
-  <button type="submit">Enviar Confirmação</button>
-</form>
+<style>
+  #rsvp {
+    padding: 2rem;
+    text-align: center;
+  }
 
-<p id="formMessage" style="display:none;"></p>
+  .cute-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    text-align: left;
+  }
+
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .form-group {
+    flex: 1;
+    min-width: 45%;
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  .radio-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 0.3rem;
+  }
+
+  .radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 1rem;
+  }
+
+  button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    background: #65805e;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  button[type="submit"]:hover {
+    background: #4e664a;
+  }
+
+  .form-message {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    display: none;
+    font-weight: 500;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .form-message.success {
+    background: #e6f7ee;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+  }
+
+  .form-message.error {
+    background: #fdecea;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 600px) {
+    .form-row {
+      flex-direction: column;
+    }
+    .form-group {
+      min-width: 100%;
+    }
+    .radio-group {
+      justify-content: space-between;
+      gap: 2rem;
+    }
+  }
+</style>
 
 <script>
 document.getElementById("rsvpForm").addEventListener("submit", function(e) {
@@ -40,7 +163,6 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e) {
   const button = form.querySelector("button[type=submit]");
   const message = document.getElementById("formMessage");
 
-  // Feedback while sending
   button.disabled = true;
   button.innerText = "Enviando...";
 
@@ -49,135 +171,21 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e) {
     body: data,
     mode: "no-cors"
   }).then(() => {
-    // Hide form, show success message
     form.style.display = "none";
     message.innerText = "💌 Obrigado! A sua confirmação foi enviada com sucesso.";
-    message.className = "success";
+    message.className = "form-message success";
     message.style.display = "block";
+    message.scrollIntoView({ behavior: "smooth", block: "center" });
   }).catch(() => {
-    // Restore button on error
     button.disabled = false;
     button.innerText = "Enviar Confirmação";
     message.innerText = "⚠️ Ocorreu um erro, tente novamente.";
-    message.className = "error";
+    message.className = "form-message error";
     message.style.display = "block";
+    message.scrollIntoView({ behavior: "smooth", block: "center" });
   });
 });
 </script>
-
-<style>
-.rsvp-form {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 2rem;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  font-family: 'Baskerville BT', 'Libre Baskerville', serif;
-}
-
-.rsvp-form .form-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.rsvp-form .form-group {
-  flex: 1 1 100%;
-}
-
-.rsvp-form label {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 0.3rem;
-}
-
-.rsvp-form input,
-.rsvp-form textarea {
-  width: 100%;
-  padding: 0.75rem;
-  font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  background-color: #f8f8f8;
-}
-
-.rsvp-form textarea {
-  resize: vertical;
-  min-height: 80px;
-}
-
-/* Radios */
-.rsvp-form .radio-group {
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 0.5rem;
-}
-
-.rsvp-form .radio-group label {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  cursor: pointer;
-}
-
-.rsvp-form input[type="radio"] {
-  accent-color: #65805e; /* wedding green */
-}
-
-/* Mobile fix */
-@media (max-width: 600px) {
-  .rsvp-form .radio-group {
-    flex-direction: column;
-    gap: 0.6rem; /* tighter spacing */
-    align-items: flex-start;
-  }
-}
-
-/* Button */
-.rsvp-form button {
-  display: block;
-  width: 100%;
-  margin-top: 1rem;
-  padding: 1rem;
-  font-size: 1rem;
-  font-weight: bold;
-  background-color: #65805e;
-  color: #fff;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.rsvp-form button:hover {
-  background-color: #4d6147;
-}
-
-/* Success/Error Messages */
-#formMessage {
-  max-width: 600px;
-  margin: 1.5rem auto;
-  padding: 1rem;
-  border-radius: 8px;
-  text-align: center;
-  font-size: 1.1rem;
-  display: none;
-}
-
-#formMessage.success {
-  background: #e6f4ea;
-  color: #2e7d32;
-  border: 1px solid #a5d6a7;
-}
-
-#formMessage.error {
-  background: #fdecea;
-  color: #c62828;
-  border: 1px solid #f5c6cb;
-}
-</style>
 
 
 
