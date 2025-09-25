@@ -89,6 +89,7 @@
       font-weight: 400;
       transition: background 0.2s;
     }
+    .hero .rsvp-button:hover { background:#4e664a; }
 
     /* Names in Pinyon Script, stacked, responsive size */
     .names {
@@ -108,10 +109,12 @@
       line-height: 1;
     }
 
-    /* Date below names with lines */
+    /* Date below names in Baskerville (forced) */
     .hero .date {
-      font-family: 'Baskerville BT','Libre Baskerville',serif;
-      font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+      font-family: 'Baskerville BT','Libre Baskerville',serif !important;
+      font-weight: 400;
+      font-style: normal;
+      font-size: clamp(1.4rem, 2.2vw, 1.9rem); /* larger date */
       margin-top: 1rem;
     }
     
@@ -291,9 +294,10 @@
         <span class="name">Tiago</span>
       </h1>
 
-      <!-- Date below names with dots -->
+      <!-- Date below names -->
       <div class="date">9 de maio de 2026</div>
 
+      <!-- Small green button -->
       <a href="#rsvp" class="rsvp-button">Confirmar Presença!</a>
 
     </div>
