@@ -64,11 +64,15 @@
 
     .hero * { position: relative; z-index: 1; }
 
-    /* Center column for date + names + subtitle */
+    /* Center column for names + date + subtitle */
     .hero-inner {
       width: min(92vw, 780px);
       margin: 0 auto;
       text-align: center;
+      transform: translateY(-4vh);         /* push content slightly upward */
+    }
+    @media (max-width: 768px) {
+      .hero-inner { transform: none; }     /* keep balanced on mobile */
     }
 
     .hero .rsvp-button {
@@ -93,26 +97,39 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: 1rem 0;
+      margin: .25rem 0 .5rem;  /* less vertical margin so it sits higher */
       font-weight: 400;
     }
-
     .names .name { display: block; }
     .names .amp {
       font-size: clamp(2rem, 4vw, 3rem);
-      margin: 0.5rem 0;
+      margin: 0.35rem 0;
       line-height: 1;
     }
 
+    /* Date below names with lines */
     .hero .date {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-      font-weight: 400;
+      font-family: 'Baskerville BT','Libre Baskerville',serif; /* Baskerville URW look */
+      font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+      letter-spacing: .04em;
+      margin: .6rem 0 0.6rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .hero .date::before,
+    .hero .date::after {
+      content: "";
+      height: 1px;
+      background: #333;
+      display: inline-block;
+      width: clamp(60px, 10vw, 120px);
+      opacity: .9;
     }
 
     .hero p {
       font-size: 1.2rem;
-      margin-top: 0.5rem;
+      margin-top: 0.6rem;
     }
 
     section:not(.hero) {
@@ -145,7 +162,7 @@
     /* RSVP card */
     .cute-form {
       max-width: 600px;
-      width: 90%;                 /* give it more horizontal room on small screens */
+      width: 90%;
       margin: 1.5rem auto 0;
       padding: 2rem;
       background: #fff;
@@ -176,7 +193,7 @@
     .cute-form input,
     .cute-form textarea {
       width: 100%;
-      padding: .9rem;             /* a touch more comfortable */
+      padding: .9rem;
       border: 1px solid #ddd;
       border-radius: 8px;
       font-size: 1rem;
@@ -196,20 +213,17 @@
       margin-top: .4rem;
       flex-wrap: wrap;
     }
-
     .radio {
       display: inline-flex;     /* keep dot and its label together */
       align-items: center;
       gap: 0.6rem;              /* distance between dot and its label */
     }
-
     .radio input[type="radio"] {
-      margin: 0;                /* remove default margins */
-      width: 15px;              /* consistent native dot size */
+      margin: 0;
+      width: 15px;
       height: 15px;
       accent-color: #65805e;
     }
-
     .radio label {
       margin: 0;
       line-height: 1;
@@ -219,14 +233,13 @@
     /* 📱 Mobile */
     @media (max-width: 720px) {
       .radio-group {
-        justify-content: flex-start;  /* keep group left-aligned on mobile */
-        gap: 1.25rem;                 /* a bit tighter between Sim/Não */
+        justify-content: flex-start;
+        gap: 1.25rem;
         width: 100%;
       }
-
       .radio {
-        flex: 0 0 auto;               /* no stretching */
-        justify-content: flex-start;  /* keep dot+text tight on the left */
+        flex: 0 0 auto;
+        justify-content: flex-start;
       }
     }
 
@@ -241,7 +254,6 @@
       cursor: pointer;
       transition: background .2s;
     }
-
     .cute-form button[type="submit"]:hover { background: #4e664a; }
 
     /* Thank-you card (replaces whole RSVP on success) */
@@ -266,15 +278,13 @@
     /* 📱 Mobile tweaks */
     @media (max-width: 720px) {
       .cute-form {
-        width: 95%;               /* nearly full width */
-        padding: 1.2rem;          /* less side padding so it feels less cramped */
+        width: 95%;
+        padding: 1.2rem;
       }
-
       .cute-form .form-row {
-        flex-direction: column;   /* stack fields */
+        flex-direction: column;
         gap: .6rem;
       }
-
       .cute-form .form-group {
         min-width: 100%;
         margin-bottom: .9rem;
@@ -287,13 +297,15 @@
   <section class="hero">
     <a href="#rsvp" class="rsvp-button">Confirmar Presença!</a>
     <div class="hero-inner">
-      <div class="date">– 9 de maio de 2026 –</div>
-
+      <!-- Names first -->
       <h1 class="names">
         <span class="name">Mariana</span>
         <span class="amp">&amp;</span>
         <span class="name">Tiago</span>
       </h1>
+
+      <!-- Date below names with dots -->
+      <div class="date">09 • 05 • 2026</div>
 
       <p>Vamos casar!</p>
     </div>
@@ -378,6 +390,5 @@ function initRSVP_GForm(container) {
 
 </body>
 </html>
-
 
 
