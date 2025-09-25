@@ -1,22 +1,27 @@
 <h2>Confirmação de Presença (RSVP)</h2>
 
-<form action="https://docs.google.com/forms/d/e/1FAIpQLSfOUgeDYzo24JNl85z2-DM7tL9CtZCzR8WMYkqMF7t7GnMZYw/formResponse"
+<form class="rsvp-form"
+      action="https://docs.google.com/forms/d/e/1FAIpQLSfOUgeDYzo24JNl85z2-DM7tL9CtZCzR8WMYkqMF7t7GnMZYw/formResponse"
       method="POST" target="_self">
 
-  <div class="form-group">
-    <label for="nome">Nome *</label>
-    <input type="text" id="nome" name="entry.1844618974" required>
-  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label for="nome">Nome *</label>
+      <input type="text" id="nome" name="entry.1844618974" required>
+    </div>
 
-  <div class="form-group">
-    <label for="sobrenome">Sobrenome *</label>
-    <input type="text" id="sobrenome" name="entry.1812276602" required>
+    <div class="form-group">
+      <label for="sobrenome">Sobrenome *</label>
+      <input type="text" id="sobrenome" name="entry.1812276602" required>
+    </div>
   </div>
 
   <div class="form-group">
     <label>Você estará presente? *</label>
-    <label><input type="radio" name="entry.1896938407" value="Sim" required> Sim</label>
-    <label><input type="radio" name="entry.1896938407" value="Não"> Não</label>
+    <div class="radio-group">
+      <label><input type="radio" name="entry.1896938407" value="Sim" required> Sim</label>
+      <label><input type="radio" name="entry.1896938407" value="Não"> Não</label>
+    </div>
   </div>
 
   <div class="form-group">
@@ -24,11 +29,98 @@
     <textarea id="restricoes" name="entry.493100585" placeholder="Escreve aqui..."></textarea>
   </div>
 
-  <!-- Optional: redirect after submit -->
+  <!-- Hidden fields required by Google -->
   <input type="hidden" name="fvv" value="1">
   <input type="hidden" name="draftResponse" value="[]">
   <input type="hidden" name="pageHistory" value="0">
 
-  <button type="submit">Enviar</button>
+  <button type="submit">Enviar Confirmação</button>
 </form>
+
+<style>
+  .rsvp-form {
+    max-width: 640px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    font-family: 'Baskerville BT', 'Libre Baskerville', serif;
+  }
+
+  .rsvp-form .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .rsvp-form .form-group {
+    flex: 1 1 100%;
+    margin-bottom: 1.2rem;
+  }
+
+  .rsvp-form label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+    color: #333;
+  }
+
+  .rsvp-form input[type="text"],
+  .rsvp-form input[type="email"],
+  .rsvp-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #fafafa;
+    transition: border 0.2s;
+    font-family: inherit;
+  }
+
+  .rsvp-form input:focus,
+  .rsvp-form textarea:focus {
+    outline: none;
+    border-color: #65805e;
+    background: #fff;
+  }
+
+  .rsvp-form textarea {
+    min-height: 90px;
+    resize: vertical;
+  }
+
+  .rsvp-form .radio-group {
+    display: flex;
+    gap: 2rem;
+    margin-top: 0.5rem;
+  }
+
+  .rsvp-form .radio-group label {
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .rsvp-form button {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    background: #65805e;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-family: inherit;
+  }
+
+  .rsvp-form button:hover {
+    background: #4f6449;
+  }
+</style>
+
 
