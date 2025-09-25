@@ -21,6 +21,15 @@
       font-style: normal;
       font-display: swap;
     }
+    @font-face {
+      font-family: 'Baskerville BT';
+      src: url('fonts/BaskervilleBoldBT.woff2') format('woff2'),
+           url('fonts/BaskervilleBoldBT.woff') format('woff'),
+           url('fonts/BaskervilleBoldBT.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -145,11 +154,14 @@
       font-family: 'Baskerville BT', 'Libre Baskerville', serif;
       font-weight: 400;
     }
-
+    
     h2 {
+      font-family: 'Baskerville BT', 'Libre Baskerville', serif;
+      font-weight: 700;          /* now uses the bold font */
       border-bottom: 1px solid #ccc;
       padding-bottom: 0.5rem;
     }
+
 
     footer {
       text-align: center;
