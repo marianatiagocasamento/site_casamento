@@ -76,15 +76,14 @@
     }
 
     .hero .rsvp-button {
-      position: absolute;
-      top: 20px;
-      right: 30px;
+      display: inline-block;
+      margin-top: 1rem;       /* spacing below the date */
       background: #65805e;
       color: #fff;
       text-decoration: none;
-      padding: 0.5rem 1.2rem;
-      font-size: 1rem;
-      border-radius: 3px;
+      padding: 0.6rem 1.4rem;
+      font-size: 1.1rem;
+      border-radius: 30px;
       font-family: 'Baskerville BT', 'Libre Baskerville', serif;
       font-weight: 400;
     }
@@ -295,7 +294,6 @@
 <body>
 
   <section class="hero">
-    <a href="#rsvp" class="rsvp-button">Confirmar Presença!</a>
     <div class="hero-inner">
       <!-- Names first -->
       <h1 class="names">
@@ -306,6 +304,8 @@
 
       <!-- Date below names with dots -->
       <div class="date">9 de maio de 2026</div>
+
+      <a href="#rsvp" class="rsvp-button">Confirmar Presença!</a>
 
     </div>
   </section>
