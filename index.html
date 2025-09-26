@@ -31,6 +31,11 @@
       font-display: swap;
     }
 
+    :root{
+      /* one token to keep the vertical rhythm consistent across sizes */
+      --stack-gap: clamp(1.2rem, 2.2vw, 2rem);
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     html, body {
@@ -62,64 +67,29 @@
       position: relative;
       z-index: 1;
     }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(255, 255, 255, 0.4);
-      z-index: 0;
-    }
-
+    .hero::before { content: ""; position: absolute; inset: 0; background: rgba(255,255,255,.4); z-index: 0; }
     .hero * { position: relative; z-index: 1; }
 
+    /* Center column for names + date + subtitle */
     .hero-inner {
       width: min(92vw, 780px);
       margin: 0 auto;
       text-align: center;
-      transform: translateY(-6vh); /* balanced on laptop */
+      padding-top: 0;
+      transform: none;                         /* mobile: natural centering */
     }
-    @media (max-width: 768px) {
-      .hero-inner { transform: none; }
+    /* tablets */
+    @media (min-width: 768px) {
+      .hero-inner { transform: translateY(-3vh); }
     }
-
-    /* Date */
-    .hero .date {
-      font-family: 'Baskerville BT','Libre Baskerville',serif !important;
-      font-weight: 400;
-      font-style: normal;
-      font-size: clamp(1.4rem, 2.2vw, 1.9rem);
-      margin-bottom: 2rem;
+    /* laptops/desktop – was -10vh, now softer */
+    @media (min-width: 1024px) {
+      .hero-inner { transform: translateY(-6vh); }
     }
 
-    /* Names */
-    .names {
-      font-family: 'Pinyon Script', cursive;
-      font-size: clamp(3rem, 6vw, 6rem);
-      line-height: 1.2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 2rem;
-      font-weight: 500;
-    }
-    .names .amp {
-      font-size: clamp(2rem, 4vw, 3rem);
-      margin: 0.35rem 0;
-      line-height: 1;
-    }
-
-    /* Location */
-    .hero .location {
-      font-family: 'Baskerville BT','Libre Baskerville',serif;
-      font-weight: 400;
-      font-size: clamp(1.2rem, 2vw, 1.6rem);
-      margin-bottom: 2.5rem;
-    }
-
-    /* RSVP button */
     .hero .rsvp-button {
       display: inline-block;
+      margin-top: 3rem;
       background: #65805e;
       color: #fff;
       text-decoration: none;
@@ -128,12 +98,42 @@
       border-radius: 8px;
       font-family: 'Baskerville BT', 'Libre Baskerville', serif;
       font-weight: 400;
-      transition: background 0.2s;
+      transition: background .2s;
     }
     .hero .rsvp-button:hover { background:#4e664a; }
 
+    /* Names in Pinyon Script */
+    .names {
+      font-family: 'Pinyon Script', cursive;
+      font-size: clamp(3rem, 6vw, 6rem);
+      line-height: 1.2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0;                                /* we control spacing with date/location */
+      font-weight: 500;
+    }
+    .names .name { display: block; }
+    .names .amp { font-size: clamp(2rem, 4vw, 3rem); margin: .35rem 0; line-height: 1; }
+
+    /* Date above names */
+    .hero .date {
+      font-family: 'Baskerville BT','Libre Baskerville',serif !important;
+      font-weight: 400;
+      font-style: normal;
+      font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+      margin-bottom: var(--stack-gap);          /* equal gap */
+    }
+    /* Location below names */
+    .hero .location {
+      font-family: 'Baskerville BT','Libre Baskerville',serif;
+      font-weight: 400;
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      margin-top: var(--stack-gap);             /* equal gap */
+    }
+
     @media (max-width: 768px) {
-      .names { font-size: 3.5rem; }
+      .names { font-size: 3.5rem; line-height: 1.2; }
     }
 
     section:not(.hero) {
@@ -144,120 +144,67 @@
       border-radius: 12px;
     }
 
+    h1, h2, h3, h4, h5, h6 { font-family: 'Baskerville BT', 'Libre Baskerville', serif; font-weight: 400; }
     h2 {
       font-family: 'Baskerville BT', 'Libre Baskerville', serif;
-      font-weight: 700;
+      font-weight: 600;
       border-bottom: 1px solid #ccc;
       text-align: center;
       padding-bottom: 0.5rem;
-      color: #65805e;
     }
 
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background-color: rgba(255, 255, 255, 0.85);
-      margin-top: 2rem;
-    }
-    footer p { margin: .25rem 0; }
-    footer p.email { font-size: 0.9rem; color:#444; }
+    footer { text-align: center; padding: 1rem; background-color: rgba(255,255,255,.85); margin-top: 2rem; }
 
     /* RSVP form */
-    .cute-form {
-      max-width: 600px;
-      width: 90%;
-      margin: 1.5rem auto 0;
-      padding: 2rem;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      text-align: left;
-      font-family: 'Baskerville BT','Libre Baskerville',serif;
-    }
-    .cute-form label { font-weight: 500; margin-bottom: .4rem; display:block; }
+    .cute-form { max-width: 600px; width: 90%; margin: 1.5rem auto 0; padding: 2rem; background:#fff; border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,.1); text-align:left; font-family:'Baskerville BT','Libre Baskerville',serif; }
+    .cute-form .form-row { display:flex; gap:1rem; flex-wrap:wrap; }
+    .cute-form .form-group { flex:1 1 45%; min-width:240px; margin-bottom:1rem; }
+    .cute-form label { display:block; font-weight:500; margin-bottom:.4rem; }
+    .cute-form input, .cute-form textarea { width:100%; padding:.9rem; border:1px solid #ddd; border-radius:8px; font-size:1rem; background:#fafafa; }
+    .cute-form input:focus, .cute-form textarea:focus { outline:none; border:1px solid #65805e; box-shadow:0 0 4px rgba(101,128,94,.4); }
+    .cute-form textarea { min-height:90px; resize:vertical; }
+    .radio-group { display:flex; align-items:center; gap:2rem; margin-top:.4rem; flex-wrap:wrap; }
+    .radio { display:inline-flex; align-items:center; gap:.6rem; }
+    .radio input[type="radio"] { margin:0; width:15px; height:15px; accent-color:#65805e; }
+    .cute-form button[type="submit"] { width:100%; padding:1rem; font-weight:600; font-size:1rem; background:#65805e; color:#fff; border:0; border-radius:8px; cursor:pointer; transition:background .2s; }
+    .cute-form button[type="submit"]:hover { background:#4e664a; }
 
-    .cute-form input,
-    .cute-form textarea {
-      width: 100%;
-      padding: .9rem;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-size: 1rem;
-      background: #fafafa;
-    }
-    .cute-form input:focus,
-    .cute-form textarea:focus {
-      outline: none;
-      border: 1px solid #65805e;
-      box-shadow: 0 0 4px rgba(101,128,94,0.4);
-    }
-
-    .radio-group {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      margin-top: .4rem;
-      flex-wrap: wrap;
-    }
-    .radio { display:inline-flex; align-items:center; gap:0.6rem; }
-    .radio input[type="radio"] {
-      margin: 0; width: 15px; height: 15px; accent-color: #65805e;
-    }
-
-    .cute-form button[type="submit"] {
-      width: 100%;
-      padding: 1rem;
-      font-weight: 600;
-      font-size: 1.1rem;
-      background: #65805e;
-      color: #fff;
-      border: 0;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background .2s;
-    }
-    .cute-form button[type="submit"]:hover { background: #4e664a; }
-
-    /* Smooth swap */
-    #rsvp { scroll-margin-top: 14vh; }
-    #rsvp .cute-form,
-    #rsvp .thankyou-card {
-      transition: opacity .28s ease, transform .28s ease;
-    }
-    #rsvp.is-submitting .cute-form {
-      opacity:.6; transform:scale(.995); pointer-events:none;
-    }
-
-    .thankyou-card{
-      max-width: 720px; margin: 2rem auto; padding: 2rem; background:#fff;
-      border-radius:16px; box-shadow:0 4px 16px rgba(0,0,0,.08);
-      text-align:center;
-      font-family:'Baskerville BT','Libre Baskerville',serif;
-      animation:fadeIn .4s ease-out;
-    }
-    .thankyou-card .emoji{ font-size:2rem; margin-bottom:.5rem; }
-    .thankyou-actions{
-      margin-top:1rem; display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap;
-    }
-    .btn{ display:inline-block; padding:.6rem 1rem; border-radius:30px; text-decoration:none; font-weight:400; font-size:0.95rem; border:1px solid transparent; }
+    /* Thank-you card */
+    .thankyou-card{ max-width:720px; margin:2rem auto; padding:2rem; background:#fff; border-radius:16px; box-shadow:0 4px 16px rgba(0,0,0,.08); text-align:center; font-family:'Baskerville BT','Libre Baskerville',serif; animation:fadeIn .4s ease-out; }
+    .thankyou-card .emoji{ font-size:2rem; display:block; margin-bottom:.5rem; }
+    .thankyou-actions{ margin-top:1rem; display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap; }
+    .btn{ display:inline-block; padding:.6rem 1rem; border-radius:30px; text-decoration:none; font-weight:400; font-size:.95rem; border:1px solid transparent; }
     .btn-primary{ background:#65805e; color:#fff; }
     .btn-primary:hover{ background:#4e664a; }
     .btn-ghost{ background:#fff; color:#333; border-color:#ddd; }
     .btn-ghost:hover{ border-color:#bbb; }
     @keyframes fadeIn{ from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none} }
+
+    @media (max-width: 720px) {
+      .cute-form { width:95%; padding:1.2rem; }
+      .cute-form .form-row { flex-direction:column; gap:.6rem; }
+      .cute-form .form-group { min-width:100%; margin-bottom:.9rem; }
+    }
   </style>
 </head>
 <body>
 
   <section class="hero">
     <div class="hero-inner">
+      <!-- Date first -->
       <div class="date">9 de maio de 2026</div>
+
+      <!-- Names -->
       <h1 class="names">
         <span class="name">Mariana</span>
         <span class="amp">&amp;</span>
         <span class="name">Tiago</span>
       </h1>
+
+      <!-- Location -->
       <div class="location">São Miguel, Açores</div>
+
+      <!-- Button -->
       <a href="#rsvp" class="rsvp-button">Confirmar Presença</a>
     </div>
   </section>
@@ -268,12 +215,12 @@
 
   <footer>
     <p>Com amor, Mariana & Tiago</p>
-    <p class="email">marianatiago.casamento2026@gmail.com</p>
   </footer>
 
-<script>
+  <script>
 window.addEventListener('DOMContentLoaded', async () => {
   const v = Date.now();
+
   async function inject(selector, url, after) {
     const res = await fetch(url + (url.includes('?') ? '&' : '?') + 'v=' + v);
     const html = await res.text();
@@ -281,6 +228,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     el.innerHTML = html;
     if (after) after(el);
   }
+
   await inject('#schedule', 'schedule.html');
   await inject('#gift', 'gift.html');
   await inject('#rsvp', 'rsvp.html', initRSVP_GForm);
@@ -291,45 +239,34 @@ function initRSVP_GForm(container) {
   const form    = section.querySelector('#rsvpForm');
   const btn     = section.querySelector('button[type="submit"]');
   const iframe  = section.querySelector('#gform_hidden');
+
   if (!form || !iframe) return;
 
   let submitted = false;
   let fallbackTimer = null;
 
-  function lockHeight() { section.style.minHeight = section.offsetHeight+'px'; }
-  function unlockHeight(){ setTimeout(()=>{section.style.minHeight='';},320); }
-  function smoothScroll(){ section.scrollIntoView({behavior:'smooth', block:'start'}); }
-
   function replaceWithThanks() {
-    lockHeight();
-    section.classList.remove('is-submitting');
     section.innerHTML = `
-      <div class="thankyou-card" role="status" aria-live="polite" style="opacity:0; transform:translateY(8px);">
+      <div class="thankyou-card" role="status" aria-live="polite">
         <span class="emoji">💌</span>
-        <h2 style="font-weight:400;">Obrigado pela sua confirmação!</h2>
-        <p style="margin-top:.35rem;">A sua resposta foi recebida com sucesso.</p>
+        <h2>Obrigado pela sua confirmação!</h2>
+        <p>A sua resposta foi recebida com sucesso.</p>
         <div class="thankyou-actions">
           <a class="btn btn-primary" href="#rsvp" onclick="reloadRSVP(event)">Enviar outra resposta</a>
           <a class="btn btn-ghost" href="#schedule">Ver detalhes do dia</a>
         </div>
-      </div>`;
-    requestAnimationFrame(()=>{
-      const card = section.querySelector('.thankyou-card');
-      if(card){
-        card.style.transition='opacity .28s ease, transform .28s ease';
-        card.style.opacity='1'; card.style.transform='none';
-      }
-      smoothScroll(); unlockHeight();
-    });
+      </div>
+    `;
+    section.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   form.addEventListener('submit', () => {
     submitted = true;
-    if (btn) { btn.disabled=true; btn.textContent='Enviando...'; }
-    section.classList.add('is-submitting');
-    smoothScroll();
+    if (btn) { btn.disabled = true; btn.textContent = 'Enviando...'; }
+    section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
     clearTimeout(fallbackTimer);
-    fallbackTimer = setTimeout(()=>{ if(submitted) replaceWithThanks(); },1200);
+    fallbackTimer = setTimeout(() => { if (submitted) replaceWithThanks(); }, 1200);
   });
 
   iframe.addEventListener('load', () => {
@@ -339,22 +276,21 @@ function initRSVP_GForm(container) {
   });
 }
 
-function reloadRSVP(e){
-  if(e) e.preventDefault();
-  const section=document.querySelector('#rsvp');
-  if(!section) return;
-  section.style.minHeight=section.offsetHeight+'px';
-  fetch('rsvp.html?v='+Date.now()).then(res=>res.text()).then(html=>{
-    section.innerHTML=html;
-    initRSVP_GForm(section);
-    section.scrollIntoView({behavior:'smooth', block:'start'});
-    setTimeout(()=>{section.style.minHeight='';},320);
-  });
+function reloadRSVP(e) {
+  e.preventDefault();
+  const section = document.querySelector('#rsvp');
+  if (!section) return;
+
+  fetch('rsvp.html?v=' + Date.now())
+    .then(res => res.text())
+    .then(html => {
+      section.innerHTML = html;
+      initRSVP_GForm(section);
+      section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
 }
-</script>
+  </script>
 
 </body>
 </html>
-
-
 
