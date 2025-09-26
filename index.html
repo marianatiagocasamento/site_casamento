@@ -7,7 +7,6 @@
 
   <!-- Names font -->
   <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
-  <!-- Fallback family in case Baskerville BT doesn't load -->
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet">
 
   <style>
@@ -31,15 +30,11 @@
       font-display: swap;
     }
 
-    :root{
-      --stack-gap: clamp(1.2rem, 2.2vw, 2rem);
-    }
-
+    :root { --stack-gap: clamp(1.2rem, 2.2vw, 2rem); }
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     html, body {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       overflow-x: hidden;
       font-family: 'Baskerville BT', 'Libre Baskerville', serif;
       background: url('https://cdn.jsdelivr.net/gh/marianatiagocasamento/site_casamento/background.png') no-repeat center center fixed;
@@ -47,7 +42,6 @@
       background-attachment: fixed;
       color: #333;
     }
-
     @media (max-width: 768px) {
       html, body {
         background: url('https://cdn.jsdelivr.net/gh/marianatiagocasamento/site_casamento/background_cellphone(1).png') no-repeat center center fixed;
@@ -70,29 +64,24 @@
     .hero::before { content: ""; position: absolute; inset: 0; background: rgba(255,255,255,.4); z-index: 0; }
     .hero * { position: relative; z-index: 1; }
 
-    /* Small top buttons INSIDE the hero (not fixed on scroll) */
-    .hero-topbar{
+    /* Top buttons inside hero */
+    .hero-topbar {
       position: absolute;
       top: 16px;
-      right: 20px;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
-      gap: .6rem;
-      flex-wrap: wrap;
+      gap: 1rem;
+      background: rgba(255,255,255,0.75);
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
     }
-    .hero-topbar a{
+    .hero-topbar a {
       font-family: 'Baskerville BT','Libre Baskerville',serif;
       font-weight: 600;
       text-decoration: none;
       color: #333;
-      padding: .38rem .75rem;
-      border-radius: 6px;
-      background: rgba(255,255,255,.85);
-      border: 1px solid rgba(0,0,0,.08);
-      transition: background .2s, color .2s;
-    }
-    .hero-topbar a:hover{ background:#65805e; color:#fff; }
-    @media (max-width: 768px){
-      .hero-topbar{ left: 50%; right: auto; transform: translateX(-50%); top: 12px; }
+      font-size: 0.95rem;
     }
 
     .hero-inner {
@@ -102,12 +91,8 @@
       padding-top: 0;
       transform: none;
     }
-    @media (min-width: 768px) {
-      .hero-inner { transform: translateY(-3vh); }
-    }
-    @media (min-width: 1024px) {
-      .hero-inner { transform: translateY(-6vh); }
-    }
+    @media (min-width: 768px) { .hero-inner { transform: translateY(-3vh); } }
+    @media (min-width: 1024px) { .hero-inner { transform: translateY(-6vh); } }
 
     .hero .rsvp-button {
       display: inline-block;
@@ -134,7 +119,6 @@
       margin: 0;
       font-weight: 500;
     }
-    .names .name { display: block; }
     .names .amp { font-size: clamp(2rem, 4vw, 3rem); margin: .35rem 0; line-height: 1; }
 
     .hero .date {
@@ -150,20 +134,15 @@
       margin-top: var(--stack-gap);
     }
 
-    @media (max-width: 768px) {
-      .names { font-size: 3.5rem; line-height: 1.2; }
-    }
+    @media (max-width: 768px) { .names { font-size: 3.5rem; } }
 
     section:not(.hero) {
-      padding: 2rem;
-      max-width: 1000px;
-      margin: 2rem auto;
-      background: rgba(255, 255, 255, 0.85);
-      border-radius: 12px;
+      padding: 2rem; max-width: 1000px; margin: 2rem auto;
+      background: rgba(255, 255, 255, 0.85); border-radius: 12px;
     }
 
-    h1, h2, h3, h4, h5, h6 { font-family: 'Baskerville BT', 'Libre Baskerville', serif; font-weight: 400; }
     h2 {
+      font-family: 'Baskerville BT', 'Libre Baskerville', serif;
       font-weight: 600;
       border-bottom: 1px solid #ccc;
       text-align: center;
@@ -172,48 +151,22 @@
 
     footer { text-align: center; padding: 1rem; background-color: rgba(255,255,255,.85); margin-top: 2rem; }
 
-    /* ===== RSVP FORM (unchanged, restored) ===== */
-    #rsvp { min-height: 360px; } /* reserve height to avoid layout jump on thank-you */
-    .cute-form {
-      max-width: 600px;
-      width: 90%;
-      margin: 1.5rem auto 0;
-      padding: 2rem;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      text-align: left;
-      font-family: 'Baskerville BT','Libre Baskerville',serif;
-    }
+    /* RSVP (unchanged styles) */
+    #rsvp { min-height: 360px; }
+    .cute-form { max-width: 600px; width: 90%; margin: 1.5rem auto 0; padding: 2rem; background:#fff; border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,.1); text-align:left; font-family:'Baskerville BT','Libre Baskerville',serif; }
     .cute-form .form-row { display:flex; gap:1rem; flex-wrap:wrap; }
     .cute-form .form-group { flex:1 1 45%; min-width:240px; margin-bottom:1rem; }
     .cute-form label { display:block; font-weight:500; margin-bottom:.4rem; }
-    .cute-form input, .cute-form textarea {
-      width:100%; padding:.9rem; border:1px solid #ddd; border-radius:8px; font-size:1rem; background:#fafafa;
-    }
-    .cute-form input:focus, .cute-form textarea:focus {
-      outline:none; border:1px solid #65805e; box-shadow:0 0 4px rgba(101,128,94,.4);
-    }
+    .cute-form input, .cute-form textarea { width:100%; padding:.9rem; border:1px solid #ddd; border-radius:8px; font-size:1rem; background:#fafafa; }
+    .cute-form input:focus, .cute-form textarea:focus { outline:none; border:1px solid #65805e; box-shadow:0 0 4px rgba(101,128,94,.4); }
     .cute-form textarea { min-height:90px; resize:vertical; }
-
-    /* Radios */
     .radio-group { display:flex; align-items:center; gap:2rem; margin-top:.4rem; flex-wrap:wrap; }
     .radio { display:inline-flex; align-items:center; gap:.6rem; }
     .radio input[type="radio"] { margin:0; width:15px; height:15px; accent-color:#65805e; }
-
-    .cute-form button[type="submit"] {
-      width:100%; padding:1rem; font-weight:600; font-size:1rem;
-      background:#65805e; color:#fff; border:0; border-radius:8px; cursor:pointer; transition:background .2s;
-    }
+    .cute-form button[type="submit"] { width:100%; padding:1rem; font-weight:600; font-size:1rem; background:#65805e; color:#fff; border:0; border-radius:8px; cursor:pointer; transition:background .2s; }
     .cute-form button[type="submit"]:hover { background:#4e664a; }
 
-    /* Thank-you card (restored lighter text/buttons) */
-    .thankyou-card{
-      max-width:720px; margin:2rem auto; padding:2rem; background:#fff;
-      border-radius:16px; box-shadow:0 4px 16px rgba(0,0,0,.08);
-      text-align:center; font-family:'Baskerville BT','Libre Baskerville',serif;
-      animation:fadeIn .4s ease-out;
-    }
+    .thankyou-card{ max-width:720px; margin:2rem auto; padding:2rem; background:#fff; border-radius:16px; box-shadow:0 4px 16px rgba(0,0,0,.08); text-align:center; font-family:'Baskerville BT','Libre Baskerville',serif; animation:fadeIn .4s ease-out; }
     .thankyou-card .emoji{ font-size:2rem; display:block; margin-bottom:.5rem; }
     .thankyou-actions{ margin-top:1rem; display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap; }
     .btn{ display:inline-block; padding:.6rem 1rem; border-radius:30px; text-decoration:none; font-weight:400; font-size:.95rem; border:1px solid transparent; }
@@ -221,19 +174,11 @@
     .btn-primary:hover{ background:#4e664a; }
     .btn-ghost{ background:#fff; color:#333; border-color:#ddd; }
     .btn-ghost:hover{ border-color:#bbb; }
-
     @keyframes fadeIn{ from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none} }
-
-    @media (max-width: 720px) {
-      .cute-form { width:95%; padding:1.2rem; }
-      .cute-form .form-row { flex-direction:column; gap:.6rem; }
-      .cute-form .form-group { min-width:100%; margin-bottom:.9rem; }
-    }
   </style>
 </head>
 <body>
 
-  <!-- Non-fixed top buttons inside hero -->
   <section class="hero">
     <div class="hero-topbar">
       <a href="#schedule">Detalhes do Dia</a>
@@ -241,20 +186,13 @@
     </div>
 
     <div class="hero-inner">
-      <!-- Date first -->
       <div class="date">9 de maio de 2026</div>
-
-      <!-- Names -->
       <h1 class="names">
         <span class="name">Mariana</span>
         <span class="amp">&amp;</span>
         <span class="name">Tiago</span>
       </h1>
-
-      <!-- Location -->
       <div class="location">São Miguel, Açores</div>
-
-      <!-- RSVP Button -->
       <a href="#rsvp" class="rsvp-button">Confirmar Presença</a>
     </div>
   </section>
@@ -270,7 +208,6 @@
   <script>
 window.addEventListener('DOMContentLoaded', async () => {
   const v = Date.now();
-
   async function inject(selector, url, after) {
     const res = await fetch(url + (url.includes('?') ? '&' : '?') + 'v=' + v);
     const html = await res.text();
@@ -278,7 +215,6 @@ window.addEventListener('DOMContentLoaded', async () => {
     el.innerHTML = html;
     if (after) after(el);
   }
-
   await inject('#schedule', 'schedule.html');
   await inject('#gift', 'gift.html');
   await inject('#rsvp', 'rsvp.html', initRSVP_GForm);
@@ -289,15 +225,13 @@ function initRSVP_GForm(container) {
   const form    = section.querySelector('#rsvpForm');
   const btn     = section.querySelector('button[type="submit"]');
   const iframe  = section.querySelector('#gform_hidden');
-
   if (!form || !iframe) return;
-
   let submitted = false;
   let fallbackTimer = null;
 
   function replaceWithThanks() {
     section.innerHTML = `
-      <div class="thankyou-card" role="status" aria-live="polite">
+      <div class="thankyou-card">
         <span class="emoji">💌</span>
         <h2>Obrigado pela sua confirmação!</h2>
         <p>A sua resposta foi recebida com sucesso.</p>
@@ -305,8 +239,7 @@ function initRSVP_GForm(container) {
           <a class="btn btn-primary" href="#rsvp" onclick="reloadRSVP(event)">Enviar outra resposta</a>
           <a class="btn btn-ghost" href="#schedule">Ver detalhes do dia</a>
         </div>
-      </div>
-    `;
+      </div>`;
     section.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
@@ -314,11 +247,9 @@ function initRSVP_GForm(container) {
     submitted = true;
     if (btn) { btn.disabled = true; btn.textContent = 'Enviando...'; }
     section.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
     clearTimeout(fallbackTimer);
     fallbackTimer = setTimeout(() => { if (submitted) replaceWithThanks(); }, 1200);
   });
-
   iframe.addEventListener('load', () => {
     if (!submitted) return;
     clearTimeout(fallbackTimer);
@@ -330,7 +261,6 @@ function reloadRSVP(e) {
   e.preventDefault();
   const section = document.querySelector('#rsvp');
   if (!section) return;
-
   fetch('rsvp.html?v=' + Date.now())
     .then(res => res.text())
     .then(html => {
