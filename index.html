@@ -75,35 +75,29 @@
       }
     }
     
-
-    /* Top buttons bar */
-    .hero-topbar{
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: var(--topbar-h);
-      /* Soft green translucent background */
-      background: rgba(101,128,94,0.12);
-      /* optional subtle blur so it feels airy */
-      backdrop-filter: saturate(120%) blur(2px);
-      padding: 0 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.25rem;
-      z-index: 2;
-    }
-    .topbar-button{
-      font-family:'Baskerville BT','Libre Baskerville',serif;
-      font-weight:500;
-      font-size:1rem;
-      text-decoration: none;      /* remove underline */
-      color:#333;
-      background: none; 
-      padding: 0.4rem 0.75rem;
-      border-radius: 8px;
-      line-height: 1;
-    }
+    
+    <header class="site-topbar">
+      <div class="brand">M <span class="plus">+</span> T</div>
+    
+      <!-- Desktop nav (shows on ≥1024px) -->
+      <nav class="nav-desktop">
+        <a href="#schedule">Detalhes do dia</a>
+        <a href="#gift">Lista de presentes</a>
+        <a href="#rsvp">Confirmação de presença</a>
+      </nav>
+    
+      <!-- Mobile hamburger (shows on <1024px) -->
+      <button class="hamburger" aria-label="Abrir menu" aria-controls="mobileMenu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </header>
+    
+    <!-- Mobile dropdown -->
+    <nav id="mobileMenu" class="nav-mobile" hidden>
+      <a href="#schedule">Detalhes do dia</a>
+      <a href="#gift">Lista de presentes</a>
+      <a href="#rsvp">Confirmação de presença</a>
+    </nav>
 
     .hero-inner {
       width: min(92vw, 780px);
@@ -152,6 +146,87 @@
       font-weight: 400;
       font-size: clamp(1.2rem, 2vw, 1.6rem);
       margin-top: var(--stack-gap);
+    }
+
+    :root{
+      --topbar-h: 56px;            /* keeps the hero padding correct */
+      --theme-green: #65805e;      /* reuse your green */
+    }
+    
+    /* Top bar (sits only at the very top of the page) */
+    .site-topbar{
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: var(--topbar-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 .9rem;
+      background: rgba(101,128,94,.12);     /* soft green tint */
+      backdrop-filter: saturate(120%) blur(2px);
+      z-index: 5;
+    }
+    
+    /* Brand – same script as the names */
+    .brand{
+      font-family: 'Pinyon Script', cursive;
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+    .brand .plus{ margin: 0 .15rem; }
+    
+    /* Desktop nav (left aligned) */
+    .nav-desktop{
+      display: none;
+      gap: 1.25rem;
+    }
+    .nav-desktop a{
+      font-family: 'Baskerville BT','Libre Baskerville',serif;
+      text-decoration: none;
+      color: #333;
+      padding: .35rem .25rem;
+      border-bottom: 1px solid transparent;    /* elegant “menu-like” cue on hover */
+    }
+    .nav-desktop a:hover{
+      border-bottom-color: rgba(0,0,0,.35);
+    }
+    
+    /* Hamburger (mobile only) */
+    .hamburger{
+      display: inline-flex;
+      width: 36px; height: 36px;
+      align-items: center; justify-content: center;
+      background: transparent; border: 0; padding: 0; cursor: pointer;
+    }
+    .hamburger span{
+      display: block;
+      width: 22px; height: 2px; background: #333; margin: 3px 0; border-radius: 2px;
+    }
+    
+    /* Mobile dropdown (below the bar) */
+    .nav-mobile{
+      position: absolute;
+      top: var(--topbar-h); left: 0; right: 0;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(2px);
+      display: flex; flex-direction: column;
+      gap: .25rem;
+      padding: .6rem 1rem .8rem;
+      z-index: 4;
+      border-bottom: 1px solid rgba(0,0,0,.06);
+    }
+    .nav-mobile a{
+      font-family: 'Baskerville BT','Libre Baskerville',serif;
+      color: #333; text-decoration: none;
+      padding: .5rem 0;
+      border-bottom: 1px solid rgba(0,0,0,.08);
+    }
+    .nav-mobile a:last-child{ border-bottom: none; }
+    
+    /* Switch at desktop */
+    @media (min-width: 1024px){
+      .nav-desktop{ display: flex; }
+      .hamburger, .nav-mobile{ display: none !important; }
     }
     
 
@@ -305,6 +380,27 @@ function reloadRSVP(e) {
       section.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
 }
+
+// Mobile menu toggle
+const btn = document.querySelector('.hamburger');
+const menu = document.getElementById('mobileMenu');
+
+if (btn && menu) {
+  btn.addEventListener('click', () => {
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    menu.hidden = open; // toggle visibility
+  });
+
+  // Close the mobile menu after clicking a link
+  menu.addEventListener('click', (e) => {
+    if (e.target.matches('a')) {
+      btn.setAttribute('aria-expanded', 'false');
+      menu.hidden = true;
+    }
+  });
+}
+
   </script>
 
 </body>
