@@ -90,9 +90,10 @@
     /* hamburger (3 dots) button */
     .hamburger {
       display: inline-flex;
-      align-items: center;
+      flex-direction: column;   /* stack lines vertically */
       justify-content: center;
-      gap: 3px;
+      align-items: center;
+      gap: 5px;                 /* space between lines */
       width: 38px;
       height: 34px;
       background: rgba(255,255,255,0.65);
@@ -102,12 +103,13 @@
       cursor: pointer;
       padding: 0;
     }
-    .hamburger .dot{
-      width: 4px;
-      height: 4px;
-      background:#333;
-      border-radius: 50%;
+    
+    .hamburger span {
       display: block;
+      width: 20px;
+      height: 2px;
+      background: #333;
+      border-radius: 2px;
     }
 
     /* Dropdown menu (anchored to the right) */
@@ -247,7 +249,9 @@
     <!-- Top bar with hamburger + dropdown (right) -->
     <div class="hero-topbar">
       <button class="hamburger" aria-label="Abrir menu" aria-controls="menu" aria-expanded="false">
-        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span></span>
+          <span></span>
+          <span></span>
       </button>
 
       <!-- Hidden menu (closed by default) -->
