@@ -72,7 +72,7 @@
     .hero::before { content: ""; position: absolute; inset: 0; background: rgba(255,255,255,.4); z-index: 0; }
     .hero * { position: relative; z-index: 1; }
 
-    /* Top bar with kebab (right) */
+    /* Top bar with hamburger (right) */
     .hero-topbar{
       position: absolute;
       top: 0; left: 0;
@@ -87,8 +87,8 @@
       z-index: 3;
     }
 
-    /* Kebab (3 dots) button */
-    .kebab {
+    /* hamburger (3 dots) button */
+    .hamburger {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -102,7 +102,7 @@
       cursor: pointer;
       padding: 0;
     }
-    .kebab .dot{
+    .hamburger .dot{
       width: 4px;
       height: 4px;
       background:#333;
@@ -244,9 +244,9 @@
 <body>
 
   <section class="hero">
-    <!-- Top bar with kebab + dropdown (right) -->
+    <!-- Top bar with hamburger + dropdown (right) -->
     <div class="hero-topbar">
-      <button class="kebab" aria-label="Abrir menu" aria-controls="menu" aria-expanded="false">
+      <button class="hamburger" aria-label="Abrir menu" aria-controls="menu" aria-expanded="false">
         <span class="dot"></span><span class="dot"></span><span class="dot"></span>
       </button>
 
@@ -293,22 +293,22 @@ window.addEventListener('DOMContentLoaded', async () => {
   await inject('#rsvp', 'rsvp.html', initRSVP_GForm);
   await inject('#contacts', 'contacts.html');
 
-  // Kebab toggle + close handlers
-  const kebab = document.querySelector('.kebab');
+  // hamburger toggle + close handlers
+  const hamburger = document.querySelector('.hamburger');
   const menu  = document.getElementById('menu');
 
   function closeMenu(){
     if (!menu.hidden){
       menu.hidden = true;
-      kebab.setAttribute('aria-expanded','false');
+      hamburger.setAttribute('aria-expanded','false');
     }
   }
 
-  if (kebab && menu) {
-    kebab.addEventListener('click', (e) => {
+  if (hamburger && menu) {
+    hamburger.addEventListener('click', (e) => {
       e.stopPropagation();
-      const open = kebab.getAttribute('aria-expanded') === 'true';
-      kebab.setAttribute('aria-expanded', String(!open));
+      const open = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', String(!open));
       menu.hidden = open;
     });
 
@@ -319,7 +319,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     // Click outside to close
     document.addEventListener('click', (e) => {
-      if (!menu.hidden && !menu.contains(e.target) && !kebab.contains(e.target)) {
+      if (!menu.hidden && !menu.contains(e.target) && !hamburger.contains(e.target)) {
         closeMenu();
       }
     });
