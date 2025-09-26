@@ -33,6 +33,7 @@
     :root{
       --stack-gap: clamp(1.2rem, 2.2vw, 2rem);
       --topbar-h: 56px; /* altura da barra do topo */
+      --theme-green: #65805e;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -74,25 +75,37 @@
       top: 0; left: 0;
       width: 100%;
       height: var(--topbar-h);
-      background: rgba(255,255,255,0.6);
+      /* Soft green translucent background */
+      background: rgba(101,128,94,0.12);
+      /* optional subtle blur so it feels airy */
+      backdrop-filter: saturate(120%) blur(2px);
       padding: 0 1rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1.5rem;
+      gap: 1.25rem;
       z-index: 2;
     }
     .topbar-button{
       font-family:'Baskerville BT','Libre Baskerville',serif;
       font-weight:500;
       font-size:1rem;
-      text-decoration: underline;   /* adiciona a linha por baixo */
-      text-decoration-thickness: 1px; /* mais fino que o normal */
-      text-underline-offset: 3px; 
+      text-decoration: none;      /* remove underline */
       color:#333;
       background: none;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
+      padding: 0.4rem 0.75rem;
+      border-radius: 4px;
+      line-height: 1;
+    }
+    /* Subtle vertical separator between items (instead of underlines) */
+    .hero-topbar a + a {
+      border-left: 1px solid rgba(101,128,94,0.35);
+      padding-left: 1rem;
+      margin-left: 0.25rem;
+    }
+    /* Optional hover: tiny tint, no color flip */
+    .topbar-button:hover {
+      background: rgba(101,128,94,0.10);
     }
 
     .hero-inner {
@@ -107,7 +120,7 @@
     .hero .rsvp-button {
       display: inline-block;
       margin-top: 3rem;
-      background: #65805e;
+      background: var(--theme-green);
       color: #fff;
       text-decoration: none;
       padding: 0.6rem 1.4rem;
@@ -158,12 +171,10 @@
       text-align: center;
       padding-bottom: 0.5rem;
     }
-    
     h3 {
       font-family: 'Baskerville BT','Libre Baskerville',serif;
-      font-weight: 550;       /* bold */
+      font-weight: 550;
     }
-    
 
     footer { text-align: center; padding: 1rem; background-color: rgba(255,255,255,.85); margin-top: 2rem; }
 
@@ -174,19 +185,19 @@
     .cute-form .form-group { flex:1 1 45%; min-width:240px; margin-bottom:1rem; }
     .cute-form label { display:block; font-weight:500; margin-bottom:.4rem; }
     .cute-form input, .cute-form textarea { width:100%; padding:.9rem; border:1px solid #ddd; border-radius:8px; font-size:1rem; background:#fafafa; }
-    .cute-form input:focus, .cute-form textarea:focus { outline:none; border:1px solid #65805e; box-shadow:0 0 4px rgba(101,128,94,.4); }
+    .cute-form input:focus, .cute-form textarea:focus { outline:none; border:1px solid var(--theme-green); box-shadow:0 0 4px rgba(101,128,94,.4); }
     .cute-form textarea { min-height:90px; resize:vertical; }
     .radio-group { display:flex; align-items:center; gap:2rem; margin-top:.4rem; flex-wrap:wrap; }
     .radio { display:inline-flex; align-items:center; gap:.6rem; }
-    .radio input[type="radio"] { margin:0; width:15px; height:15px; accent-color:#65805e; }
-    .cute-form button[type="submit"] { width:100%; padding:1rem; font-weight:600; font-size:1rem; background:#65805e; color:#fff; border:0; border-radius:8px; cursor:pointer; transition:background .2s; }
+    .radio input[type="radio"] { margin:0; width:15px; height:15px; accent-color: var(--theme-green); }
+    .cute-form button[type="submit"] { width:100%; padding:1rem; font-weight:600; font-size:1rem; background: var(--theme-green); color:#fff; border:0; border-radius:8px; cursor:pointer; transition:background .2s; }
     .cute-form button[type="submit"]:hover { background:#4e664a; }
 
     .thankyou-card{ max-width:720px; margin:2rem auto; padding:2rem; background:#fff; border-radius:16px; box-shadow:0 4px 16px rgba(0,0,0,.08); text-align:center; font-family:'Baskerville BT','Libre Baskerville',serif; animation:fadeIn .4s ease-out; }
     .thankyou-card .emoji{ font-size:2rem; display:block; margin-bottom:.5rem; }
     .thankyou-actions{ margin-top:1rem; display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap; }
     .btn{ display:inline-block; padding:.6rem 1rem; border-radius:30px; text-decoration:none; font-weight:400; font-size:.95rem; border:1px solid transparent; }
-    .btn-primary{ background:#65805e; color:#fff; }
+    .btn-primary{ background: var(--theme-green); color:#fff; }
     .btn-primary:hover{ background:#4e664a; }
     .btn-ghost{ background:#fff; color:#333; border-color:#ddd; }
     .btn-ghost:hover{ border-color:#bbb; }
@@ -221,12 +232,10 @@
     </div>
   </section>
 
-
   <section id="schedule"></section>
   <section id="rsvp"></section>
   <section id="gift"></section>
   <section id="contacts"></section>
-
 
   <footer>
     <p>Com amor, Mariana & Tiago</p>
@@ -301,6 +310,7 @@ function reloadRSVP(e) {
 
 </body>
 </html>
+
 
 
 
