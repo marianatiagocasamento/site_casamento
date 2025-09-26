@@ -69,6 +69,13 @@
     .hero::before { content: ""; position: absolute; inset: 0; background: rgba(255,255,255,.4); z-index: 0; }
     .hero * { position: relative; z-index: 1; }
 
+    @media (max-width: 768px) {
+      .hero-inner {
+        transform: translateY(-6vh); /* push it up */
+      }
+    }
+    
+
     /* Top buttons bar */
     .hero-topbar{
       position: absolute;
