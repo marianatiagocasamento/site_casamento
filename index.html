@@ -10,6 +10,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet">
 
   <style>
+    /* Respect the hidden attribute in all browsers */
+    [hidden]{ display:none !important; }
+
     /* Load Baskerville BT */
     @font-face {
       font-family: 'Baskerville BT';
@@ -25,7 +28,7 @@
       src: url('fonts/BaskervilleBoldBT.woff2') format('woff2'),
            url('fonts/BaskervilleBoldBT.woff') format('woff'),
            url('fonts/BaskervilleBoldBT.ttf') format('truetype');
-      font-weight: 500;              /* gentler “bold” */
+      font-weight: 500; /* gentler “bold” */
       font-style: normal;
       font-display: swap;
     }
@@ -69,7 +72,7 @@
     .hero::before { content: ""; position: absolute; inset: 0; background: rgba(255,255,255,.4); z-index: 0; }
     .hero * { position: relative; z-index: 1; }
 
-    /* Top bar with hamburger (left) */
+    /* Top bar with kebab (right) */
     .hero-topbar{
       position: absolute;
       top: 0; left: 0;
@@ -79,17 +82,17 @@
       backdrop-filter: saturate(120%) blur(2px);
       display: flex;
       align-items: center;
-      justify-content: flex-start;            /* left-aligned */
+      justify-content: flex-end;              /* move to the right */
       padding: 0 .75rem;
       z-index: 3;
     }
 
-    /* Hamburger button */
-    .hamburger {
+    /* Kebab (3 dots) button */
+    .kebab {
       display: inline-flex;
-      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      gap: 4px;
+      gap: 3px;
       width: 38px;
       height: 34px;
       background: rgba(255,255,255,0.65);
@@ -97,21 +100,22 @@
       border: 1px solid rgba(101,128,94,0.25);
       border-radius: 8px;
       cursor: pointer;
-      padding: 6px 7px;
+      padding: 0;
     }
-    .hamburger span {
+    .kebab .dot{
+      width: 4px;
+      height: 4px;
+      background:#333;
+      border-radius: 50%;
       display: block;
-      width: 100%;
-      height: 2px;
-      background: #333;
-      border-radius: 2px;
     }
 
-    /* Dropdown menu */
+    /* Dropdown menu (anchored to the right) */
     .topbar-menu {
       position: absolute;
       top: var(--topbar-h);
-      left: .75rem;
+      right: .75rem;                  /* right side */
+      left: auto;
       background: rgba(255,255,255,0.95);
       backdrop-filter: blur(4px);
       border: 1px solid rgba(101,128,94,0.18);
@@ -226,7 +230,7 @@
     .cute-form button[type="submit"] { width:100%; padding:1rem; font-weight:500; font-size:1rem; font-family:'Baskerville BT','Libre Baskerville',serif; background: var(--theme-green); color:#fff; border:0; border-radius:8px; cursor:pointer; transition:background .2s; }
     .cute-form button[type="submit"]:hover { background:#4e664a; }
 
-    .thankyou-card{ max-width:720px; margin:2rem auto; padding:2rem; background:#fff; border-radius:16px; box-shadow:0 4px 16px rgba(0,0,0,.08); text-align:center; font-family:'Baskerville BT','Libre Baskerville',serif; animation:fadeIn .4s ease-out; }
+    .thankyou-card{ max-width:720px; margin:2rem auto; padding:2rem; background:#fff; border-radius:16px; box-shadow:0 4px 16px rgba(0,0,0,0.08); text-align:center; font-family:'Baskerville BT','Libre Baskerville',serif; animation:fadeIn .4s ease-out; }
     .thankyou-card .emoji{ font-size:2rem; display:block; margin-bottom:.5rem; }
     .thankyou-actions{ margin-top:1rem; display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap; }
     .btn{ display:inline-block; padding:.6rem 1rem; border-radius:30px; text-decoration:none; font-weight:400; font-size:.95rem; border:1px solid transparent; }
@@ -240,13 +244,13 @@
 <body>
 
   <section class="hero">
-    <!-- Top bar with hamburger + dropdown (left) -->
+    <!-- Top bar with kebab + dropdown (right) -->
     <div class="hero-topbar">
-      <button class="hamburger" aria-label="Abrir menu" aria-controls="menu" aria-expanded="false">
-        <span></span><span></span><span></span>
+      <button class="kebab" aria-label="Abrir menu" aria-controls="menu" aria-expanded="false">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
       </button>
 
-      <!-- Hidden menu -->
+      <!-- Hidden menu (closed by default) -->
       <nav id="menu" class="topbar-menu" hidden>
         <a href="#schedule">O NOSSO DIA</a>
         <a href="#gift">LISTA DE PRESENTES</a>
@@ -289,21 +293,40 @@ window.addEventListener('DOMContentLoaded', async () => {
   await inject('#rsvp', 'rsvp.html', initRSVP_GForm);
   await inject('#contacts', 'contacts.html');
 
-  // Hamburger toggle
-  const burger = document.querySelector('.hamburger');
-  const menu   = document.getElementById('menu');
-  if (burger && menu) {
-    burger.addEventListener('click', () => {
-      const open = burger.getAttribute('aria-expanded') === 'true';
-      burger.setAttribute('aria-expanded', String(!open));
+  // Kebab toggle + close handlers
+  const kebab = document.querySelector('.kebab');
+  const menu  = document.getElementById('menu');
+
+  function closeMenu(){
+    if (!menu.hidden){
+      menu.hidden = true;
+      kebab.setAttribute('aria-expanded','false');
+    }
+  }
+
+  if (kebab && menu) {
+    kebab.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = kebab.getAttribute('aria-expanded') === 'true';
+      kebab.setAttribute('aria-expanded', String(!open));
       menu.hidden = open;
     });
-    // Close menu after clicking a link
-    menu.addEventListener('click', e => {
-      if (e.target.matches('a')) {
-        burger.setAttribute('aria-expanded','false');
-        menu.hidden = true;
+
+    // Close after clicking a link
+    menu.addEventListener('click', (e) => {
+      if (e.target.matches('a')) closeMenu();
+    });
+
+    // Click outside to close
+    document.addEventListener('click', (e) => {
+      if (!menu.hidden && !menu.contains(e.target) && !kebab.contains(e.target)) {
+        closeMenu();
       }
+    });
+
+    // ESC to close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
     });
   }
 });
