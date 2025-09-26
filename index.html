@@ -66,22 +66,28 @@
 
     /* Top buttons inside hero */
     .hero-topbar {
-      position: absolute;
-      top: 16px;
-      left: 50%;
-      transform: translateX(-50%);
+      width: 100%;
+      background: rgba(255,255,255,0.6); /* semi-transparent full bar */
+      padding: 0.8rem 1rem;
       display: flex;
-      gap: 1rem;
-      background: rgba(255,255,255,0.75);
-      padding: 0.4rem 0.8rem;
-      border-radius: 8px;
+      justify-content: center;
+      gap: 1.5rem;
     }
-    .hero-topbar a {
+    
+    .topbar-button {
       font-family: 'Baskerville BT','Libre Baskerville',serif;
-      font-weight: 600;
+      font-weight: 500;
+      font-size: 1rem;
       text-decoration: none;
       color: #333;
-      font-size: 0.95rem;
+      background: rgba(255,255,255,0.85);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    
+    .topbar-button:hover {
+      background: rgba(255,255,255,1);
     }
 
     .hero-inner {
@@ -178,24 +184,33 @@
   </style>
 </head>
 <body>
-
+  
   <section class="hero">
+    <!-- New full-width top bar -->
     <div class="hero-topbar">
-      <a href="#schedule">Detalhes do Dia</a>
-      <a href="#gift">Lista de Presentes</a>
+      <a href="#schedule" class="topbar-button">Detalhes sobre o nosso dia</a>
+      <a href="#gift" class="topbar-button">Lista de presentes</a>
     </div>
-
+  
     <div class="hero-inner">
+      <!-- Date first -->
       <div class="date">9 de maio de 2026</div>
+  
+      <!-- Names -->
       <h1 class="names">
         <span class="name">Mariana</span>
         <span class="amp">&amp;</span>
         <span class="name">Tiago</span>
       </h1>
+  
+      <!-- Location -->
       <div class="location">São Miguel, Açores</div>
+  
+      <!-- RSVP Button -->
       <a href="#rsvp" class="rsvp-button">Confirmar Presença</a>
     </div>
   </section>
+
 
   <section id="schedule"></section>
   <section id="gift"></section>
