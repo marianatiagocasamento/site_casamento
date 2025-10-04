@@ -153,45 +153,9 @@
       transform: translateY(-50%);
     }
 
-    /* iPhone SE / older small phones (320–375px wide) */
-    @media (max-width: 375px) {
-      .hero-inner { transform: translateY(-2vh); }
-    }
+    @media (min-width: 768px) { .hero-inner { transform: translateY(-3vh); } } 
     
-    /* iPhone 11, XR (414px wide, tall screen) */
-    @media (min-width: 376px) and (max-width: 415px) {
-      .hero-inner { transform: translateY(-3vh); }
-    }
-    
-    /* iPhone 12 / 13 / 14 / 15 (390px wide, taller notch area) */
-    @media (width: 390px) {
-      .hero-inner { transform: translateY(-4vh); }
-    }
-    
-    /* iPhone 14 Pro Max / large phones (430px wide) */
-    @media (width: 430px) {
-      .hero-inner { transform: translateY(-5vh); }
-    }
-    
-    /* iPads portrait (768–820px wide) */
-    @media (min-width: 768px) and (max-width: 834px) {
-      .hero-inner { transform: translateY(-6vh); }
-    }
-    
-    /* iPads landscape (1024px+) */
-    @media (min-width: 1024px) and (max-width: 1366px) {
-      .hero-inner { transform: translateY(-7vh); }
-    }
-    
-    /* Laptops / desktops (1280px+) */
-    @media (min-width: 1280px) {
-      .hero-inner { transform: translateY(-8vh); }
-    }
-    
-    /* Very large screens / ultrawide (1600px+) */
-    @media (min-width: 1600px) {
-      .hero-inner { transform: translateY(-10vh); }
-    }
+    @media (min-width: 1024px) { .hero-inner { transform: translateY(-6vh); } }
 
     
     .hero .rsvp-button {
