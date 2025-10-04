@@ -10,8 +10,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet">
 
   <style>
+    /* Respect the hidden attribute in all browsers */
     [hidden]{ display:none !important; }
 
+    /* Load Baskerville BT */
     @font-face {
       font-family: 'Baskerville BT';
       src: url('fonts/BaskervilleBT.woff2') format('woff2'),
@@ -26,7 +28,7 @@
       src: url('fonts/BaskervilleBoldBT.woff2') format('woff2'),
            url('fonts/BaskervilleBoldBT.woff') format('woff'),
            url('fonts/BaskervilleBoldBT.ttf') format('truetype');
-      font-weight: 500;
+      font-weight: 500; /* gentler “bold” */
       font-style: normal;
       font-display: swap;
     }
@@ -56,23 +58,6 @@
       }
     }
 
-    /* ===== SITE TITLE ===== */
-    .site-title {
-      width: 100%;
-      text-align: center;
-      padding: 1rem 0;
-      position: relative;
-      z-index: 5;
-      background: rgba(255, 255, 255, 0.5);
-    }
-    .site-title h1 {
-      font-family: 'Baskerville BT','Libre Baskerville',serif;
-      font-weight: 400;
-      font-size: clamp(2rem, 3.2vw, 2.6rem);
-      color: #323f30;
-      letter-spacing: 0.02em;
-    }
-
     /* ===== HERO ===== */
     .hero {
       min-height: 100vh;
@@ -80,38 +65,45 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: calc(var(--topbar-h) + 3rem) 2rem 2rem; /* push down to make space for header */
+      padding: var(--topbar-h) 2rem 2rem; /* space for top bar */
       position: relative;
       z-index: 1;
     }
     .hero::before { content: ""; position: absolute; inset: 0; background: rgba(255,255,255,.4); z-index: 0; }
     .hero * { position: relative; z-index: 1; }
 
+    /* Top bar with hamburger (right) */
     .hero-topbar{
       position: absolute;
       top: 0; left: 0;
       width: 100%;
       height: var(--topbar-h);
+      background: none;      /* soft green tint */
+      backdrop-filter: none;
       display: flex;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: flex-end;              /* move to the right */
       padding: 0 .75rem;
       z-index: 3;
     }
 
+    /* hamburger (3 lines) button */
     .hamburger {
       display: inline-flex;
-      flex-direction: column;
+      flex-direction: column;   /* stack lines vertically */
       justify-content: center;
       align-items: center;
-      gap: 5px;
+      gap: 5px;                 /* space between lines */
       width: 38px;
       height: 34px;
       background: rgba(255,255,255,0.65);
+      backdrop-filter: none;
       border: 1px solid rgba(101,128,94,0.25);
       border-radius: 8px;
       cursor: pointer;
+      padding: 0;
     }
+    
     .hamburger span {
       display: block;
       width: 20px;
@@ -120,11 +112,14 @@
       border-radius: 2px;
     }
 
+    /* Dropdown menu (anchored to the right) */
     .topbar-menu {
       position: absolute;
       top: var(--topbar-h);
-      right: .75rem;
+      right: .75rem;                  /* right side */
+      left: auto;
       background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(4px);
       border: 1px solid rgba(101,128,94,0.18);
       border-radius: 10px;
       box-shadow: 0 6px 24px rgba(0,0,0,0.12);
@@ -142,6 +137,7 @@
       padding: .55rem 0;
       border-bottom: 1px solid rgba(0,0,0,0.08);
       text-transform: uppercase;
+      letter-spacing: .03em;
       font-weight: 500;
     }
     .topbar-menu a:last-child { border-bottom: none; }
@@ -150,6 +146,7 @@
       width: min(92vw, 780px);
       margin: 0 auto;
       text-align: center;
+      transform: none;
     }
     @media (min-width: 768px) { .hero-inner { transform: translateY(-3vh); } }
     @media (min-width: 1024px) { .hero-inner { transform: translateY(-6vh); } }
@@ -163,6 +160,8 @@
       padding: 0.6rem 1.4rem;
       font-size: 1rem;
       border-radius: 8px;
+      font-family: 'Baskerville BT', 'Libre Baskerville', serif;
+      font-weight: 400;
       transition: background .2s;
     }
     .hero .rsvp-button:hover { background:#4e664a; }
@@ -174,12 +173,13 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin: 0;
       font-weight: 500;
     }
-    .names .amp { font-size: clamp(2rem, 4vw, 3rem); margin: .35rem 0; }
+    .names .amp { font-size: clamp(2rem, 4vw, 3rem); margin: .35rem 0; line-height: 1; }
 
     .hero .date {
-      font-family: 'Baskerville BT','Libre Baskerville',serif;
+      font-family: 'Baskerville BT','Libre Baskerville',serif !important;
       font-weight: 400;
       font-size: clamp(1.4rem, 2.2vw, 1.9rem);
       margin-bottom: var(--stack-gap);
@@ -217,46 +217,44 @@
 
     footer { text-align: center; padding: 0; background-color: transparent; margin-top: 0; }
 
-    /* RSVP styles (same as before)... */
+    /* ===== RSVP (unchanged styles, lighter text) ===== */
     #rsvp { min-height: 360px; }
-    .cute-form { max-width: 600px; width: 90%; margin: 1.5rem auto 0; padding: 2rem; background:#fff; border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,.1); text-align:left; }
+    .cute-form { max-width: 600px; width: 90%; margin: 1.5rem auto 0; padding: 2rem; background:#fff; border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,.1); text-align:left; font-family:'Baskerville BT','Libre Baskerville',serif; }
     .cute-form .form-row { display:flex; gap:1rem; flex-wrap:wrap; }
     .cute-form .form-group { flex:1 1 45%; min-width:240px; margin-bottom:1rem; }
     .cute-form label { display:block; font-weight:400; margin-bottom:.4rem; }
     .cute-form input, .cute-form textarea { width:100%; padding:.9rem; border:1px solid #ddd; border-radius:8px; font-size:1rem; background:#fafafa; }
-    .cute-form input:focus, .cute-form textarea:focus { border:1px solid var(--theme-green); box-shadow:0 0 4px rgba(101,128,94,.4); outline:none; }
+    .cute-form input:focus, .cute-form textarea:focus { outline:none; border:1px solid var(--theme-green); box-shadow:0 0 4px rgba(101,128,94,.4); }
     .cute-form textarea { min-height:90px; resize:vertical; }
-    .radio-group { display:flex; gap:2rem; margin-top:.4rem; flex-wrap:wrap; }
+    .radio-group { display:flex; align-items:center; gap:2rem; margin-top:.4rem; flex-wrap:wrap; }
     .radio { display:inline-flex; align-items:center; gap:.6rem; }
-    .radio input[type="radio"] { width:15px; height:15px; accent-color: var(--theme-green); }
-    .cute-form button[type="submit"] { width:100%; padding:1rem; font-weight:500; font-size:1rem; background: var(--theme-green); color:#fff; border:0; border-radius:8px; cursor:pointer; }
+    .radio input[type="radio"] { margin:0; width:15px; height:15px; accent-color: var(--theme-green); }
+    .cute-form button[type="submit"] { width:100%; padding:1rem; font-weight:500; font-size:1rem; font-family:'Baskerville BT','Libre Baskerville',serif; background: var(--theme-green); color:#fff; border:0; border-radius:8px; cursor:pointer; transition:background .2s; }
     .cute-form button[type="submit"]:hover { background:#4e664a; }
 
-    .thankyou-card{ max-width:720px; margin:2rem auto; padding:2rem; background:#fff; border-radius:16px; box-shadow:0 4px 16px rgba(0,0,0,0.08); text-align:center; animation:fadeIn .4s ease-out; }
-    .thankyou-card .emoji{ font-size:2rem; margin-bottom:.5rem; }
+    .thankyou-card{ max-width:720px; margin:2rem auto; padding:2rem; background:#fff; border-radius:16px; box-shadow:0 4px 16px rgba(0,0,0,0.08); text-align:center; font-family:'Baskerville BT','Libre Baskerville',serif; animation:fadeIn .4s ease-out; }
+    .thankyou-card .emoji{ font-size:2rem; display:block; margin-bottom:.5rem; }
     .thankyou-actions{ margin-top:1rem; display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap; }
-    .btn{ padding:.6rem 1rem; border-radius:30px; text-decoration:none; font-size:.95rem; }
+    .btn{ display:inline-block; padding:.6rem 1rem; border-radius:30px; text-decoration:none; font-weight:400; font-size:.95rem; border:1px solid transparent; }
     .btn-primary{ background: var(--theme-green); color:#fff; }
     .btn-primary:hover{ background:#4e664a; }
-    .btn-ghost{ background:#fff; color:#333; border:1px solid #ddd; }
+    .btn-ghost{ background:#fff; color:#333; border-color:#ddd; }
     .btn-ghost:hover{ border-color:#bbb; }
     @keyframes fadeIn{ from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none} }
   </style>
 </head>
 <body>
 
-  <!-- Site title -->
-  <header class="site-title">
-    <h1>O Nosso Casamento</h1>
-  </header>
-
   <section class="hero">
+    <!-- Top bar with hamburger + dropdown (right) -->
     <div class="hero-topbar">
       <button class="hamburger" aria-label="Abrir menu" aria-controls="menu" aria-expanded="false">
           <span></span>
           <span></span>
           <span></span>
       </button>
+
+      <!-- Hidden menu (closed by default) -->
       <nav id="menu" class="topbar-menu" hidden>
         <a href="#schedule">O nosso dia</a>
         <a href="#gift">Lista de presentes</a>
@@ -285,109 +283,117 @@
   <section id="contacts"></section>
 
   <script>
-  window.addEventListener('DOMContentLoaded', async () => {
-    const v = Date.now();
-    async function inject(selector, url, after) {
-      const res = await fetch(url + (url.includes('?') ? '&' : '?') + 'v=' + v);
-      const html = await res.text();
-      const el = document.querySelector(selector);
-      el.innerHTML = html;
-      if (after) after(el);
+window.addEventListener('DOMContentLoaded', async () => {
+  const v = Date.now();
+  async function inject(selector, url, after) {
+    const res = await fetch(url + (url.includes('?') ? '&' : '?') + 'v=' + v);
+    const html = await res.text();
+    const el = document.querySelector(selector);
+    el.innerHTML = html;
+    if (after) after(el);
+  }
+  await inject('#schedule', 'schedule.html');
+  await inject('#gift', 'gift.html');
+  await inject('#rsvp', 'rsvp.html', initRSVP_GForm);
+  await inject('#contacts', 'contacts.html');
+
+  // hamburger toggle + close handlers
+  const hamburger = document.querySelector('.hamburger');
+  const menu  = document.getElementById('menu');
+
+  function closeMenu(){
+    if (!menu.hidden){
+      menu.hidden = true;
+      hamburger.setAttribute('aria-expanded','false');
     }
-    await inject('#schedule', 'schedule.html');
-    await inject('#gift', 'gift.html');
-    await inject('#rsvp', 'rsvp.html', initRSVP_GForm);
-    await inject('#contacts', 'contacts.html');
+  }
 
-    const hamburger = document.querySelector('.hamburger');
-    const menu  = document.getElementById('menu');
+  if (hamburger && menu) {
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', String(!open));
+      menu.hidden = open;
+    });
 
-    function closeMenu(){
-      if (!menu.hidden){
-        menu.hidden = true;
-        hamburger.setAttribute('aria-expanded','false');
+    // Close after clicking a link
+    menu.addEventListener('click', (e) => {
+      if (e.target.matches('a')) closeMenu();
+    });
+
+    // Click outside to close
+    document.addEventListener('click', (e) => {
+      if (!menu.hidden && !menu.contains(e.target) && !hamburger.contains(e.target)) {
+        closeMenu();
       }
-    }
+    });
 
-    if (hamburger && menu) {
-      hamburger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const open = hamburger.getAttribute('aria-expanded') === 'true';
-        hamburger.setAttribute('aria-expanded', String(!open));
-        menu.hidden = open;
-      });
+    // ESC to close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
+    });
+  }
+});
 
-      menu.addEventListener('click', (e) => {
-        if (e.target.matches('a')) closeMenu();
-      });
+function initRSVP_GForm(container) {
+  const section = container;
+  const form    = section.querySelector('#rsvpForm');
+  const btn     = section.querySelector('button[type="submit"]');
+  const iframe  = section.querySelector('#gform_hidden');
+  if (!form || !iframe) return;
+  let submitted = false;
+  let fallbackTimer = null;
 
-      document.addEventListener('click', (e) => {
-        if (!menu.hidden && !menu.contains(e.target) && !hamburger.contains(e.target)) {
-          closeMenu();
-        }
-      });
+  function replaceWithThanks() {
+    section.innerHTML = `
+      <div class="thankyou-card" role="status" aria-live="polite">
+        <span class="emoji">💌</span>
+        <h2>Obrigado pela sua confirmação!</h2>
+        <p>A sua resposta foi recebida com sucesso.</p>
+        <div class="thankyou-actions">
+          <a class="btn btn-primary" href="#rsvp" onclick="reloadRSVP(event)">Enviar outra resposta</a>
+          <a class="btn btn-ghost" href="#schedule">Ver detalhes do dia</a>
+        </div>
+      </div>`;
+    section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeMenu();
-      });
-    }
+  form.addEventListener('submit', () => {
+    submitted = true;
+    if (btn) { btn.disabled = true; btn.textContent = 'Enviando...'; }
+    section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    clearTimeout(fallbackTimer);
+    fallbackTimer = setTimeout(() => { if (submitted) replaceWithThanks(); }, 1200);
   });
 
-  function initRSVP_GForm(container) {
-    const section = container;
-    const form    = section.querySelector('#rsvpForm');
-    const btn     = section.querySelector('button[type="submit"]');
-    const iframe  = section.querySelector('#gform_hidden');
-    if (!form || !iframe) return;
-    let submitted = false;
-    let fallbackTimer = null;
+  iframe.addEventListener('load', () => {
+    if (!submitted) return;
+    clearTimeout(fallbackTimer);
+    replaceWithThanks();
+  });
+}
 
-    function replaceWithThanks() {
-      section.innerHTML = `
-        <div class="thankyou-card" role="status" aria-live="polite">
-          <span class="emoji">💌</span>
-          <h2>Obrigado pela sua confirmação!</h2>
-          <p>A sua resposta foi recebida com sucesso.</p>
-          <div class="thankyou-actions">
-            <a class="btn btn-primary" href="#rsvp" onclick="reloadRSVP(event)">Enviar outra resposta</a>
-            <a class="btn btn-ghost" href="#schedule">Ver detalhes do dia</a>
-          </div>
-        </div>`;
+function reloadRSVP(e) {
+  e.preventDefault();
+  const section = document.querySelector('#rsvp');
+  if (!section) return;
+  fetch('rsvp.html?v=' + Date.now())
+    .then(res => res.text())
+    .then(html => {
+      section.innerHTML = html;
+      initRSVP_GForm(section);
       section.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-
-    form.addEventListener('submit', () => {
-      submitted = true;
-      if (btn) { btn.disabled = true; btn.textContent = 'Enviando...'; }
-      section.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-      clearTimeout(fallbackTimer);
-      fallbackTimer = setTimeout(() => { if (submitted) replaceWithThanks(); }, 1200);
     });
-
-    iframe.addEventListener('load', () => {
-      if (!submitted) return;
-      clearTimeout(fallbackTimer);
-      replaceWithThanks();
-    });
-  }
-
-  function reloadRSVP(e) {
-    e.preventDefault();
-    const section = document.querySelector('#rsvp');
-    if (!section) return;
-    fetch('rsvp.html?v=' + Date.now())
-      .then(res => res.text())
-      .then(html => {
-        section.innerHTML = html;
-        initRSVP_GForm(section);
-        section.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      });
-  }
+}
   </script>
 
 </body>
 </html>
+
+
+
+
 
 
 
