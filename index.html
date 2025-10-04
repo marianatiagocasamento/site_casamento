@@ -248,6 +248,16 @@
     .btn-ghost{ background:#fff; color:#333; border-color:#ddd; }
     .btn-ghost:hover{ border-color:#bbb; }
     @keyframes fadeIn{ from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none} }
+
+    /* === Make the first section shorter on mobile (no background changes) === */
+    @media (max-width: 768px) {
+      .hero {
+        min-height: 80vh;   /* fallback for older browsers */
+        min-height: 80dvh;  /* dynamic viewport for iOS/Android */
+        padding-bottom: calc(32px + env(safe-area-inset-bottom));
+      }
+      .hero .rsvp-button { margin-bottom: 16px; }
+    }
   </style>
 </head>
 <body>
