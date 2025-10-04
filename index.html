@@ -60,7 +60,7 @@
 
     /* ===== HERO ===== */
     .hero {
-      min-height: 100dvh;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -146,8 +146,13 @@
       width: min(92vw, 780px);
       margin: 0 auto;
       text-align: center;
-      transform: none;
+    
+      /* vertical centering */
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
     }
+
     @media (min-width: 768px) { .hero-inner { transform: translateY(-3vh); } }
     @media (min-width: 1024px) { .hero-inner { transform: translateY(-6vh); } }
 
