@@ -245,7 +245,35 @@
     .btn-primary:hover{ background:#4e664a; }
     .btn-ghost{ background:#fff; color:#333; border-color:#ddd; }
     .btn-ghost:hover{ border-color:#bbb; }
+
     @keyframes fadeIn{ from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none} }
+
+    /* === Mobile fix: consistent first fold on iPhone 11/13/etc. === */
+    @media (max-width: 768px) {
+      /* Optional: nudge/scale mobile background so text starts below the right petal */
+      html, body {
+        /* TUNE THESE THREE VALUES TO TASTE */
+        background-position: right 8% top -24px;
+        background-size: 118%;
+      }
+
+      .hero {
+        min-height: 100dvh; /* dynamic viewport fixes iOS toolbars */
+        align-items: flex-start; /* no vertical centering */
+        padding-top: calc(var(--topbar-h) + 92px); /* TUNE: distance under petal */
+        padding-bottom: calc(48px + env(safe-area-inset-bottom)); /* room above bottom bar */
+      }
+
+      .hero-inner {
+        position: static;
+        top: auto;
+        transform: none; /* cancel desktop centering */
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .hero .rsvp-button { margin-bottom: 24px; } /* extra breathing room */
+    }
   </style>
 </head>
 <body>
@@ -395,6 +423,7 @@ function reloadRSVP(e) {
 
 </body>
 </html>
+
 
 
 
