@@ -250,7 +250,7 @@
     .radio { display:inline-flex; align-items:center; gap:.6rem; }
     .radio input[type="radio"] { margin:0; width:15px; height:15px; accent-color: var(--theme-green); }
     .cute-form button[type="submit"] { width:100%; padding:1rem; font-weight:500; font-size:1rem; font-family:'Cardo', serif; background: var(--theme-green); color:#fff; border:0; border-radius:8px; cursor:pointer; transition:background .2s; }
-    .cute-form button[type="submit"]:hover { background:#4e664a; }
+    .cute-form button[type="submit"]:{ background:#4e664a; }
 
     .thankyou-card{ max-width:720px; margin:2rem auto; padding:2rem; background:#fff; border-radius:16px; box-shadow:0 4px 16px rgba(0,0,0,0.08); text-align:center; font-family:'Cardo', serif; animation:fadeIn .4s ease-out; }
     .thankyou-card .emoji{ font-size:2rem; display:block; margin-bottom:.5rem; }
@@ -323,6 +323,16 @@
 
   <script>
 window.addEventListener('DOMContentLoaded', async () => {
+  // === ADDED: always start at the very top and keep URL clean ===
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+  if (location.hash) {
+    history.replaceState(null, '', location.pathname + location.search);
+  }
+  window.scrollTo(0, 0);
+  // ============================================================
+
   const v = Date.now();
   async function inject(selector, url, after) {
     const res = await fetch(url + (url.includes('?') ? '&' : '?') + 'v=' + v);
@@ -335,6 +345,10 @@ window.addEventListener('DOMContentLoaded', async () => {
   await inject('#gift', 'gift.html');
   await inject('#rsvp', 'rsvp.html', initRSVP_GForm);
   await inject('#contacts', 'contacts.html');
+
+  // === ADDED: after dynamic content loads, pin to top again ===
+  requestAnimationFrame(() => window.scrollTo(0, 0));
+  // ===========================================================
 
   // hamburger toggle + close handlers
   const hamburger = document.querySelector('.hamburger');
@@ -355,10 +369,20 @@ window.addEventListener('DOMContentLoaded', async () => {
       menu.hidden = open;
     });
 
-    // Close after clicking a link
+    // === CHANGED: smooth-scroll to sections without changing URL ===
     menu.addEventListener('click', (e) => {
-      if (e.target.matches('a')) closeMenu();
+      const a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      // keep URL clean (no #hash)
+      history.replaceState(null, '', location.pathname + location.search);
+      closeMenu();
     });
+    // ============================================================
 
     // Click outside to close
     document.addEventListener('click', (e) => {
@@ -429,3 +453,4 @@ function reloadRSVP(e) {
 
 </body>
 </html>
+
