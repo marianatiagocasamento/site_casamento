@@ -142,22 +142,29 @@
     }
     .topbar-menu a:last-child { border-bottom: none; }
 
+    /* === CHANGED: use grid with the names as the vertical anchor === */
     .hero-inner {
       width: min(92vw, 780px);
       margin: 0 auto;
       text-align: center;
-    
-      /* vertical centering */
-      position: relative;
-      top: 50%;
-      transform: translateY(-50%);
+
+      display: grid;
+      grid-template-rows: 1fr auto auto auto auto 1fr; /* names centered on row 3 */
+      justify-items: center;
+      align-items: center;
+      row-gap: clamp(0.6rem, 1.5vw, 1.2rem);
+
+      min-height: calc(100vh - var(--topbar-h) - 4rem);
     }
 
-    @media (min-width: 768px) { .hero-inner { transform: translateY(-3vh); } } 
-    
-    @media (min-width: 1024px) { .hero-inner { transform: translateY(-6vh); } }
+    /* Pin items to rows around the names */
+    .hero .date       { grid-row: 2; margin-bottom: 0.5rem; }
+    .names            { grid-row: 3; }
+    .hero .location   { grid-row: 4; margin-top: 1rem; }
+    .hero .rsvp-button{ grid-row: 5; margin-top: 2rem; }
 
-    
+    /* (removed old top/transform centering & related media-query transforms) */
+
     .hero .rsvp-button {
       display: inline-block;
       margin-top: 4rem;
@@ -199,7 +206,6 @@
     }
 
     @media (max-width: 768px) {
-      .hero-inner { transform: translateY(-6vh); }
       .names { font-size: 3.5rem; }
     }
 
@@ -407,26 +413,6 @@ function reloadRSVP(e) {
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
