@@ -200,12 +200,15 @@
     .hero-message {
       position: absolute;
       top: 1.2rem;
-      left: 1.4rem;
+      left: 50%;                 /* start at horizontal midpoint */
+      transform: translateX(-50%); /* shift back half its width for perfect centering */
       font-family: 'Pinyon Script', cursive;
-      font-size: 1rem;
+      font-size: 1.5rem;
       color: var(--theme-green);
       opacity: 0.9;
       letter-spacing: 0.02em;
+      text-align: center;
+      white-space: nowrap; /* optional: keeps it on one line */
     }
 
     .hero .date {
